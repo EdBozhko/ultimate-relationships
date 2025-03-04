@@ -1,52 +1,57 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+/.idea
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# next-pwa
+/public/workbox-*.js
+/public/sw.js
+
 # production
-dist
+/build
 
-# dependencies 
-node_modules/
-jspm_packages/
-
-# VsCode folder
-.vscode
-
-# src files
-fonts.scss
-version.json
-
-# macOS Files
+# misc
 .DS_Store
-.DS_Store?
 *.pem
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-.idea
 
-# Logs
-logs
-*.log
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
-# Runtime DData
-pids
-*.pid
-*.seed
-*.pid.lock
+# env files (can opt-in for committing if needed)
+.env*
 
-# Optional npm cache directory
-.npm
+# vercel
+.vercel
 
-# Optional eslint cache
-.eslintcache
+# typescript
+*.tsbuildinfo
 
-# Optional REPL history
-.node_repl_history
+# prefer yarn than npm
+package-lock.json
 
-# Output of 'npm pack'
-*.tgz
+report.*.json
 
-# Yarn Integrity file
-.yarn-integrity
+# .vscode Debugging
+.vscode/*-debug-profile
+
+# local env files
+.env*.local

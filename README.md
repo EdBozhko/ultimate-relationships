@@ -1,69 +1,36 @@
-# New GULP project
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-> ## Technologies for studying:
->
-> ### PUG
->
-> https://pugjs.org/ - Pug is a high-performance template engine. (https://youtu.be/XemDmsmnYII)
->
-> ### SCSS
->
-> https://sass-lang.com/guide - Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.
+## Getting Started
 
-> ## "Path Autocomplete" plugin for VS Code for alias path configuration (needed for development process)
->
-> - install "Path Autocomplete" plugin for VS Code
-> - add to the "settings.json" file (open VSCode "Settings">"User">"path-autocomplete">"Path Mappings">"Edit in settings.json"):
+First, run the development server:
 
-```
-"path-autocomplete.pathMappings": {
-    "@img": "${folder}/src/img",
-    "@scss": "${folder}/src/scss",
-    "@js": "${folder}/src/js",
-    "@pages": "${folder}/src/html/pages",
-    "@php": "${folder}/src/php",
-    "@files": "${folder}/src/files",
-},
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-> ## Project local deployment
->
-> - clone the project locally with SSH or HTTPS using `git clone` command
-> - open project folder with your IDE
-> - install dependencies using `npm i` command
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-# Commands
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```
-npm i - to install dependencies
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-```
-npm run dev - to start dev environment. Will start local server and open default browser. All pug, scss, js changes will cause page auto reload. For new fonts, images, videos, other files, lang.json and customLang.json restart the project for the changes to take effect
-```
+## Learn More
 
-```
-npm run build - to build the project. Will create builded project in the 'dist' with converted images into the '.webp' format, will create one common minified files for css and js files  respectively, will compile pug files into html.
-```
+To learn more about Next.js, take a look at the following resources:
 
-````
-npm run start - to build and start the project. Will create builded project as ```npm run build``` and will start local server. Needed to test how will look like the project on the server as there could be some styles differences from when you start the project using ```npm run dev```. For example, if you will add some image using 'img' tag and apply some styles, it probably will not work as you expect, as in the builded version GULP will cover 'img' tag with 'picture' tag and add sources. Тo changes in the code will be displayed automatically.
-````
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-````
-npm run zip - to build and zip the project. Will create builded project as ```npm run build``` and will zip the project.
-````
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-````
-npm run ftp - to build an upload the project to ftp server. Will create builded project as ```npm run build``` and will load it on the server. There are some configurations needed to be done in the 'gulp/config/ftp.js' file.
-````
+## Deploy on Vercel
 
-позы
-игрушки
-доп.настройки
-настройки
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-окружение комнаты
-модели
-доп.управление
-кнопка назад
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
