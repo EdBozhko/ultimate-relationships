@@ -1,0 +1,187 @@
+.card-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300rem;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  &__title {
+    font: inherit;
+    color: #ffffff;
+    font-size: 16rem;
+    margin: 0 0 20rem 0;
+  }
+
+  &__container {
+    display: flex;
+    width: 100%;
+    transition: transform 0.5s ease;
+
+    &.transform {
+      transform: translate(calc(-100% - 10rem), 0);
+    }
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 1px);
+    min-width: calc(100% - 1px);
+    max-width: calc(100% - 1px);
+    flex: 1 1 calc(100% - 1px);
+    margin: 0 0 0 10rem;
+  }
+
+  &__back-to-membership-plans {
+    width: 30rem;
+    height: 30rem;
+    margin: 0 0 10rem 0;
+    padding: 0;
+    background-color: transparent;
+    background-image: url('@img/icons/back.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+  }
+
+  &__membership-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    flex: 1 1 100%;
+  }
+
+  &__membership-plan-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &__membership-plan-input {
+    display: none;
+  }
+
+  &__membership-plan-label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #5e5e5e;
+    padding: 10rem;
+    margin: 0 0 10rem 0;
+    border-radius: 10rem;
+    background-color: rgba(14, 18, 27, 0.8);
+    cursor: pointer;
+  }
+
+  &__membership-plan-title {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 16rem;
+  }
+
+  &__membership-plan-price {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    color: #ffffff;
+  }
+
+  &__membership-plan-price-box {
+    font-size: 18rem;
+    color: #f77d3b;
+    font-weight: 600;
+  }
+
+  &__membership-plan-description {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    color: #ffffff;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20rem 15rem;
+    border-radius: 10rem;
+    background-color: rgba(14, 18, 27, 0.8);
+    border: 1px solid #5e5e5e;
+  }
+
+  &__card-info-container,
+  &__submit-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &__submit-container {
+    margin: 20rem 0 0 0;
+  }
+
+  &__card-fields-group {
+    display: flex;
+    margin: 0 0 10rem 0;
+
+    // &.--cvv-date {
+    //   flex-direction: row;
+    // }
+  }
+
+  &__card-input {
+    display: flex;
+    flex: 1 1 calc(50% - 10rem);
+    width: 100%;
+    font: inherit;
+    border: none;
+    border-bottom: 1px solid #5e5e5e;
+    background-color: transparent;
+    color: #ffffff;
+    outline: none;
+    padding: 1px;
+    font-size: 20rem;
+
+    &:nth-child(2) {
+      margin: 0 0 0 10rem;
+    }
+  }
+
+  &__submit {
+    @extend .full-menu__button;
+    font: inherit;
+    color: #ffffff;
+    width: 100%;
+    height: 50rem;
+    padding: 10rem;
+    border-radius: 10rem;
+  }
+}
+
+.card-form__membership-plan-input:checked + .card-form__membership-plan-label {
+  background: #d40b0b linear-gradient(#d40b0b 0%, #f77d3b 100%);
+}
+
+@include screen-tb {
+  .card-form {
+    max-width: 400rem;
+
+    &__card-input {
+      font-size: 30rem;
+    }
+  }
+
+  [type='month'].card-form__card-input {
+    font-size: 28rem;
+  }
+}

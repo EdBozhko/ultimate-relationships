@@ -1,0 +1,23 @@
+@mixin remFontSizeSetUp {
+  font-size: 0.278vw;
+
+  @include screen-tb {
+    font-size: 0.13vw;
+  }
+
+  @include screen-lp {
+    font-size: 0.0977vw;
+  }
+
+  @include screen-md {
+    font-size: 0.0714vw;
+  }
+
+  @include screen-hd {
+    font-size: 0.052vw;
+  }
+
+  @include screen-lg {
+    font-size: 0.039vw;
+  }
+}

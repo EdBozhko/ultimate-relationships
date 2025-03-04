@@ -1,0 +1,67 @@
+extends ../components/Layouts/MainLayout/index.pug
+
+block mainLayoutVariables
+    //- head meta data
+    -
+        const pageMetaData = {
+            keywords: '',
+            description: '',
+            title: 'Real 3D Sex Simulator',
+            faviconSrc: '@img/favicon.ico'
+        }
+
+block mainLayoutContent
+    //- page content data
+    -
+        const pageData = {
+
+        }
+
+
+    //- MARK UP
+    div(class='full-menu')
+        button(class='full-menu__close')
+            span(class='full-menu__close-text') close
+        ul(class='full-menu__list')
+        div(class='full-menu__content')
+
+    div(class='menu__control-container')
+        div(class='menu__control')
+            button(class='menu__burger')
+                //- input(class='menu__input visually-hidden' type="checkbox" id='menu-control' name="menu-control")
+                div(class='menu__line')
+                span(class='visually-hidden') open/closed
+
+            div(class='menu__joystick')
+                //- div(class='menu__model-controller')     
+
+        table(class='menu__table')
+            tr(class='menu__table-row')
+                td(class='menu__table-data')
+                td(class='menu__table-data')
+                    div(class='menu__data-container')
+                        button(class="menu__button" data-menu-button-id='1')
+                            div(class="menu__image-box")
+                td(class='menu__table-data')
+                    div(class='menu__data-container')
+                        button(class="menu__button" data-menu-button-id='0')
+                            div(class="menu__image-box")
+            tr(class='menu__table-row')
+                td(class='menu__table-data')
+                    div(class='menu__data-container')
+                        button(class="menu__button" data-menu-button-id='2')
+                            div(class="menu__image-box")
+                td(class='menu__table-data')
+                td(class='menu__table-data')
+            tr(class='menu__table-row')
+                td(class='menu__table-data')
+                    div(class='menu__data-container')
+                        button(class="menu__button" data-menu-button-id='3')
+                            div(class="menu__image-box")
+                td(class='menu__table-data')
+                td(class='menu__table-data no-touch')
+
+    div(class='manual hide')
+        div(class='manual__image-box --mobile')
+        div(class='manual__image-box --desktop')
+
