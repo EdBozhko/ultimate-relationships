@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -22,13 +23,22 @@
     "paths": {
       "@src/*": ["src/*"],
       "@app/*": ["src/app/*"],
+      "@helpers/*": ["src/helpers/*"],
       "@themeConfigs/*": ["src/themeConfigs/*"],
-      "@layouts": ["src/layouts"],
-      "@components": ["src/components"],
+      "@comp/*": ["src/components/*"],
       "@modules/*": ["src/modules/*"],
       "@shared/*": ["src/shared/*"]
-    }
+    },
+    "types": ["@react-three/fiber"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "next.config.js",
+    "src",
+    "src/@types/**/*.ts"
+  ],
   "exclude": ["node_modules"]
 }

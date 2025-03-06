@@ -1,5 +1,3 @@
-import type { NextConfig } from 'next';
-
 // export default nextConfig;
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -14,7 +12,7 @@ const withPWA = require('@ducanh2912/next-pwa').default({
   disable: process.env.NODE_ENV === 'development',
 });
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   // uncomment the following snippet if using styled components
   compiler: {
     styledComponents: true,
@@ -74,7 +72,7 @@ const KEYS_TO_OMIT = [
   'assetPrefix',
 ];
 
-module.exports = (_phase: string, { defaultConfig }: { defaultConfig: NextConfig }) => {
+module.exports = (_phase, { defaultConfig }) => {
   const plugins = [[withPWA], [withBundleAnalyzer, {}]];
 
   const wConfig = plugins.reduce((acc, [plugin, config]) => plugin({ ...acc, ...config }), {
@@ -82,7 +80,7 @@ module.exports = (_phase: string, { defaultConfig }: { defaultConfig: NextConfig
     ...nextConfig,
   });
 
-  const finalConfig: Record<string, unknown> = {};
+  const finalConfig = {};
   Object.keys(wConfig).forEach((key) => {
     if (!KEYS_TO_OMIT.includes(key)) {
       finalConfig[key] = wConfig[key];
