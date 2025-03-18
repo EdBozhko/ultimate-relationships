@@ -1,14 +1,17 @@
 'use client';
 
+import { useRef, Suspense } from 'react';
+import dynamic from 'next/dynamic';
+import * as THREE from 'three';
 import { OrbitControls, useHelper } from '@react-three/drei';
 import { useControls, button } from 'leva';
 import { Perf } from 'r3f-perf';
-import { useRef, Suspense } from 'react';
-import { DirectionalLight, DirectionalLightHelper } from 'three';
+
+const StripClubModel = dynamic(() => import('@comp/Experience/StripClubModel'), { ssr: false });
 
 const MainExperience = () => {
-  const directionalLightRef = useRef<DirectionalLight>(null!);
-  useHelper(directionalLightRef, DirectionalLightHelper, 1);
+  const directionalLightRef = useRef<THREE.DirectionalLight>(null!);
+  useHelper(directionalLightRef, THREE.DirectionalLightHelper, 1);
 
   const { isPerfVisible } = useControls('debug', {
     isPerfVisible: true,
@@ -19,25 +22,19 @@ const MainExperience = () => {
       {isPerfVisible && <Perf position='top-left' />}
 
       <Suspense fallback={null}>
-        <OrbitControls makeDefault />
+        <axesHelper args={[5]} />
 
-        <directionalLight ref={directionalLightRef} castShadow position={[1, 2, 3]} intensity={4.5} />
+        <OrbitControls
+          makeDefault
+          minDistance={5}
+          maxDistance={40}
+          screenSpacePanning={true}
+          maxPolarAngle={Math.PI / 2}
+        />
+
         <ambientLight intensity={1.5} />
 
-        <mesh castShadow visible={true} position={[-2, 0, 0]}>
-          <sphereGeometry />
-          <meshStandardMaterial color={'#ff0000'} />
-        </mesh>
-
-        <mesh castShadow position-x={2} scale={1.5}>
-          <boxGeometry />
-          <meshStandardMaterial color='mediumpurple' />
-        </mesh>
-
-        <mesh receiveShadow position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
-          <planeGeometry />
-          <meshStandardMaterial color='greenyellow' />
-        </mesh>
+        <StripClubModel />
       </Suspense>
     </>
   );

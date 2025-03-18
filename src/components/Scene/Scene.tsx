@@ -1,8 +1,8 @@
 'use client';
 
+import * as THREE from 'three';
 import { Canvas, CanvasProps } from '@react-three/fiber';
 import { Preload } from '@react-three/drei';
-import { ACESFilmicToneMapping } from 'three';
 import { Leva } from 'leva';
 
 const Scene = ({ children, ...props }: CanvasProps) => {
@@ -12,7 +12,7 @@ const Scene = ({ children, ...props }: CanvasProps) => {
       <Canvas
         {...props}
         gl={{ powerPreference: 'high-performance', antialias: true }}
-        onCreated={(state) => (state.gl.toneMapping = ACESFilmicToneMapping)}
+        onCreated={(state) => (state.gl.toneMapping = THREE.ACESFilmicToneMapping)}
       >
         <Preload all />
         {children}
