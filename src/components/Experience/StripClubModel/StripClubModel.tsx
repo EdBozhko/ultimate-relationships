@@ -76,16 +76,34 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
 
   useGSAP(() => {
     setTimeout(() => {
-      gsap.fromTo(
-        camera.position,
-        { z: camera.position.z, delay: 1, ease: 'power1.out' },
-        { z: 0, duration: 2.5, ease: 'power1.out' },
-      );
+      const fromCoords = controls.target;
+      const toCoords = refs.surfaceMarker.current.position;
 
-      gsap.fromTo(
+      const gsapTimeline1 = gsap.timeline({});
+      const gsapTimeline2 = gsap.timeline({});
+
+      gsapTimeline1
+        .fromTo(
+          camera.position,
+          { z: camera.position.z, delay: 1, ease: 'power1.out' },
+          {
+            z: 0,
+            duration: 2.5,
+            ease: 'power1.out',
+          },
+        )
+        .to(camera.position, {
+          x: toCoords.x - 0.5,
+          y: toCoords.y + 0.5,
+          z: toCoords.z + 0.5,
+          duration: 2.5,
+          ease: 'power1.out',
+        });
+
+      gsapTimeline2.fromTo(
         controls.target,
-        { ...controls.target, delay: 1, ease: 'power1.out' },
-        { ...refs.surfaceMarker.current.position, duration: 2.5, ease: 'power1.out' },
+        { ...fromCoords, delay: 1, ease: 'power1.out' },
+        { ...toCoords, duration: 2.5, ease: 'power1.out' },
       );
     }, 1000);
   }, []);
@@ -786,5 +804,3 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
 };
 
 export default StripClubModel;
-
-useGLTF.preload(modelPath);
