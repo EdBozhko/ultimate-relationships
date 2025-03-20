@@ -11,10 +11,7 @@ const StripClubModel = dynamic(() => import('@comp/Experience/StripClubModel'), 
 const BasePartnerModel = dynamic(() => import('@comp/Experience/BasePartnerModel'), { ssr: false });
 
 const MainExperience = () => {
-  const directionalLightRef = useRef<THREE.DirectionalLight>(null!);
-  useHelper(directionalLightRef, THREE.DirectionalLightHelper, 1);
-
-  const { isPerfVisible } = useControls('debug', {
+  const { isPerfVisible } = useControls('perf', {
     isPerfVisible: true,
   });
 
