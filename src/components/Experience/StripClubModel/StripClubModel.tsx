@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import { useEffect, useRef } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
-import { useGLTF, useTexture, useHelper } from '@react-three/drei';
+import { useGLTF, useTexture, useHelper, SpotLight } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -47,13 +47,20 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
     stayWildSign: useRef<THREE.Mesh>(null!),
   };
 
+  const spotLightDebug = useControls('spotLight', {
+    color: '#ffffff',
+    penumbra: { min: 0, max: 1, step: 0.1, value: 1 },
+    intensity: { min: 0, max: 100, step: 1, value: 7 },
+    angle: { min: 0, max: Math.PI / 2, step: 0.01, value: 0.5 },
+    decay: { min: -2, max: 2, step: 1, value: 0 },
+  });
+  useHelper(refs.spotLight, THREE.SpotLightHelper, 'yellow');
+
   const camera = useThree((state) => state.camera);
   const controls = useThree((state) => state.controls);
 
   const stripClub = useGLTF(modelPath);
   const { nodes, materials } = stripClub as GLTFResult;
-
-  useHelper(refs.spotLight, THREE.SpotLightHelper, 1);
 
   useEffect(() => {
     const initialPosition = refs.stayWildSign.current.position;
@@ -114,13 +121,12 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
     <>
       <spotLight
         ref={refs.spotLight}
-        color={'white'}
+        color={spotLightDebug.color}
         castShadow
-        position={[0, 10, 0]}
-        angle={0.5}
-        penumbra={1}
-        decay={0}
-        intensity={7}
+        angle={spotLightDebug.angle}
+        penumbra={spotLightDebug.penumbra}
+        decay={spotLightDebug.decay}
+        intensity={spotLightDebug.intensity}
       />
 
       <group {...props} dispose={null}>
@@ -761,6 +767,7 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
           geometry={nodes.stage_down.geometry}
           position={[3.833, 1.156, -13.407]}
           rotation={[0, -0.019, 0]}
+          receiveShadow
         >
           <meshStandardMaterial map={bakedTextures.stageDownBakedTexture} map-flipY={false} />
         </mesh>
