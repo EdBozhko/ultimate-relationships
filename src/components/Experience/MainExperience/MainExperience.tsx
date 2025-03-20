@@ -8,6 +8,7 @@ import { useControls, button } from 'leva';
 import { Perf } from 'r3f-perf';
 
 const StripClubModel = dynamic(() => import('@comp/Experience/StripClubModel'), { ssr: false });
+const BasePartnerModel = dynamic(() => import('@comp/Experience/BasePartnerModel'), { ssr: false });
 
 const MainExperience = () => {
   const directionalLightRef = useRef<THREE.DirectionalLight>(null!);
@@ -26,15 +27,16 @@ const MainExperience = () => {
 
         <OrbitControls
           makeDefault
-          minDistance={5}
-          maxDistance={40}
-          screenSpacePanning={true}
-          maxPolarAngle={Math.PI / 2}
+          // minDistance={5}
+          // maxDistance={40}
+          // screenSpacePanning={true}
+          // maxPolarAngle={Math.PI / 2}
         />
 
         <ambientLight intensity={1.5} />
 
         <StripClubModel />
+        <BasePartnerModel />
       </Suspense>
     </>
   );

@@ -7,6 +7,7 @@ import { useGLTF, useTexture, useHelper } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { useControls, button } from 'leva';
 
 gsap.registerPlugin(useGSAP);
 
@@ -57,6 +58,7 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
   useEffect(() => {
     const initialPosition = refs.stayWildSign.current.position;
     const markerPosition = refs.surfaceMarker.current.position;
+    // const initialPosition = markerPosition;
     camera.position.copy(initialPosition);
     camera.position.x += 1.5;
     camera.position.y += 1;
@@ -118,8 +120,9 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
         angle={0.5}
         penumbra={1}
         decay={0}
-        intensity={15}
+        intensity={7}
       />
+
       <group {...props} dispose={null}>
         <group ref={refs.surfaceMarker} name='surface_marker' position={[3.895, 1.159, -5.343]} />
 

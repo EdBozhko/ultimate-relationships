@@ -11,7 +11,10 @@ const Scene = ({ children, ...props }: CanvasProps) => {
       <Leva />
       <Canvas
         {...props}
-        gl={{ powerPreference: 'high-performance', antialias: true }}
+        gl={{
+          powerPreference: 'high-performance',
+          antialias: true,
+        }}
         onCreated={(state) => (state.gl.toneMapping = THREE.ACESFilmicToneMapping)}
       >
         <Preload all />
