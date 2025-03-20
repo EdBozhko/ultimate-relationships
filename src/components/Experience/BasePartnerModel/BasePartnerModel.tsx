@@ -28,19 +28,28 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
     <>
       <group scale={1.5} position={[3.895, 1.159, -5.343]} {...props} dispose={null}>
         <skinnedMesh
+          castShadow
           name='Panties'
           geometry={nodes.Panties.geometry}
           material={materials.Panties}
           skeleton={nodes.Panties.skeleton}
         />
         <skinnedMesh
+          castShadow
           name='ThighStraps'
           geometry={nodes.ThighStraps.geometry}
           material={materials.ThighStraps}
           skeleton={nodes.ThighStraps.skeleton}
         />
-        <skinnedMesh name='Top' geometry={nodes.Top.geometry} material={materials.Top} skeleton={nodes.Top.skeleton} />
         <skinnedMesh
+          castShadow
+          name='Top'
+          geometry={nodes.Top.geometry}
+          material={materials.Top}
+          skeleton={nodes.Top.skeleton}
+        />
+        <skinnedMesh
+          castShadow
           name='Top001'
           geometry={nodes.Top001.geometry}
           material={materials.Top3}
@@ -48,6 +57,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
         />
         <primitive object={nodes.root} />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female'
           geometry={nodes.Genesis8_1Female.geometry}
           material={materials.Body}
@@ -56,6 +66,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_1'
           geometry={nodes.Genesis8_1Female_1.geometry}
           material={materials.Face}
@@ -64,6 +75,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_1.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_2'
           geometry={nodes.Genesis8_1Female_2.geometry}
           material={materials.Lips}
@@ -72,6 +84,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_2.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_3'
           geometry={nodes.Genesis8_1Female_3.geometry}
           material={materials.Teeth}
@@ -80,6 +93,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_3.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_4'
           geometry={nodes.Genesis8_1Female_4.geometry}
           material={materials.Ears}
@@ -88,6 +102,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_4.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_5'
           geometry={nodes.Genesis8_1Female_5.geometry}
           material={materials.Legs}
@@ -96,6 +111,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_5.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_6'
           geometry={nodes.Genesis8_1Female_6.geometry}
           material={materials.EyeSocket}
@@ -104,6 +120,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_6.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_7'
           geometry={nodes.Genesis8_1Female_7.geometry}
           material={materials.Mouth}
@@ -112,6 +129,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_7.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_8'
           geometry={nodes.Genesis8_1Female_8.geometry}
           material={materials.Arms}
@@ -120,6 +138,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_8.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_9'
           geometry={nodes.Genesis8_1Female_9.geometry}
           material={materials.Pupils}
@@ -128,6 +147,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_9.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_10'
           geometry={nodes.Genesis8_1Female_10.geometry}
           material={materials.EyeMoisture}
@@ -136,6 +156,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_10.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_11'
           geometry={nodes.Genesis8_1Female_11.geometry}
           material={materials.Fingernails}
@@ -144,6 +165,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_11.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_12'
           geometry={nodes.Genesis8_1Female_12.geometry}
           material={materials.Cornea}
@@ -152,6 +174,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_12.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_13'
           geometry={nodes.Genesis8_1Female_13.geometry}
           material={materials.Irises}
@@ -160,6 +183,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_13.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_14'
           geometry={nodes.Genesis8_1Female_14.geometry}
           material={materials.Sclera}
@@ -168,6 +192,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_14.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_15'
           geometry={nodes.Genesis8_1Female_15.geometry}
           material={materials.Toenails}
@@ -176,6 +201,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_15.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_16'
           geometry={nodes.Genesis8_1Female_16.geometry}
           material={materials.Head}
@@ -184,6 +210,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_16.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_17'
           geometry={nodes.Genesis8_1Female_17.geometry}
           material={materials.Eyelashes}
@@ -192,6 +219,7 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_17.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Genesis8_1Female_18'
           geometry={nodes.Genesis8_1Female_18.geometry}
           material={materials.Eyelashes2}
@@ -200,12 +228,14 @@ const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
           morphTargetInfluences={nodes.Genesis8_1Female_18.morphTargetInfluences}
         />
         <skinnedMesh
+          castShadow
           name='Top_83133003'
           geometry={nodes.Top_83133003.geometry}
           material={materials.Top}
           skeleton={nodes.Top_83133003.skeleton}
         />
         <skinnedMesh
+          castShadow
           name='Top_83133003_1'
           geometry={nodes.Top_83133003_1.geometry}
           material={materials.Top2}
