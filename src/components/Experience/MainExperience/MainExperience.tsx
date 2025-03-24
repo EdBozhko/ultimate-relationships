@@ -1,11 +1,10 @@
 'use client';
 
-import { useRef, Suspense } from 'react';
+import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
-import * as THREE from 'three';
 import { useThree } from '@react-three/fiber';
-import { OrbitControls, useHelper } from '@react-three/drei';
-import { useControls, button } from 'leva';
+import { OrbitControls } from '@react-three/drei';
+import { useControls } from 'leva';
 import { Perf } from 'r3f-perf';
 
 const StripClubModel = dynamic(() => import('@comp/Experience/StripClubModel'), { ssr: false });
@@ -28,10 +27,10 @@ const MainExperience = () => {
 
         <OrbitControls
           makeDefault
-          // minDistance={5}
-          // maxDistance={40}
-          // screenSpacePanning={true}
-          // maxPolarAngle={Math.PI / 2}
+          minDistance={5}
+          maxDistance={40}
+          screenSpacePanning={true}
+          maxPolarAngle={Math.PI / 2}
         />
 
         <ambientLight intensity={1.5} />
