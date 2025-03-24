@@ -1,14 +1,17 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import * as THREE from 'three';
 import { Canvas, CanvasProps, useThree } from '@react-three/fiber';
 import { Preload, AdaptiveDpr } from '@react-three/drei';
 import { Leva } from 'leva';
 
 const Scene = ({ children, ...props }: CanvasProps) => {
+  const isDebugMode = useSearchParams().get('debug-mode') === 'true';
+
   return (
     <>
-      <Leva collapsed />
+      <Leva collapsed hidden={!isDebugMode} />
       <Canvas
         {...props}
         gl={{

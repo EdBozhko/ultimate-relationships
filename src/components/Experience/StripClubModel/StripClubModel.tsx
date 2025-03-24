@@ -1,7 +1,8 @@
 'use client';
 
-import * as THREE from 'three';
 import { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import * as THREE from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
 import { useGLTF, useTexture, useHelper, SpotLight } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
@@ -19,6 +20,8 @@ type GLTFResult = GLTF & {
 };
 
 const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
+  const isDebugMode = useSearchParams().get('debug-mode') === 'true';
+
   const bakedTextures = {
     floor: useTexture('/models/strip_club/textures/floor.webp'),
     mixerBakedTexture: useTexture('/models/strip_club/textures/mixer.webp'),
@@ -63,7 +66,7 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
   const stripClub = useGLTF(modelPath);
   const { nodes, materials } = stripClub as GLTFResult;
 
-  useHelper(refs.spotLight, THREE.SpotLightHelper, 'yellow');
+  isDebugMode && useHelper(refs.spotLight, THREE.SpotLightHelper, 'yellow');
 
   useEffect(() => {
     const initialPosition = refs.stayWildSign.current.position;

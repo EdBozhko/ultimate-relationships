@@ -2,6 +2,7 @@
 
 import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
+import { useSearchParams } from 'next/navigation';
 import { useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useControls } from 'leva';
@@ -11,6 +12,7 @@ const StripClubModel = dynamic(() => import('@comp/Experience/StripClubModel'), 
 const BasePartnerModel = dynamic(() => import('@comp/Experience/BasePartnerModel'), { ssr: false });
 
 const MainExperience = () => {
+  const isDebugMode = useSearchParams().get('debug-mode') === 'true';
   const { isPerfVisible } = useControls('perf', {
     isPerfVisible: true,
   });
@@ -19,11 +21,15 @@ const MainExperience = () => {
 
   return (
     <>
-      {isPerfVisible && <Perf position='top-left' />}
+      {isDebugMode && isPerfVisible && <Perf position='top-left' />}
 
       <Suspense fallback={null}>
-        <axesHelper args={[5]} />
-        <cameraHelper args={[camera]} />
+        {isDebugMode && (
+          <>
+            <axesHelper args={[5]} />
+            <cameraHelper args={[camera]} />
+          </>
+        )}
 
         <OrbitControls
           makeDefault
