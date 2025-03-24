@@ -1,14 +1,14 @@
 'use client';
 
 import * as THREE from 'three';
-import { Canvas, CanvasProps } from '@react-three/fiber';
-import { Preload } from '@react-three/drei';
+import { Canvas, CanvasProps, useThree } from '@react-three/fiber';
+import { Preload, AdaptiveDpr } from '@react-three/drei';
 import { Leva } from 'leva';
 
 const Scene = ({ children, ...props }: CanvasProps) => {
   return (
     <>
-      <Leva />
+      <Leva collapsed />
       <Canvas
         {...props}
         gl={{
@@ -17,6 +17,7 @@ const Scene = ({ children, ...props }: CanvasProps) => {
         }}
         onCreated={(state) => (state.gl.toneMapping = THREE.ACESFilmicToneMapping)}
       >
+        <AdaptiveDpr pixelated />
         <Preload all />
         {children}
       </Canvas>

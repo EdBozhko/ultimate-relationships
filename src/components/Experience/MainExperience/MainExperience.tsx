@@ -3,6 +3,7 @@
 import { useRef, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import * as THREE from 'three';
+import { useThree } from '@react-three/fiber';
 import { OrbitControls, useHelper } from '@react-three/drei';
 import { useControls, button } from 'leva';
 import { Perf } from 'r3f-perf';
@@ -15,12 +16,15 @@ const MainExperience = () => {
     isPerfVisible: true,
   });
 
+  const camera = useThree((state) => state.camera);
+
   return (
     <>
       {isPerfVisible && <Perf position='top-left' />}
 
       <Suspense fallback={null}>
         <axesHelper args={[5]} />
+        <cameraHelper args={[camera]} />
 
         <OrbitControls
           makeDefault

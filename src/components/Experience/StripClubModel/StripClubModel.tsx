@@ -1,7 +1,7 @@
 'use client';
 
 import * as THREE from 'three';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { useGLTF, useTexture, useHelper, SpotLight } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
@@ -45,6 +45,7 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
     surfaceMarker: useRef<THREE.Object3D>(null!),
     spotLight: useRef<THREE.SpotLight>(null!),
     stayWildSign: useRef<THREE.Mesh>(null!),
+    floor: useRef<THREE.Mesh>(null!),
   };
 
   const spotLightDebug = useControls('spotLight', {
@@ -54,13 +55,15 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
     angle: { min: 0, max: Math.PI / 2, step: 0.01, value: 0.5 },
     decay: { min: -2, max: 2, step: 1, value: 0 },
   });
-  useHelper(refs.spotLight, THREE.SpotLightHelper, 'yellow');
 
   const camera = useThree((state) => state.camera);
   const controls = useThree((state) => state.controls);
+  const [spotLightDistance, setSpotLightDistance] = useState(0.1);
 
   const stripClub = useGLTF(modelPath);
   const { nodes, materials } = stripClub as GLTFResult;
+
+  useHelper(refs.spotLight, THREE.SpotLightHelper, 'yellow');
 
   useEffect(() => {
     const initialPosition = refs.stayWildSign.current.position;
@@ -76,11 +79,10 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
     controls.target = lookAtTarget;
   }, []);
 
-  useFrame((state) => {});
-
   useEffect(() => {
     refs.spotLight.current.position.copy(refs.ceilingStageLight.current.position);
     refs.spotLight.current.target = refs.surfaceMarker.current;
+    setSpotLightDistance(refs.spotLight.current.position.distanceTo(refs.floor.current.position) * 1.5);
   }, [refs.ceilingStageLight, refs.surfaceMarker]);
 
   useGSAP(() => {
@@ -127,6 +129,7 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
         penumbra={spotLightDebug.penumbra}
         decay={spotLightDebug.decay}
         intensity={spotLightDebug.intensity}
+        distance={spotLightDistance}
       />
 
       <group {...props} dispose={null}>
@@ -805,7 +808,7 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
         <mesh name='bar_counter_top' geometry={nodes.bar_counter_top.geometry} position={[4.292, 0.845, 11.314]}>
           <meshStandardMaterial map={bakedTextures.barCounterBakedTexture} map-flipY={false} />
         </mesh>
-        <mesh name='floor' geometry={nodes.floor.geometry} position={[3.018, 0, -4.342]}>
+        <mesh ref={refs.floor} name='floor' geometry={nodes.floor.geometry} position={[3.018, 0, -4.342]}>
           <meshStandardMaterial map={bakedTextures.floor} map-flipY={false} />
         </mesh>
       </group>
