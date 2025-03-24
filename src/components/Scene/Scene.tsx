@@ -2,12 +2,13 @@
 
 import { useSearchParams } from 'next/navigation';
 import * as THREE from 'three';
-import { Canvas, CanvasProps, useThree } from '@react-three/fiber';
+import { Canvas, CanvasProps } from '@react-three/fiber';
 import { Preload, AdaptiveDpr } from '@react-three/drei';
 import { Leva } from 'leva';
+import type { FC } from 'react';
 
-const Scene = ({ children, ...props }: CanvasProps) => {
-  const isDebugMode = useSearchParams().get('debug-mode') === 'true';
+const Scene: FC<CanvasProps> = ({ children, ...props }) => {
+  const isDebugMode = Boolean(useSearchParams().get('debug-mode'));
 
   return (
     <>
@@ -18,7 +19,9 @@ const Scene = ({ children, ...props }: CanvasProps) => {
           powerPreference: 'high-performance',
           antialias: true,
         }}
-        onCreated={(state) => (state.gl.toneMapping = THREE.ACESFilmicToneMapping)}
+        onCreated={({ gl }) => {
+          gl.toneMapping = THREE.ACESFilmicToneMapping;
+        }}
       >
         <AdaptiveDpr pixelated />
         <Preload all />

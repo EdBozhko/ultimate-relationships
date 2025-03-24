@@ -7,21 +7,31 @@ import { useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useControls } from 'leva';
 import { Perf } from 'r3f-perf';
+import type { FC } from 'react';
+import type { PerspectiveCamera } from 'three';
 
-const StripClubModel = dynamic(() => import('@comp/Experience/StripClubModel'), { ssr: false });
-const BasePartnerModel = dynamic(() => import('@comp/Experience/BasePartnerModel'), { ssr: false });
+type ModelComponentProps = Partial<JSX.IntrinsicElements['mesh']>;
 
-const MainExperience = () => {
-  const isDebugMode = useSearchParams().get('debug-mode') === 'true';
+const StripClubModel = dynamic(() => import('@comp/Experience/StripClubModel'), {
+  ssr: false,
+}) as FC<ModelComponentProps>;
+const BasePartnerModel = dynamic(() => import('@comp/Experience/BasePartnerModel'), {
+  ssr: false,
+}) as FC<ModelComponentProps>;
+
+const MainExperience: FC = () => {
+  const isDebugMode = Boolean(useSearchParams().get('debug-mode'));
+  const isDebugPerfMode = Boolean(useSearchParams().get('debug-perf-mode'));
+
   const { isPerfVisible } = useControls('perf', {
     isPerfVisible: true,
   });
 
-  const camera = useThree((state) => state.camera);
+  const camera = useThree((state) => state.camera as PerspectiveCamera);
 
   return (
     <>
-      {isDebugMode && isPerfVisible && <Perf position='top-left' />}
+      {isDebugPerfMode || (isDebugMode && isPerfVisible) ? <Perf position='top-left' /> : null}
 
       <Suspense fallback={null}>
         {isDebugMode && (

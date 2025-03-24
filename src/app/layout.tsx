@@ -2,19 +2,21 @@ import type { Metadata } from 'next';
 import { Ubuntu } from 'next/font/google';
 import { StyledComponentsRegistry } from '@helpers/lib/registry.tsx';
 import GlobalStyle from '@themeConfigs/global.style';
+import { NextFont } from 'next/dist/compiled/@next/font';
+import { Url } from 'next/dist/shared/lib/router/router';
 
-const ubuntu = Ubuntu({
+const ubuntu: NextFont = Ubuntu({
   subsets: ['latin', 'cyrillic'],
   weight: ['300', '500', '700'],
   display: 'swap',
   style: 'normal',
 });
 
-const title = 'Perfect AI Partner';
-const url = 'https://perfect-ai-partner.com/';
-const description = 'Perfect AI Partner';
-const author = 'EdBozhko';
-const twitter = '@';
+const title: string = 'Perfect AI Partner';
+const url: Url = 'https://perfect-ai-partner.com/';
+const description: string = 'Perfect AI Partner';
+const author: string = 'EdBozhko';
+const twitter: string = '@';
 
 // {/* Recommended Meta Tags */}
 // <meta charSet='utf-8' />
@@ -78,11 +80,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html lang='en' className='antialiased'>
       <head />
@@ -92,4 +94,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
