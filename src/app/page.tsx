@@ -26,6 +26,7 @@ const Home = ({ children }: { children: React.ReactNode }) => {
         eventPrefix='client'
       >
         <MainExperience />
+        {children}
       </Scene>
     </>
   );
