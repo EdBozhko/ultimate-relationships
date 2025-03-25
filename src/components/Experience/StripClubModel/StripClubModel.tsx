@@ -10,6 +10,8 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useControls, button } from 'leva';
 
+import useGlobalStore from '@src/stores/useGlobalStore';
+
 gsap.registerPlugin(useGSAP);
 
 const modelPath = '/models/strip_club/strip_club.glb';
@@ -20,7 +22,7 @@ type GLTFResult = GLTF & {
 };
 
 const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
-  const isDebugMode = useSearchParams().get('debug-mode') === 'true';
+  const isDebugMode = useGlobalStore((state) => state.isDebugMode);
 
   const bakedTextures = {
     floor: useTexture('/models/strip_club/textures/floor.webp'),

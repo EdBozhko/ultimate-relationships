@@ -7,8 +7,10 @@ import { Preload, AdaptiveDpr } from '@react-three/drei';
 import { Leva } from 'leva';
 import type { FC } from 'react';
 
+import useGlobalStore from '@src/stores/useGlobalStore';
+
 const Scene: FC<CanvasProps> = ({ children, ...props }) => {
-  const isDebugMode = Boolean(useSearchParams().get('debug-mode'));
+  const isDebugMode = useGlobalStore((state) => state.isDebugMode);
 
   return (
     <>

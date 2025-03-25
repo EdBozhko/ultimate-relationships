@@ -10,6 +10,8 @@ import { Perf } from 'r3f-perf';
 import type { FC } from 'react';
 import type { PerspectiveCamera } from 'three';
 
+import useGlobalStore from '@src/stores/useGlobalStore';
+
 type ModelComponentProps = Partial<JSX.IntrinsicElements['mesh']>;
 
 const StripClubModel = dynamic(() => import('@comp/Experience/StripClubModel'), {
@@ -20,8 +22,8 @@ const BasePartnerModel = dynamic(() => import('@comp/Experience/BasePartnerModel
 }) as FC<ModelComponentProps>;
 
 const MainExperience: FC = () => {
-  const isDebugMode = Boolean(useSearchParams().get('debug-mode'));
-  const isDebugPerfMode = Boolean(useSearchParams().get('debug-perf-mode'));
+  const isDebugMode = useGlobalStore((state) => state.isDebugMode);
+  const isDebugPerfMode = useGlobalStore((state) => state.isDebugPerfMode);
 
   const { isPerfVisible } = useControls('perf', {
     isPerfVisible: true,
@@ -43,8 +45,8 @@ const MainExperience: FC = () => {
 
         <OrbitControls
           makeDefault
-          minDistance={5}
-          maxDistance={40}
+          minDistance={1}
+          maxDistance={10}
           screenSpacePanning={true}
           maxPolarAngle={Math.PI / 2}
         />
