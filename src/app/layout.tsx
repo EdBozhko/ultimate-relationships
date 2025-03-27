@@ -80,7 +80,9 @@ const RootLayout = ({
       </head>
       <body className={ubuntu.className}>
         <GlobalStyle />
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          <main>{children}</main>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

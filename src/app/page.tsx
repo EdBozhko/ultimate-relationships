@@ -2,8 +2,8 @@
 
 import dynamic from 'next/dynamic';
 
-const Scene = dynamic(() => import('@src/components/Scene'), { ssr: false });
-const MainExperience = dynamic(() => import('@comp/Experience/MainExperience'), { ssr: false });
+const Scene = dynamic(() => import('@src/components/experience/Scene'), { ssr: false });
+const MainExperience = dynamic(() => import('@comp/experience/MainExperience'), { ssr: false });
 
 const Home = ({ children }: { children: React.ReactNode }) => {
   return (

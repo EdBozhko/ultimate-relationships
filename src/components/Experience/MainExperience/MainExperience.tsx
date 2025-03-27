@@ -14,10 +14,10 @@ import useGlobalStore from '@src/stores/useGlobalStore';
 
 type ModelComponentProps = Partial<JSX.IntrinsicElements['mesh']>;
 
-const StripClubModel = dynamic(() => import('@comp/Experience/StripClubModel'), {
+const StripClubModel = dynamic(() => import('@comp/experience/StripClubModel'), {
   ssr: false,
 }) as FC<ModelComponentProps>;
-const BasePartnerModel = dynamic(() => import('@comp/Experience/BasePartnerModel'), {
+const BasePartnerModel = dynamic(() => import('@comp/experience/BasePartnerModel'), {
   ssr: false,
 }) as FC<ModelComponentProps>;
 
