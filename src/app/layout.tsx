@@ -9,6 +9,9 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import useGlobalStore from '@src/stores/useGlobalStore';
 
+import { Header } from '@src/components/markup/Header';
+import { useViewportHeightFix } from '@src/hooks/useViewportHeightFix';
+
 const ubuntu: NextFont = Ubuntu({
   subsets: ['latin', 'cyrillic'],
   weight: ['300', '500', '700'],
@@ -39,6 +42,8 @@ const RootLayout = ({
     isDebugMode ? debugMode() : userMode();
     isDebugPerfMode ? debugPerfMode() : userPerfMode();
   }, []);
+
+  useViewportHeightFix();
 
   return (
     <html lang='en' className='antialiased'>
@@ -81,6 +86,7 @@ const RootLayout = ({
       <body className={ubuntu.className}>
         <GlobalStyle />
         <StyledComponentsRegistry>
+          <Header />
           <main>{children}</main>
         </StyledComponentsRegistry>
       </body>
