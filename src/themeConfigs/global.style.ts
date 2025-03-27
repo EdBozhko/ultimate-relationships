@@ -1,6 +1,11 @@
 'use client';
 
 import * as styled from 'styled-components';
+import { SCREENS, BREAKPOINTS } from './constants/screen.ts';
+
+const remCalc = (screenWidth: number = 0): string => {
+  return `font-size: ${100 / screenWidth}vw`;
+};
 
 const GlobalStyle = styled.createGlobalStyle`
   * {
@@ -77,11 +82,26 @@ const GlobalStyle = styled.createGlobalStyle`
   body,
   #root,
   #__next {
-    width: 100%;
-    height: 100%;
+    max-width: 100vw;
+    width: 100vw;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     margin: 0;
     padding: 0;
     overflow: hidden;
+    scroll-behavior: smooth;
+  }
+
+  html {
+    ${remCalc(BREAKPOINTS.mobileScreenWidth)}
+
+    @media ${SCREENS.tablet} {
+      ${remCalc(BREAKPOINTS.tabletScreenWidth)}
+    }
+
+    @media ${SCREENS.fullHd} {
+      ${remCalc(BREAKPOINTS.fullHdScreenWidth)}
+    }
   }
 `;
 
