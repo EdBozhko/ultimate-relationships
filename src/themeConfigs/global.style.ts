@@ -3,10 +3,6 @@
 import * as styled from 'styled-components';
 import { SCREENS, BREAKPOINTS } from './constants/screen.ts';
 
-const remCalc = (screenWidth: number = 0): string => {
-  return `font-size: ${100 / screenWidth}vw`;
-};
-
 const GlobalStyle = styled.createGlobalStyle`
   * {
     box-sizing: border-box;
@@ -93,14 +89,14 @@ const GlobalStyle = styled.createGlobalStyle`
   }
 
   html {
-    ${remCalc(BREAKPOINTS.mobileScreenWidth)}
+    font-size: ${100 / BREAKPOINTS.mobileScreenWidth}vw;
 
     @media ${SCREENS.tablet} {
-      ${remCalc(BREAKPOINTS.tabletScreenWidth)}
+      font-size: ${100 / BREAKPOINTS.mobileScreenWidth}vw;
     }
 
     @media ${SCREENS.fullHd} {
-      ${remCalc(BREAKPOINTS.fullHdScreenWidth)}
+      font-size: ${100 / BREAKPOINTS.fullHdScreenWidth}vw;
     }
   }
 `;
