@@ -27,9 +27,9 @@ const nextConfig = {
       // We're in the browser build, so we can safely exclude the sharp module
       config.externals.push('sharp');
     }
-    // audio support
+    // file support
     config.module.rules.push({
-      test: /\.(ogg|mp3|wav|mpe?g)$/i,
+      test: /\.(ogg|mp3|wav|mpe?g|glb)$/i,
       exclude: config.exclude,
       use: [
         {
