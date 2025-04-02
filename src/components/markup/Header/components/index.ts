@@ -1,0 +1,9 @@
+export { GameIcon } from './GameIcon';
+export { MoreIcon } from './MoreIcon';
+export { ChatIcon } from './ChatIcon';
+export { ShopIcon } from './ShopIcon';
+export { ArrowIcon } from './ArrowIcon';
+export { StoriesIcon } from './StoriesIcon';
+export { MediaIcon } from './MediaIcon';
+export { SettingsIcon } from './SettingsIcon';
+export { Icon } from './Icon';
