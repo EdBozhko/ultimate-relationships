@@ -86,6 +86,7 @@ const GlobalStyle = styled.createGlobalStyle`
     padding: 0;
     overflow: hidden;
     scroll-behavior: smooth;
+    line-height: 1.2;
   }
 
   html {
@@ -98,6 +99,14 @@ const GlobalStyle = styled.createGlobalStyle`
     @media ${SCREENS.fullHd} {
       font-size: ${100 / BREAKPOINTS.fullHdScreenWidth}vw;
     }
+  }
+
+  main {
+    width: 100%;
+    height: 100%;
+    background: #181818;
+    background: linear-gradient(90deg, #181818 0%, #090979 50%, #181818 100%);
+    padding: 16rem 16rem 16rem 16rem;
   }
 `;
 
