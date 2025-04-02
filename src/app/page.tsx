@@ -1,33 +1,44 @@
 'use client';
 
-import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
+import { useProgress } from '@react-three/drei';
 
-const Scene = dynamic(() => import('@src/components/experience/Scene'), { ssr: false });
-const MainExperience = dynamic(() => import('@comp/experience/MainExperience'), { ssr: false });
+import { ClientPortal } from '@comp/markup/ClientPortal';
+import { PopUp } from '@comp/markup/PopUp';
+import { PopUpTitle, PopUpText, PopUpButtonsContainer, PopUpButton, PopUpLink } from '@comp/markup/PopUp/PopUp.style';
+import { LoadingBar } from '@comp/markup/LoadingBar/';
 
-const Home = ({ children }: { children: React.ReactNode }) => {
+const Home = () => {
+  const [showPopUp, setShowPopUp] = useState(false);
+  const loadingProgress = useProgress((state) => state.progress);
+  const loaded = useProgress((state) => state.loaded);
+  const totalLoaded = useProgress((state) => state.total);
+
+  useEffect(() => {
+    if (loaded === totalLoaded) {
+      setTimeout(() => {
+        setShowPopUp(true);
+      }, 3000);
+    }
+  }, [loadingProgress]);
+
   return (
     <>
-      <Scene
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-        }}
-        camera={{
-          fov: 45,
-          near: 0.1,
-          far: 200,
-          position: [0, 0, 0],
-        }}
-        shadows={true}
-        eventPrefix='client'
-      >
-        <MainExperience />
-        {children}
-      </Scene>
+      {!showPopUp && <LoadingBar progress={loadingProgress} loaded={loaded} totalLoaded={totalLoaded} />}
+      <ClientPortal selector='client-portal' show={showPopUp}>
+        <PopUp>
+          <PopUpTitle>This is an adult website</PopUpTitle>
+          <PopUpText>
+            This website contains age-restricted materials including nudity and explicit depictions of sexual activity.
+            By entering, you affirm that you are at least 18 years of age or the age of majority in the jurisdiction you
+            are accessing the website from and you consent to viewing sexually explicit content.
+          </PopUpText>
+          <PopUpButtonsContainer>
+            <PopUpLink href='/game'>I am 18 or older - Enter</PopUpLink>
+            <PopUpLink href='https://google.com'>I am under 18 - Exit</PopUpLink>
+          </PopUpButtonsContainer>
+        </PopUp>
+      </ClientPortal>
     </>
   );
 };
