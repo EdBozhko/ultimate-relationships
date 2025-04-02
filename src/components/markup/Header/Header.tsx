@@ -16,7 +16,7 @@ import {
   AdditionalMenuListItem,
   AdditionalMenuLink,
   AdditionalMenuLinkIcon,
-} from './Header.style.ts';
+} from './Header.styles.ts';
 import { Icon, ArrowIcon } from './components/';
 import { useState, forwardRef } from 'react';
 

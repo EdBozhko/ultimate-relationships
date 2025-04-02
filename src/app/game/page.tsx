@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 const Scene = dynamic(() => import('@src/components/experience/Scene'), { ssr: false });
 const MainExperience = dynamic(() => import('@comp/experience/MainExperience'), { ssr: false });
 
-const Home = ({ children }: { children: React.ReactNode }) => {
+const Game = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Scene
@@ -32,4 +32,4 @@ const Home = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Home;
+export default Game;

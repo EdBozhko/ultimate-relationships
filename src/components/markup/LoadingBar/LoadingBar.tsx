@@ -8,7 +8,7 @@ import {
   LinearGradient,
   DisplayProgress,
   InfoContainer,
-} from './LoadingBar.style';
+} from './LoadingBar.styles.ts';
 
 export const LoadingBar = ({ progress = 0, loaded = 0, totalLoaded = 0 }) => {
   const [currentProgress, setCurrentProgress] = useState(0);

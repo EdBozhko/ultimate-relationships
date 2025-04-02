@@ -138,16 +138,11 @@ export const AdditionalMenu = styled.div`
   transform: translate(100%, 0);
   transition: transform 0.5s ease;
 
-  ${({ $isOpened }) => {
-    console.log($isOpened);
-
-    return (
-      $isOpened &&
-      css`
-        transform: translate(0, 0);
-      `
-    );
-  }}
+  ${({ $isOpened }) =>
+    $isOpened &&
+    css`
+      transform: translate(0, 0);
+    `}
 `;
 
 export const AdditionalMenuList = styled.ul`

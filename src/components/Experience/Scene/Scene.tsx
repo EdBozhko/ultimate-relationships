@@ -1,6 +1,5 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import * as THREE from 'three';
 import { Canvas, CanvasProps } from '@react-three/fiber';
 import { Preload, AdaptiveDpr } from '@react-three/drei';

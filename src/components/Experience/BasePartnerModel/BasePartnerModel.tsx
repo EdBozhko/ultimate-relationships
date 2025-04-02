@@ -1,9 +1,8 @@
 'use client';
 
 import * as THREE from 'three';
-import { useEffect, useRef } from 'react';
-import { useThree, useFrame } from '@react-three/fiber';
-import { useGLTF, useTexture, useHelper } from '@react-three/drei';
+import { useRef } from 'react';
+import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';

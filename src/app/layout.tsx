@@ -2,19 +2,17 @@
 
 import { Ubuntu } from 'next/font/google';
 import { StyledComponentsRegistry } from '@helpers/lib/registry.tsx';
-import GlobalStyle from '@themeConfigs/global.style';
+import GlobalStyle from '@themeConfigs/global.style.ts';
 import { NextFont } from 'next/dist/compiled/@next/font';
 import { useGLTF } from '@react-three/drei';
 
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import useGlobalStore from '@src/stores/useGlobalStore';
+import useGlobalStore from '@src/stores/useGlobalStore.ts';
 
 import { Header } from '@src/components/markup/Header';
 import { Main } from '@src/components/markup/Main';
-import { useViewportHeightFix } from '@src/hooks/useViewportHeightFix';
-
-// import basePartnerModelSrc from '@public/models/base_partner/base_partner.glb';
+import { useViewportHeightFix } from '@src/hooks/useViewportHeightFix.ts';
 
 const ubuntu: NextFont = Ubuntu({
   subsets: ['latin', 'cyrillic'],

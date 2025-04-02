@@ -1,16 +1,15 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import * as THREE from 'three';
-import { useThree, useFrame } from '@react-three/fiber';
+import { useThree } from '@react-three/fiber';
 import { useGLTF, useTexture, useHelper, SpotLight } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useControls, button } from 'leva';
+import { useControls } from 'leva';
 
-import useGlobalStore from '@src/stores/useGlobalStore';
+import useGlobalStore from '@src/stores/useGlobalStore.ts';
 import floorSrc from '@public/models/strip_club/textures/floor.webp';
 import mixerSrc from '@public/models/strip_club/textures/mixer.webp';
 import tablesSrc from '@public/models/strip_club/textures/tables.webp';

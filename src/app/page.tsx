@@ -5,7 +5,7 @@ import { useProgress } from '@react-three/drei';
 
 import { ClientPortal } from '@comp/markup/ClientPortal';
 import { PopUp } from '@comp/markup/PopUp';
-import { PopUpTitle, PopUpText, PopUpButtonsContainer, PopUpButton, PopUpLink } from '@comp/markup/PopUp/PopUp.style';
+import { PopUpTitle, PopUpText, PopUpButtonsContainer, PopUpLink } from '@comp/markup/PopUp/PopUp.styles.ts';
 import { LoadingBar } from '@comp/markup/LoadingBar/';
 
 const Home = () => {

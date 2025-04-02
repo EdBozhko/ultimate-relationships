@@ -18,7 +18,7 @@ export const PopUpContainer = styled.div`
   border-radius: 20rem;
   box-shadow:
     0 0 15rem rgba(255, 0, 150, 0.8),
-    /* Outer glow */ 0 0 30rem rgba(255, 0, 150, 0.6),
+    0 0 30rem rgba(255, 0, 150, 0.6),
     0 0 60rem rgba(255, 0, 150, 0.4),
     inset 0 0 50rem rgba(0, 173, 255, 0.5),
     inset 0 0 140rem rgba(255, 50, 200, 0.4);
@@ -32,9 +32,7 @@ export const PopUpContainer = styled.div`
     right: -5rem;
     bottom: -5rem;
     border-radius: 25rem;
-    /* background: linear-gradient(90deg, rgba(255, 0, 150, 0.8), rgba(255, 100, 0, 0.8)); */
     z-index: -1;
-    /* filter: blur(10rem); */
     opacity: 0.8;
   }
 `;
