@@ -28,7 +28,8 @@
       "@comp/*": ["src/components/*"],
       "@modules/*": ["src/modules/*"],
       "@shared/*": ["src/shared/*"],
-      "@stores/*": ["src/stores/*"]
+      "@stores/*": ["src/stores/*"],
+      "@public/*": ["public/*"]
     },
     "types": ["@react-three/fiber"]
   },
