@@ -4,13 +4,17 @@ import { Ubuntu } from 'next/font/google';
 import { StyledComponentsRegistry } from '@helpers/lib/registry.tsx';
 import GlobalStyle from '@themeConfigs/global.style';
 import { NextFont } from 'next/dist/compiled/@next/font';
+import { useGLTF } from '@react-three/drei';
 
 import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useGlobalStore from '@src/stores/useGlobalStore';
 
 import { Header } from '@src/components/markup/Header';
+import { Main } from '@src/components/markup/Main';
 import { useViewportHeightFix } from '@src/hooks/useViewportHeightFix';
+
+// import basePartnerModelSrc from '@public/models/base_partner/base_partner.glb';
 
 const ubuntu: NextFont = Ubuntu({
   subsets: ['latin', 'cyrillic'],
@@ -38,10 +42,18 @@ const RootLayout = ({
   const debugPerfMode = useGlobalStore((state) => state.debugPerfMode);
   const userPerfMode = useGlobalStore((state) => state.userPerfMode);
 
+  const [headerHeight, setHeaderHeight] = useState(null);
+
+  const headerRef = useRef(null);
+
   useEffect(() => {
     isDebugMode ? debugMode() : userMode();
     isDebugPerfMode ? debugPerfMode() : userPerfMode();
   }, []);
+
+  useEffect(() => {
+    setHeaderHeight(headerRef.current.clientHeight);
+  }, [headerRef]);
 
   useViewportHeightFix();
 
@@ -86,8 +98,12 @@ const RootLayout = ({
       <body className={ubuntu.className}>
         <GlobalStyle />
         <StyledComponentsRegistry>
-          <Header />
-          <main>{children}</main>
+          <Header ref={headerRef} />
+          <Main headerHeight={headerHeight}>
+            {children}
+
+            <div id='client-portal' />
+          </Main>
         </StyledComponentsRegistry>
       </body>
     </html>
@@ -95,3 +111,6 @@ const RootLayout = ({
 };
 
 export default RootLayout;
+
+useGLTF.preload('/models/base_partner/base_partner.glb');
+useGLTF.preload('/models/strip_club/strip_club.glb');
