@@ -11,10 +11,44 @@ import { useGSAP } from '@gsap/react';
 import { useControls, button } from 'leva';
 
 import useGlobalStore from '@src/stores/useGlobalStore';
+import floorSrc from '@public/models/strip_club/textures/floor.webp';
+import mixerSrc from '@public/models/strip_club/textures/mixer.webp';
+import tablesSrc from '@public/models/strip_club/textures/tables.webp';
+import stageDownSrc from '@public/models/strip_club/textures/stage_down.webp';
+import stageUpSrc from '@public/models/strip_club/textures/stage_up.webp';
+import speakersSrc from '@public/models/strip_club/textures/speakers.webp';
+import mixerSpeakerSrc from '@public/models/strip_club/textures/mixer_speaker.webp';
+import wallsSrc from '@public/models/strip_club/textures/walls.webp';
+import neonSignsSrc from '@public/models/strip_club/textures/neon_signs.webp';
+import ceilingLightsSrc from '@public/models/strip_club/textures/celling_lights.webp';
+import curtainsSrc from '@public/models/strip_club/textures/curtains.webp';
+import doorsSrc from '@public/models/strip_club/textures/doors.001.webp';
+import stairsSrc from '@public/models/strip_club/textures/stairs.webp';
+import barWallSrc from '@public/models/strip_club/textures/bar_wall.webp';
+import barCounterSrc from '@public/models/strip_club/textures/bar_counter.webp';
+import barstoolsSrc from '@public/models/strip_club/textures/barstools.webp';
+import metalChairsSrc from '@public/models/strip_club/textures/metal_chairs.webp';
+import ceilingSrc from '@public/models/strip_club/textures/ceiling.webp';
+
+useTexture.preload(floorSrc);
+useTexture.preload(mixerSrc);
+useTexture.preload(tablesSrc);
+useTexture.preload(stageDownSrc);
+useTexture.preload(stageUpSrc);
+useTexture.preload(speakersSrc);
+useTexture.preload(mixerSpeakerSrc);
+useTexture.preload(wallsSrc);
+useTexture.preload(neonSignsSrc);
+useTexture.preload(ceilingLightsSrc);
+useTexture.preload(curtainsSrc);
+useTexture.preload(doorsSrc), useTexture.preload(stairsSrc);
+useTexture.preload(barWallSrc);
+useTexture.preload(barCounterSrc);
+useTexture.preload(barstoolsSrc);
+useTexture.preload(metalChairsSrc);
+useTexture.preload(ceilingSrc);
 
 gsap.registerPlugin(useGSAP);
-
-const modelPath = '/models/strip_club/strip_club.glb';
 
 type GLTFResult = GLTF & {
   nodes: {};
@@ -22,28 +56,27 @@ type GLTFResult = GLTF & {
 };
 
 const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
-  const isDebugMode = useGlobalStore((state) => state.isDebugMode);
-
   const bakedTextures = {
-    floor: useTexture('/models/strip_club/textures/floor.webp'),
-    mixerBakedTexture: useTexture('/models/strip_club/textures/mixer.webp'),
-    tablesBakedTexture: useTexture('/models/strip_club/textures/tables.webp'),
-    stageDownBakedTexture: useTexture('/models/strip_club/textures/stage_down.webp'),
-    stageUpBakedTexture: useTexture('/models/strip_club/textures/stage_up.webp'),
-    speakersBakedTexture: useTexture('/models/strip_club/textures/speakers.webp'),
-    mixerSpeakersBakedTexture: useTexture('/models/strip_club/textures/mixer_speaker.webp'),
-    wallsBakedTexture: useTexture('/models/strip_club/textures/walls.webp'),
-    neonSignsBakedTexture: useTexture('/models/strip_club/textures/neon_signs.webp'),
-    ceilingLightsBakedTexture: useTexture('/models/strip_club/textures/celling_lights.webp'),
-    curtainsBakedTexture: useTexture('/models/strip_club/textures/curtains.webp'),
-    doorsBakedTexture: useTexture('/models/strip_club/textures/doors.001.webp'),
-    stairsBakedTexture: useTexture('/models/strip_club/textures/stairs.webp'),
-    barWallBakedTexture: useTexture('/models/strip_club/textures/bar_wall.webp'),
-    barCounterBakedTexture: useTexture('/models/strip_club/textures/bar_counter.webp'),
-    barstoolsBakedTexture: useTexture('/models/strip_club/textures/barstools.webp'),
-    metalChairsBakedTexture: useTexture('/models/strip_club/textures/metal_chairs.webp'),
-    ceilingBakedTexture: useTexture('/models/strip_club/textures/ceiling.webp'),
+    floor: useTexture(floorSrc),
+    mixerBakedTexture: useTexture(mixerSrc),
+    tablesBakedTexture: useTexture(tablesSrc),
+    stageDownBakedTexture: useTexture(stageDownSrc),
+    stageUpBakedTexture: useTexture(stageUpSrc),
+    speakersBakedTexture: useTexture(speakersSrc),
+    mixerSpeakersBakedTexture: useTexture(mixerSpeakerSrc),
+    wallsBakedTexture: useTexture(wallsSrc),
+    neonSignsBakedTexture: useTexture(neonSignsSrc),
+    ceilingLightsBakedTexture: useTexture(ceilingLightsSrc),
+    curtainsBakedTexture: useTexture(curtainsSrc),
+    doorsBakedTexture: useTexture(doorsSrc),
+    stairsBakedTexture: useTexture(stairsSrc),
+    barWallBakedTexture: useTexture(barWallSrc),
+    barCounterBakedTexture: useTexture(barCounterSrc),
+    barstoolsBakedTexture: useTexture(barstoolsSrc),
+    metalChairsBakedTexture: useTexture(metalChairsSrc),
+    ceilingBakedTexture: useTexture(ceilingSrc),
   };
+  const isDebugMode = useGlobalStore((state) => state.isDebugMode);
 
   const refs = {
     ceilingStageLight: useRef<THREE.Mesh>(null!),
@@ -65,7 +98,7 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
   const controls = useThree((state) => state.controls);
   const [spotLightDistance, setSpotLightDistance] = useState(0.1);
 
-  const stripClub = useGLTF(modelPath);
+  const stripClub = useGLTF('/models/strip_club/strip_club.glb');
   const { nodes, materials } = stripClub as GLTFResult;
 
   isDebugMode && useHelper(refs.spotLight, THREE.SpotLightHelper, 'yellow');

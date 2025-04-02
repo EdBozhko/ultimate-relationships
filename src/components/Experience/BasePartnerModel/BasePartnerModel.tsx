@@ -12,8 +12,6 @@ import { useBoxHelper } from '@src/hooks';
 
 gsap.registerPlugin(useGSAP);
 
-const modelPath = '/models/base_partner/base_partner.glb';
-
 type GLTFResult = GLTF & {
   nodes: {
     Body: THREE.SkinnedMesh;
@@ -23,7 +21,7 @@ type GLTFResult = GLTF & {
 };
 
 const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
-  const basePartner = useGLTF(modelPath) as GLTFResult;
+  const basePartner = useGLTF('/models/base_partner/base_partner.glb') as GLTFResult;
   const { nodes, materials } = basePartner;
   const modelRef = useRef(null!);
   useBoxHelper(modelRef);
