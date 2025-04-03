@@ -1,5 +1,65 @@
 import Link from 'next/link';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+
+const popupContentIn = keyframes`
+  from {
+    max-height: 0rem;
+  }
+
+  to {
+    max-height: 100vh;
+  }
+`;
+
+export const PopUpContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+
+  ${({ $show }) =>
+    !$show &&
+    css`
+      max-height: 0rem;
+    `}
+
+  ${({ $show }) =>
+    $show &&
+    css`
+      animation: ${popupContentIn} 1s linear;
+      animation-delay: 1s;
+      animation-fill-mode: both;
+    `}
+`;
+
+const popupIn = keyframes`
+  0% {
+    padding: 0 16rem;
+    border-width: 2rem;
+    transform: translate(-200%, -50%);
+  }
+
+  30% {
+    padding: 0 16rem;
+    border-width: 2rem;
+    transform: translate(-50%, -50%);
+  }
+
+  50% {
+    padding: 0 16rem;
+    border-width: 2rem;
+    transform: translate(-50%, -50%);
+  }
+
+  100% {
+    padding: 16rem;
+    border-width: 5rem;
+    transform: translate(-50%, -50%);  
+  }
+`;
 
 export const PopUpContainer = styled.div`
   display: flex;
@@ -13,7 +73,6 @@ export const PopUpContainer = styled.div`
   width: 80%;
   max-width: 576rem;
   padding: 16rem;
-
   background: linear-gradient(180deg, rgba(0, 0, 60, 1) 0%, rgba(0, 0, 60, 1) 100%);
   border-radius: 20rem;
   box-shadow:
@@ -23,6 +82,7 @@ export const PopUpContainer = styled.div`
     inset 0 0 50rem rgba(0, 173, 255, 0.5),
     inset 0 0 140rem rgba(255, 50, 200, 0.4);
   border: 5rem solid rgba(255, 0, 150, 0.5);
+  will-change: transform, padding, border-width;
 
   &::before {
     content: '';
@@ -35,6 +95,21 @@ export const PopUpContainer = styled.div`
     z-index: -1;
     opacity: 0.8;
   }
+
+  ${({ $show }) =>
+    !$show &&
+    css`
+      padding: 0;
+      border-width: 2rem;
+      transform: translate(-200%, -50%);
+    `}
+
+  ${({ $show }) =>
+    $show &&
+    css`
+      animation: ${popupIn} 2s linear;
+      animation-fill-mode: both;
+    `}
 `;
 
 export const PopUpTitle = styled.p`

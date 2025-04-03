@@ -9,24 +9,46 @@ import { PopUpTitle, PopUpText, PopUpButtonsContainer, PopUpLink } from '@comp/m
 import { LoadingBar } from '@comp/markup/LoadingBar/';
 
 const Home = () => {
+  const [hideLoadingBar, setHideLoadingBar] = useState(false);
   const [showPopUp, setShowPopUp] = useState(false);
+  const [currentLoadingProgress, setCurrentLoadingProgress] = useState(0);
   const loadingProgress = useProgress((state) => state.progress);
   const loaded = useProgress((state) => state.loaded);
   const totalLoaded = useProgress((state) => state.total);
 
   useEffect(() => {
-    if (loaded === totalLoaded) {
-      setTimeout(() => {
-        setShowPopUp(true);
-      }, 3000);
+    let loadingProgressTimeout = null;
+
+    if (loadingProgress > currentLoadingProgress) {
+      setCurrentLoadingProgress(loadingProgress);
     }
+
+    if (loadingProgress === 100) {
+      loadingProgressTimeout = setTimeout(() => {
+        setHideLoadingBar(true);
+      }, 2000);
+    }
+
+    return () => clearTimeout(loadingProgressTimeout);
   }, [loadingProgress]);
+
+  useEffect(() => {
+    let showPopUpTimeout = null;
+
+    if (hideLoadingBar === true) {
+      showPopUpTimeout = setTimeout(() => {
+        setShowPopUp(true);
+      }, 1000);
+    }
+
+    return () => clearTimeout(showPopUpTimeout);
+  }, [hideLoadingBar]);
 
   return (
     <>
-      {!showPopUp && <LoadingBar progress={loadingProgress} loaded={loaded} totalLoaded={totalLoaded} />}
+      <LoadingBar hide={hideLoadingBar} progress={currentLoadingProgress} loaded={loaded} totalLoaded={totalLoaded} />
       <ClientPortal selector='client-portal' show={showPopUp}>
-        <PopUp>
+        <PopUp show={showPopUp}>
           <PopUpTitle>This is an adult website</PopUpTitle>
           <PopUpText>
             This website contains age-restricted materials including nudity and explicit depictions of sexual activity.

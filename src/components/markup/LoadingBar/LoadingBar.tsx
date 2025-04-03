@@ -1,32 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import {
   LoadingBarContainer,
   LoadingBarCounter,
   SVG,
   Background,
   Meter,
-  LinearGradient,
   DisplayProgress,
   InfoContainer,
+  LinearGradient,
 } from './LoadingBar.styles.ts';
 
-export const LoadingBar = ({ progress = 0, loaded = 0, totalLoaded = 0 }) => {
-  const [currentProgress, setCurrentProgress] = useState(0);
-  const [loadingStatus, setLoadingStatus] = useState('in progress');
-  useEffect(() => {
-    if (progress > currentProgress) {
-      setCurrentProgress(progress);
-    }
-  }, [progress]);
+export const LoadingBar = ({ progress = 0, loaded = 0, totalLoaded = 0, hide = false }) => {
+  // Memoize `loadingStatus` to avoid unnecessary re-renders
+  const loadingStatus = useMemo(() => (progress === 100 ? 'done' : 'in progress'), [progress]);
 
-  useEffect(() => {
-    if (loaded === totalLoaded) {
-      setLoadingStatus('done');
-    }
-  }, [loaded]);
+  // Precompute `strokeDashoffset` to prevent inline calculations
+  const strokeDashoffset = useMemo(() => ((100 - progress) / 100) * 3.14 * 150, [progress]);
 
   return (
-    <LoadingBarContainer>
+    <LoadingBarContainer $hide={hide}>
       <SVG>
         <defs>
           <LinearGradient id='gradient' x1='0%' y1='0%' x2='0%' y2='100%'>
@@ -36,10 +28,10 @@ export const LoadingBar = ({ progress = 0, loaded = 0, totalLoaded = 0 }) => {
           </LinearGradient>
         </defs>
         <Background cx='50%' cy='50%' r='50%' />
-        <Meter stroke='url(#gradient)' cx='50%' cy='50%' r='50%' $strokeDashoffset={currentProgress} />
+        <Meter stroke='url(#gradient)' cx='50%' cy='50%' r='50%' $strokeDashoffset={strokeDashoffset} />
       </SVG>
       <InfoContainer>
-        <LoadingBarCounter>{`${Math.floor(currentProgress)}%`}</LoadingBarCounter>
+        <LoadingBarCounter>{`${Math.floor(progress)}%`}</LoadingBarCounter>
         <DisplayProgress>{`${loadingStatus}`}</DisplayProgress>
         <DisplayProgress>{`${loaded}/${totalLoaded}`}</DisplayProgress>
       </InfoContainer>
