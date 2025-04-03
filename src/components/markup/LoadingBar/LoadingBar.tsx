@@ -10,11 +10,10 @@ import {
   LinearGradient,
 } from './LoadingBar.styles.ts';
 
-export const LoadingBar = ({ progress = 0, loaded = 0, totalLoaded = 0, hide = false }) => {
-  // Memoize `loadingStatus` to avoid unnecessary re-renders
-  const loadingStatus = useMemo(() => (progress === 100 ? 'done' : 'in progress'), [progress]);
+import type { LoadingBarComponent } from './LoadingBar.types.ts';
 
-  // Precompute `strokeDashoffset` to prevent inline calculations
+export const LoadingBar: LoadingBarComponent = ({ progress = 0, loaded = 0, totalLoaded = 0, hide = false }) => {
+  const loadingStatus = useMemo(() => (progress === 100 ? 'done' : 'in progress'), [progress]);
   const strokeDashoffset = useMemo(() => ((100 - progress) / 100) * 3.14 * 150, [progress]);
 
   return (

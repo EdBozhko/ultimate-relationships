@@ -1,4 +1,6 @@
-export const ChatIcon = (props) => {
+import type { ChatIconComponent } from './ChatIcon.types.ts';
+
+export const ChatIcon: ChatIconComponent = (props) => {
   const { color } = props;
 
   return (

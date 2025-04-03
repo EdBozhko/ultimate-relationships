@@ -1,4 +1,6 @@
-export const GameIcon = (props) => {
+import { GameIconComponent } from './GameIcon.types.ts';
+
+export const GameIcon: GameIconComponent = (props) => {
   const { color } = props;
 
   return (

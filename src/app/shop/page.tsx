@@ -1,7 +1,9 @@
 'use client';
 
-const Shop = ({ children }: { children: React.ReactNode }) => {
-  return <>{children}</>;
+import type { ShopComponent } from './Shop.types.ts';
+
+const Shop: ShopComponent = () => {
+  return <></>;
 };
 
 export default Shop;

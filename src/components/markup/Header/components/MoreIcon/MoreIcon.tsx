@@ -1,4 +1,6 @@
-export const MoreIcon = (props) => {
+import type { MoreIconComponent } from './MoreIcon.types.ts';
+
+export const MoreIcon: MoreIconComponent = (props) => {
   const { color } = props;
 
   return (

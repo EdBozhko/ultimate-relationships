@@ -1,14 +1,15 @@
 'use client';
 
 import * as THREE from 'three';
-import { Canvas, CanvasProps } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { Preload, AdaptiveDpr } from '@react-three/drei';
 import { Leva } from 'leva';
 import type { FC } from 'react';
+import type { SceneProps } from './Scene.types.ts';
 
 import useGlobalStore from '@src/stores/useGlobalStore';
 
-const Scene: FC<CanvasProps> = ({ children, ...props }) => {
+const Scene: FC<SceneProps> = ({ children, ...props }) => {
   const isDebugMode = useGlobalStore((state) => state.isDebugMode);
 
   return (

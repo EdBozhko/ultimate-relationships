@@ -1,8 +1,9 @@
 'use client';
 
 import { create } from 'zustand';
+import type { GlobalStore } from './useGlobalStore.types.ts';
 
-export default create((set) => {
+const useGlobalStore = create<GlobalStore>((set) => {
   return {
     isDebugMode: false,
     debugMode: () => {
@@ -28,3 +29,5 @@ export default create((set) => {
     },
   };
 });
+
+export default useGlobalStore;

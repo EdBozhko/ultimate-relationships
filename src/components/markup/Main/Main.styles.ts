@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 
-export const MainContainer = styled.main`
+import type { MainContainerProps, ContainerProps } from './Main.types.ts';
+
+export const MainContainer = styled.main<MainContainerProps>`
   ${({ $headerHeight }) =>
     $headerHeight &&
     css`
@@ -8,7 +10,7 @@ export const MainContainer = styled.main`
     `}
 `;
 
-export const Container = styled.div`
+export const Container = styled.div<ContainerProps>`
   width: 100%;
   height: 100%;
   position: relative;

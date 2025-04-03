@@ -1,9 +1,9 @@
 import { PAGES } from '@src/utils';
 import { GameIcon, ChatIcon, MoreIcon, ShopIcon, StoriesIcon, MediaIcon, SettingsIcon } from '../';
 
-export const Icon = (props) => {
-  const { color, type } = props;
+import type { IconComponent } from './Icon.types.ts';
 
+export const Icon: IconComponent = ({ color, type }) => {
   return (
     <>
       {type === PAGES.GAME && <GameIcon color={color} />}

@@ -20,6 +20,8 @@ import {
 import { Icon, ArrowIcon } from './components/';
 import { useState, forwardRef } from 'react';
 
+import type { HeaderComponent, HeaderProps } from './Header.types.ts';
+
 const navigation = [
   { id: PAGES.GAME, href: '/game', name: 'game', iconSrc: '' },
   { id: PAGES.CHAT, href: '/chat', name: 'chat', iconSrc: '' },
@@ -33,7 +35,8 @@ const additionalNavigation = [
   { id: PAGES.SETTINGS, href: '/settings', name: 'settings', iconSrc: '' },
 ];
 
-export const Header = forwardRef((props, ref) => {
+// ForwardRef with correct type for ref
+export const Header: HeaderComponent = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
   const pathname = usePathname();
 
   const [isSubmenuOpened, setIsSubmenuOpened] = useState(false);
@@ -44,7 +47,6 @@ export const Header = forwardRef((props, ref) => {
   const [isAdditionalMenuOpened, setIsAdditionalMenuOpened] = useState(false);
   const onMoreButtonClick = () => {
     console.log('more');
-
     setIsAdditionalMenuOpened((prev) => !prev);
   };
 
@@ -62,7 +64,7 @@ export const Header = forwardRef((props, ref) => {
             <NavLinkName>{name}</NavLinkName>
           </NavButton>
         ) : (
-          <NavLink href={href} onClick={id === PAGES.MORE ? onMoreButtonClick : null}>
+          <NavLink href={href} onClick={id === PAGES.MORE ? onMoreButtonClick : undefined}>
             <NavLinkIcon>{iconSrc || <Icon type={id} color={'#656565'} />}</NavLinkIcon>
             <NavLinkName>{name}</NavLinkName>
           </NavLink>

@@ -8,7 +8,9 @@ import { PopUp } from '@comp/markup/PopUp';
 import { PopUpTitle, PopUpText, PopUpButtonsContainer, PopUpLink } from '@comp/markup/PopUp/PopUp.styles.ts';
 import { LoadingBar } from '@comp/markup/LoadingBar/';
 
-const Home = () => {
+import type { HomeComponent } from './Home.types.ts';
+
+const Home: HomeComponent = () => {
   const [hideLoadingBar, setHideLoadingBar] = useState(false);
   const [showPopUp, setShowPopUp] = useState(false);
   const [currentLoadingProgress, setCurrentLoadingProgress] = useState(0);
@@ -17,7 +19,7 @@ const Home = () => {
   const totalLoaded = useProgress((state) => state.total);
 
   useEffect(() => {
-    let loadingProgressTimeout = null;
+    let loadingProgressTimeout: ReturnType<typeof setTimeout>;
 
     if (loadingProgress > currentLoadingProgress) {
       setCurrentLoadingProgress(loadingProgress);
@@ -33,7 +35,7 @@ const Home = () => {
   }, [loadingProgress]);
 
   useEffect(() => {
-    let showPopUpTimeout = null;
+    let showPopUpTimeout: ReturnType<typeof setTimeout>;
 
     if (hideLoadingBar === true) {
       showPopUpTimeout = setTimeout(() => {

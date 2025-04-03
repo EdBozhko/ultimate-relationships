@@ -1,4 +1,6 @@
-export const ShopIcon = (props) => {
+import type { ShopIconComponent } from './ShopIcon.types.ts';
+
+export const ShopIcon: ShopIconComponent = (props) => {
   const { color } = props;
 
   return (

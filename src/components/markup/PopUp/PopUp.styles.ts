@@ -1,6 +1,16 @@
 import Link from 'next/link';
 import styled, { css, keyframes } from 'styled-components';
 
+import type {
+  PopUpButtonProps,
+  PopUpButtonsContainerProps,
+  PopUpContainerProps,
+  PopUpContentProps,
+  PopUpLinkProps,
+  PopUpTextProps,
+  PopUpTitleProps,
+} from './PopUp.types.ts';
+
 const popupContentIn = keyframes`
   from {
     max-height: 0rem;
@@ -9,30 +19,6 @@ const popupContentIn = keyframes`
   to {
     max-height: 100vh;
   }
-`;
-
-export const PopUpContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-
-  ${({ $show }) =>
-    !$show &&
-    css`
-      max-height: 0rem;
-    `}
-
-  ${({ $show }) =>
-    $show &&
-    css`
-      animation: ${popupContentIn} 1s linear;
-      animation-delay: 1s;
-      animation-fill-mode: both;
-    `}
 `;
 
 const popupIn = keyframes`
@@ -61,7 +47,31 @@ const popupIn = keyframes`
   }
 `;
 
-export const PopUpContainer = styled.div`
+export const PopUpContent = styled.div<PopUpContentProps>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+
+  ${({ $show }) =>
+    !$show &&
+    css`
+      max-height: 0rem;
+    `}
+
+  ${({ $show }) =>
+    $show &&
+    css`
+      animation: ${popupContentIn} 1s linear;
+      animation-delay: 1s;
+      animation-fill-mode: both;
+    `}
+`;
+
+export const PopUpContainer = styled.div<PopUpContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -112,7 +122,7 @@ export const PopUpContainer = styled.div`
     `}
 `;
 
-export const PopUpTitle = styled.p`
+export const PopUpTitle = styled.p<PopUpTitleProps>`
   color: #d8acff;
   font: inherit;
   font-size: 20rem;
@@ -123,7 +133,7 @@ export const PopUpTitle = styled.p`
   padding: 0;
 `;
 
-export const PopUpText = styled.p`
+export const PopUpText = styled.p<PopUpTextProps>`
   color: #c686ff;
   font: inherit;
   font-size: 16rem;
@@ -133,7 +143,7 @@ export const PopUpText = styled.p`
   padding: 0;
 `;
 
-export const PopUpButtonsContainer = styled.div`
+export const PopUpButtonsContainer = styled.div<PopUpButtonsContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -141,7 +151,7 @@ export const PopUpButtonsContainer = styled.div`
   width: 100%;
 `;
 
-export const PopUpLink = styled(Link)`
+export const PopUpLink = styled(Link)<PopUpLinkProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,4 +169,4 @@ export const PopUpLink = styled(Link)`
   }
 `;
 
-export const PopUpButton = styled(PopUpLink).attrs({ as: 'button' })``;
+export const PopUpButton = styled(PopUpLink).attrs({ as: 'button' })<PopUpButtonProps>``;

@@ -1,14 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-interface ClientPortal {
-  children: React.ReactNode;
-  show?: boolean;
-  onClose?: () => void;
-  selector: string;
-}
+import type { ClientPortalComponent } from './ClientPortal.types.ts';
 
-export const ClientPortal = ({ children, selector, show }: ClientPortal) => {
+export const ClientPortal: ClientPortalComponent = ({ children, selector, show }) => {
   const ref = useRef<Element | null>(null);
   useEffect(() => {
     ref.current = document.getElementById(selector);

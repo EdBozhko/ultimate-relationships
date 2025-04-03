@@ -1,7 +1,25 @@
 import styled, { css } from 'styled-components';
 import Link from 'next/link';
 
-export const HeaderStyled = styled.header`
+import type {
+  AdditionalMenuLinkIconProps,
+  AdditionalMenuLinkProps,
+  AdditionalMenuListItemProps,
+  AdditionalMenuListProps,
+  AdditionalMenuProps,
+  HeaderStyledProps,
+  NavButtonProps,
+  NavLinkProps,
+  NavLinkIconProps,
+  NavLinkNameProps,
+  NavListItemProps,
+  NavListProps,
+  NavProps,
+  SubmenuProps,
+  SwitcherProps,
+} from './Header.types.ts';
+
+export const HeaderStyled = styled.header<HeaderStyledProps>`
   position: fixed;
   bottom: 0;
   left: 0;
@@ -9,7 +27,7 @@ export const HeaderStyled = styled.header`
   z-index: 1;
 `;
 
-export const Nav = styled.nav`
+export const Nav = styled.nav<NavProps>`
   position: absolute;
   bottom: 0;
   left: 0;
@@ -20,7 +38,7 @@ export const Nav = styled.nav`
   overflow: hidden;
 `;
 
-export const Submenu = styled(Nav).attrs({ as: 'div' })`
+export const Submenu = styled(Nav).attrs({ as: 'div' })<SubmenuProps>`
   position: relative;
   padding: 0 10rem;
   border-top: #272323 1px solid;
@@ -35,7 +53,7 @@ export const Submenu = styled(Nav).attrs({ as: 'div' })`
     `}
 `;
 
-export const NavList = styled.ul`
+export const NavList = styled.ul<NavListProps>`
   width: 100%;
   list-style: none;
   display: flex;
@@ -44,9 +62,9 @@ export const NavList = styled.ul`
   flex-wrap: wrap;
 `;
 
-export const NavListItem = styled.li``;
+export const NavListItem = styled.li<NavListItemProps>``;
 
-export const NavLinkIcon = styled.div`
+export const NavLinkIcon = styled.div<NavLinkIconProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,12 +73,12 @@ export const NavLinkIcon = styled.div`
   aspect-ratio: 1 / 1;
 `;
 
-export const NavLinkName = styled.span`
+export const NavLinkName = styled.span<NavLinkNameProps>`
   font: inherit;
   font-weight: 400;
 `;
 
-export const NavLink = styled(Link)`
+export const NavLink = styled(Link)<NavLinkProps>`
   font-size: 12rem;
   color: #656565;
   display: flex;
@@ -77,7 +95,7 @@ export const NavLink = styled(Link)`
   }
 `;
 
-export const NavButton = styled(NavLink).attrs({ as: 'button' })`
+export const NavButton = styled(NavLink).attrs({ as: 'button' })<NavButtonProps>`
   position: relative;
 
   ${NavLinkIcon} {
@@ -100,7 +118,7 @@ export const NavButton = styled(NavLink).attrs({ as: 'button' })`
   }
 `;
 
-export const Switcher = styled.div`
+export const Switcher = styled.div<SwitcherProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -126,7 +144,7 @@ export const Switcher = styled.div`
     `}
 `;
 
-export const AdditionalMenu = styled.div`
+export const AdditionalMenu = styled.div<AdditionalMenuProps>`
   position: absolute;
   background-color: #181818;
   width: 100vw;
@@ -145,7 +163,7 @@ export const AdditionalMenu = styled.div`
     `}
 `;
 
-export const AdditionalMenuList = styled.ul`
+export const AdditionalMenuList = styled.ul<AdditionalMenuListProps>`
   list-style: none;
   width: 100%;
   height: 100%;
@@ -156,14 +174,14 @@ export const AdditionalMenuList = styled.ul`
   overflow-y: auto;
 `;
 
-export const AdditionalMenuListItem = styled.li`
+export const AdditionalMenuListItem = styled.li<AdditionalMenuListItemProps>`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin: 0 0 10rem 0;
 `;
 
-export const AdditionalMenuLink = styled(Link)`
+export const AdditionalMenuLink = styled(Link)<AdditionalMenuLinkProps>`
   font-size: 26rem;
   color: #656565;
   display: flex;
@@ -171,7 +189,7 @@ export const AdditionalMenuLink = styled(Link)`
   align-items: center;
 `;
 
-export const AdditionalMenuLinkIcon = styled.div`
+export const AdditionalMenuLinkIcon = styled.div<AdditionalMenuLinkIconProps>`
   display: flex;
   width: 40rem;
   aspect-ratio: 1 / 1;

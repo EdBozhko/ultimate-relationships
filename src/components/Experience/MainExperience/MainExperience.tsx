@@ -6,21 +6,19 @@ import { useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useControls } from 'leva';
 import { Perf } from 'r3f-perf';
-import type { FC } from 'react';
-import type { PerspectiveCamera } from 'three';
 
 import useGlobalStore from '@src/stores/useGlobalStore';
 
-type ModelComponentProps = Partial<JSX.IntrinsicElements['mesh']>;
+import type { MainExperienceComponent, PerspectiveCameraProps } from './MainExperience.types.ts';
 
 const StripClubModel = dynamic(() => import('@comp/experience/StripClubModel'), {
   ssr: false,
-}) as FC<ModelComponentProps>;
+}) as MainExperienceComponent;
 const BasePartnerModel = dynamic(() => import('@comp/experience/BasePartnerModel'), {
   ssr: false,
-}) as FC<ModelComponentProps>;
+}) as MainExperienceComponent;
 
-const MainExperience: FC = () => {
+const MainExperience: MainExperienceComponent = () => {
   const isDebugMode = useGlobalStore((state) => state.isDebugMode);
   const isDebugPerfMode = useGlobalStore((state) => state.isDebugPerfMode);
 
@@ -28,7 +26,7 @@ const MainExperience: FC = () => {
     isPerfVisible: true,
   });
 
-  const camera = useThree((state) => state.camera as PerspectiveCamera);
+  const camera = useThree((state) => state.camera as PerspectiveCameraProps);
 
   return (
     <>

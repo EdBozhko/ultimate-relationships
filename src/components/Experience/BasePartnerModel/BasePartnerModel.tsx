@@ -1,25 +1,17 @@
 'use client';
 
-import * as THREE from 'three';
 import { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
-import { GLTF } from 'three-stdlib';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 import { useBoxHelper } from '@src/hooks';
 
+import type { GLTFResult, BasePartnerModelComponent } from './BasePartnerModel.types.ts';
+
 gsap.registerPlugin(useGSAP);
 
-type GLTFResult = GLTF & {
-  nodes: {
-    Body: THREE.SkinnedMesh;
-    root: THREE.Bone;
-  };
-  materials: {};
-};
-
-const BasePartnerModel = (props: JSX.IntrinsicElements['group']) => {
+const BasePartnerModel: BasePartnerModelComponent = (props) => {
   const basePartner = useGLTF('/models/base_partner/base_partner.glb') as GLTFResult;
   const { nodes, materials } = basePartner;
   const modelRef = useRef(null!);

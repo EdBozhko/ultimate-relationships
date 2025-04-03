@@ -27,11 +27,7 @@ const description: string = 'Perfect AI Partner';
 const author: string = 'EdBozhko';
 const twitter: string = '@';
 
-const RootLayout = ({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) => {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const isDebugMode = Boolean(useSearchParams().get('debug-mode'));
   const debugMode = useGlobalStore((state) => state.debugMode);
   const userMode = useGlobalStore((state) => state.userMode);
@@ -40,9 +36,9 @@ const RootLayout = ({
   const debugPerfMode = useGlobalStore((state) => state.debugPerfMode);
   const userPerfMode = useGlobalStore((state) => state.userPerfMode);
 
-  const [headerHeight, setHeaderHeight] = useState(null);
+  const [headerHeight, setHeaderHeight] = useState<number | null>(null);
 
-  const headerRef = useRef(null);
+  const headerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     isDebugMode ? debugMode() : userMode();
@@ -50,7 +46,9 @@ const RootLayout = ({
   }, []);
 
   useEffect(() => {
-    setHeaderHeight(headerRef.current.clientHeight);
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.clientHeight);
+    }
   }, [headerRef]);
 
   useViewportHeightFix();
@@ -99,7 +97,6 @@ const RootLayout = ({
           <Header ref={headerRef} />
           <Main headerHeight={headerHeight}>
             {children}
-
             <div id='client-portal' />
           </Main>
         </StyledComponentsRegistry>

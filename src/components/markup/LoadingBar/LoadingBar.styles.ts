@@ -1,8 +1,28 @@
 import styled, { css, keyframes } from 'styled-components';
 
-const loadingBarWidth = 150;
+import type {
+  BackgroundProps,
+  DisplayProgressProps,
+  InfoContainerProps,
+  LinearGradientProps,
+  LoadingBarContainerProps,
+  LoadingBarCounterProps,
+  MeterProps,
+  SVGProps,
+} from './LoadingBar.types.ts';
 
-export const LoadingBarContainer = styled.div`
+const loadingBarWidth = 150;
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const LoadingBarContainer = styled.div<LoadingBarContainerProps>`
   display: flex;
   position: absolute;
   top: 50%;
@@ -21,7 +41,7 @@ export const LoadingBarContainer = styled.div`
     `}
 `;
 
-export const InfoContainer = styled.p`
+export const InfoContainer = styled.p<InfoContainerProps>`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -43,31 +63,33 @@ export const InfoContainer = styled.p`
     0 0 151px #c300b6;
 `;
 
-export const LoadingBarCounter = styled.span`
+export const LoadingBarCounter = styled.span<LoadingBarCounterProps>`
   font: inherit;
   font-size: 36rem;
 `;
 
-export const DisplayProgress = styled.span`
+export const DisplayProgress = styled.span<DisplayProgressProps>`
   font: inherit;
   font-size: 16rem;
 `;
 
-export const SVG = styled.svg`
+export const SVG = styled.svg<SVGProps>`
   width: ${loadingBarWidth}rem;
   aspect-ratio: 1 / 1;
   overflow: visible;
+  will-change: transform;
+  animation: ${rotate} 2s linear infinite;
 
   filter: drop-shadow(0 0 21px #c295c0) drop-shadow(0 0 151px #c300b6);
 `;
 
-export const Background = styled.circle`
+export const Background = styled.circle<BackgroundProps>`
   fill: none;
   stroke-width: 5rem;
   stroke: transparent;
 `;
 
-export const Meter = styled.circle`
+export const Meter = styled.circle<MeterProps>`
   fill: none;
   stroke-width: 5rem;
   stroke-linecap: round;
@@ -78,4 +100,4 @@ export const Meter = styled.circle`
   transition: stroke-dashoffset 0.2s linear;
 `;
 
-export const LinearGradient = styled.linearGradient``;
+export const LinearGradient = styled.linearGradient<LinearGradientProps>``;

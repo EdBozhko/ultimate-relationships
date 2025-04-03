@@ -1,4 +1,6 @@
-export const SettingsIcon = (props) => {
+import type { SettingsIconComponent } from './SettingsIcon.types.ts';
+
+export const SettingsIcon: SettingsIconComponent = (props) => {
   const { color } = props;
 
   return (

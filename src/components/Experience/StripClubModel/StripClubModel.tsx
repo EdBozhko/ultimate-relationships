@@ -3,11 +3,12 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { useThree } from '@react-three/fiber';
-import { useGLTF, useTexture, useHelper, SpotLight } from '@react-three/drei';
-import { GLTF } from 'three-stdlib';
+import { useGLTF, useTexture, useHelper } from '@react-three/drei';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useControls } from 'leva';
+
+import type { GLTFResult, OrbitControlsImpl, StripClubModelComponent } from './StripClubModel.types.ts';
 
 import useGlobalStore from '@src/stores/useGlobalStore.ts';
 import floorSrc from '@public/models/strip_club/textures/floor.webp';
@@ -49,12 +50,7 @@ useTexture.preload(ceilingSrc);
 
 gsap.registerPlugin(useGSAP);
 
-type GLTFResult = GLTF & {
-  nodes: {};
-  materials: {};
-};
-
-const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
+const StripClubModel: StripClubModelComponent = (props) => {
   const bakedTextures = {
     floor: useTexture(floorSrc),
     mixerBakedTexture: useTexture(mixerSrc),
@@ -79,7 +75,7 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
 
   const refs = {
     ceilingStageLight: useRef<THREE.Mesh>(null!),
-    surfaceMarker: useRef<THREE.Object3D>(null!),
+    surfaceMarker: useRef<THREE.Group>(null!),
     spotLight: useRef<THREE.SpotLight>(null!),
     stayWildSign: useRef<THREE.Mesh>(null!),
     floor: useRef<THREE.Mesh>(null!),
@@ -94,7 +90,7 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
   });
 
   const camera = useThree((state) => state.camera);
-  const controls = useThree((state) => state.controls);
+  const controls = useThree((state) => state.controls as OrbitControlsImpl);
   const [spotLightDistance, setSpotLightDistance] = useState(0.1);
 
   const stripClub = useGLTF('/models/strip_club/strip_club.glb');
@@ -153,7 +149,7 @@ const StripClubModel = (props: JSX.IntrinsicElements['group']) => {
         { ...fromCoords, delay: 1, ease: 'power1.out' },
         { ...toCoords, duration: 2.5, ease: 'power1.out' },
       );
-    }, 1000);
+    }, 3000);
   }, []);
 
   return (

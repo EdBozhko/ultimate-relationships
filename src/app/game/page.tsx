@@ -2,10 +2,12 @@
 
 import dynamic from 'next/dynamic';
 
+import type { GameComponent } from './Game.types.ts';
+
 const Scene = dynamic(() => import('@src/components/experience/Scene'), { ssr: false });
 const MainExperience = dynamic(() => import('@comp/experience/MainExperience'), { ssr: false });
 
-const Game = ({ children }: { children: React.ReactNode }) => {
+const Game: GameComponent = () => {
   return (
     <>
       <Scene
@@ -26,7 +28,6 @@ const Game = ({ children }: { children: React.ReactNode }) => {
         eventPrefix='client'
       >
         <MainExperience />
-        {children}
       </Scene>
     </>
   );

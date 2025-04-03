@@ -1,7 +1,9 @@
 'use client';
 
-const Chat = ({ children }: { children: React.ReactNode }) => {
-  return <>{children}</>;
+import type { ChatComponent } from './Chat.types.ts';
+
+const Chat: ChatComponent = () => {
+  return <></>;
 };
 
 export default Chat;

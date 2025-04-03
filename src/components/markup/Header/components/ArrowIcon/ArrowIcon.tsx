@@ -1,4 +1,6 @@
-export const ArrowIcon = (props) => {
+import type { ArrowIconComponent } from './ArrowIcon.types.ts';
+
+export const ArrowIcon: ArrowIconComponent = (props) => {
   const { color } = props;
 
   return (

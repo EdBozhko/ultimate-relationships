@@ -1,4 +1,6 @@
-export const StoriesIcon = (props) => {
+import type { StoriesIconComponent } from './StoriesIcon.types.ts';
+
+export const StoriesIcon: StoriesIconComponent = (props) => {
   const { color } = props;
 
   return (

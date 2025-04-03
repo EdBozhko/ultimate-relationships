@@ -1,4 +1,6 @@
-export const MediaIcon = (props) => {
+import type { MediaIconComponent } from './MediaIcon.types.ts';
+
+export const MediaIcon: MediaIconComponent = (props) => {
   const { color } = props;
 
   return (
