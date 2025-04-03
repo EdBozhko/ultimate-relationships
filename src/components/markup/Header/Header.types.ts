@@ -49,3 +49,5 @@ export interface AdditionalMenuListItemProps {}
 export interface AdditionalMenuLinkProps {}
 
 export interface AdditionalMenuLinkIconProps {}
+
+export interface AdditionalMenuLinkNameProps {}

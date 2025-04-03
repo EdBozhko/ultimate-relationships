@@ -16,6 +16,7 @@ import {
   AdditionalMenuListItem,
   AdditionalMenuLink,
   AdditionalMenuLinkIcon,
+  AdditionalMenuLinkName,
 } from './Header.styles.ts';
 import { Icon, ArrowIcon } from './components/';
 import { useState, forwardRef } from 'react';
@@ -79,10 +80,8 @@ export const Header: HeaderComponent = forwardRef<HTMLElement, HeaderProps>((pro
     return (
       <AdditionalMenuListItem key={id}>
         <AdditionalMenuLink href={href}>
-          <AdditionalMenuLinkIcon>
-            <Icon type={id} color={'#656565'} />
-          </AdditionalMenuLinkIcon>
-          {name}
+          <AdditionalMenuLinkIcon>{iconSrc || <Icon type={id} color={'#656565'} />}</AdditionalMenuLinkIcon>
+          <AdditionalMenuLinkName>{name}</AdditionalMenuLinkName>
         </AdditionalMenuLink>
       </AdditionalMenuListItem>
     );

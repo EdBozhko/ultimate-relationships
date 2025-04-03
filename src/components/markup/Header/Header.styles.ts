@@ -6,6 +6,7 @@ import type {
   AdditionalMenuLinkProps,
   AdditionalMenuListItemProps,
   AdditionalMenuListProps,
+  AdditionalMenuLinkNameProps,
   AdditionalMenuProps,
   HeaderStyledProps,
   NavButtonProps,
@@ -194,4 +195,9 @@ export const AdditionalMenuLinkIcon = styled.div<AdditionalMenuLinkIconProps>`
   width: 40rem;
   aspect-ratio: 1 / 1;
   margin: 0 10rem 0 0;
+`;
+
+export const AdditionalMenuLinkName = styled.span<AdditionalMenuLinkNameProps>`
+  font: inherit;
+  font-weight: 400;
 `;
