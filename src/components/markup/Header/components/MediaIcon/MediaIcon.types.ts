@@ -4,4 +4,4 @@ export interface MediaIconProps extends SVGProps<SVGSVGElement> {
   color: string;
 }
 
-export interface MediaIconComponent extends FC<MediaIconProps> {}
+export type MediaIconComponent = FC<MediaIconProps>;

@@ -113,7 +113,8 @@ export type GLTFResult = GLTF & {
     bar_counter_top: THREE.Mesh;
     floor: THREE.Mesh;
   };
-  materials: {};
+  materials: {
+    floor: THREE.MeshStandardMaterial;
+  };
 };
-
 export type OrbitControlsImpl = OrbitControls;

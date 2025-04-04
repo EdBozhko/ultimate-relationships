@@ -16,15 +16,3 @@ export interface LoadingBarContainerProps {
 export interface MeterProps {
   $strokeDashoffset: number;
 }
-
-export interface InfoContainerProps {}
-
-export interface LoadingBarCounterProps {}
-
-export interface DisplayProgressProps {}
-
-export interface SVGProps {}
-
-export interface BackgroundProps {}
-
-export interface LinearGradientProps {}

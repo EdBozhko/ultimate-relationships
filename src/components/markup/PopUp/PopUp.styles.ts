@@ -1,15 +1,7 @@
 import Link from 'next/link';
 import styled, { css, keyframes } from 'styled-components';
 
-import type {
-  PopUpButtonProps,
-  PopUpButtonsContainerProps,
-  PopUpContainerProps,
-  PopUpContentProps,
-  PopUpLinkProps,
-  PopUpTextProps,
-  PopUpTitleProps,
-} from './PopUp.types.ts';
+import type { PopUpContainerProps, PopUpContentProps, PopUpLinkProps } from './PopUp.types.ts';
 
 const popupContentIn = keyframes`
   from {
@@ -122,7 +114,7 @@ export const PopUpContainer = styled.div<PopUpContainerProps>`
     `}
 `;
 
-export const PopUpTitle = styled.p<PopUpTitleProps>`
+export const PopUpTitle = styled.p`
   color: #d8acff;
   font: inherit;
   font-size: 20rem;
@@ -133,7 +125,7 @@ export const PopUpTitle = styled.p<PopUpTitleProps>`
   padding: 0;
 `;
 
-export const PopUpText = styled.p<PopUpTextProps>`
+export const PopUpText = styled.p`
   color: #c686ff;
   font: inherit;
   font-size: 16rem;
@@ -143,7 +135,7 @@ export const PopUpText = styled.p<PopUpTextProps>`
   padding: 0;
 `;
 
-export const PopUpButtonsContainer = styled.div<PopUpButtonsContainerProps>`
+export const PopUpButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -169,4 +161,4 @@ export const PopUpLink = styled(Link)<PopUpLinkProps>`
   }
 `;
 
-export const PopUpButton = styled(PopUpLink).attrs({ as: 'button' })<PopUpButtonProps>``;
+export const PopUpButton = styled(PopUpLink).attrs({ as: 'button' })``;

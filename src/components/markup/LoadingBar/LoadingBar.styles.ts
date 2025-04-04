@@ -1,15 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 
-import type {
-  BackgroundProps,
-  DisplayProgressProps,
-  InfoContainerProps,
-  LinearGradientProps,
-  LoadingBarContainerProps,
-  LoadingBarCounterProps,
-  MeterProps,
-  SVGProps,
-} from './LoadingBar.types.ts';
+import type { LoadingBarContainerProps, MeterProps } from './LoadingBar.types.ts';
 
 const loadingBarWidth = 150;
 const rotate = keyframes`
@@ -41,7 +32,7 @@ export const LoadingBarContainer = styled.div<LoadingBarContainerProps>`
     `}
 `;
 
-export const InfoContainer = styled.p<InfoContainerProps>`
+export const InfoContainer = styled.p`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -63,27 +54,27 @@ export const InfoContainer = styled.p<InfoContainerProps>`
     0 0 151px #c300b6;
 `;
 
-export const LoadingBarCounter = styled.span<LoadingBarCounterProps>`
+export const LoadingBarCounter = styled.span`
   font: inherit;
   font-size: 36rem;
 `;
 
-export const DisplayProgress = styled.span<DisplayProgressProps>`
+export const DisplayProgress = styled.span`
   font: inherit;
   font-size: 16rem;
 `;
 
-export const SVG = styled.svg<SVGProps>`
+export const SVG = styled.svg`
   width: ${loadingBarWidth}rem;
   aspect-ratio: 1 / 1;
   overflow: visible;
   will-change: transform;
   animation: ${rotate} 2s linear infinite;
-
+  // Lots of drop-shadows are bad for performance
   filter: drop-shadow(0 0 21px #c295c0) drop-shadow(0 0 151px #c300b6);
 `;
 
-export const Background = styled.circle<BackgroundProps>`
+export const Background = styled.circle`
   fill: none;
   stroke-width: 5rem;
   stroke: transparent;
@@ -100,4 +91,4 @@ export const Meter = styled.circle<MeterProps>`
   transition: stroke-dashoffset 0.2s linear;
 `;
 
-export const LinearGradient = styled.linearGradient<LinearGradientProps>``;
+export const LinearGradient = styled.linearGradient``;

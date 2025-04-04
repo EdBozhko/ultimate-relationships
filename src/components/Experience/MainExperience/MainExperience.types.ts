@@ -4,8 +4,6 @@ import type { JSX } from 'react';
 
 export type ModelComponentProps = Partial<JSX.IntrinsicElements['mesh']>;
 
-export interface MainExperienceProps {}
-
-export type MainExperienceComponent = FC<MainExperienceProps>;
+export type MainExperienceComponent = FC;
 
 export type PerspectiveCameraProps = PerspectiveCamera;

@@ -4,4 +4,4 @@ export interface ArrowIconProps extends SVGProps<SVGSVGElement> {
   color: string;
 }
 
-export interface ArrowIconComponent extends FC<ArrowIconProps> {}
+export type ArrowIconComponent = FC<ArrowIconProps>;

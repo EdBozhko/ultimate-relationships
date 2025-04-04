@@ -4,4 +4,4 @@ export interface GameIconProps extends SVGProps<SVGSVGElement> {
   color: string;
 }
 
-export interface GameIconComponent extends FC<GameIconProps> {}
+export type GameIconComponent = FC<GameIconProps>;

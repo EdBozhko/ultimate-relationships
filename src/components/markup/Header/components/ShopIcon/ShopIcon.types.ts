@@ -4,4 +4,4 @@ export interface ShopIconProps extends SVGProps<SVGSVGElement> {
   color: string;
 }
 
-export interface ShopIconComponent extends FC<ShopIconProps> {}
+export type ShopIconComponent = FC<ShopIconProps>;

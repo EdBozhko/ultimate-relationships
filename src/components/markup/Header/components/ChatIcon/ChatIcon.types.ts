@@ -4,4 +4,4 @@ export interface ChatIconProps extends SVGProps<SVGSVGElement> {
   color: string;
 }
 
-export interface ChatIconComponent extends FC<ChatIconProps> {}
+export type ChatIconComponent = FC<ChatIconProps>;

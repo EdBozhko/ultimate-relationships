@@ -1,68 +1,11 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import { useProgress } from '@react-three/drei';
-
-import { ClientPortal } from '@comp/markup/ClientPortal';
-import { PopUp } from '@comp/markup/PopUp';
-import { PopUpTitle, PopUpText, PopUpButtonsContainer, PopUpLink } from '@comp/markup/PopUp/PopUp.styles.ts';
-import { LoadingBar } from '@comp/markup/LoadingBar/';
+import { HomeClientLayout } from '@comp/markup/Layouts/HomeClientLayout/';
 
 import type { HomeComponent } from './Home.types.ts';
 
 const Home: HomeComponent = () => {
-  const [hideLoadingBar, setHideLoadingBar] = useState(false);
-  const [showPopUp, setShowPopUp] = useState(false);
-  const [currentLoadingProgress, setCurrentLoadingProgress] = useState(0);
-  const loadingProgress = useProgress((state) => state.progress);
-  const loaded = useProgress((state) => state.loaded);
-  const totalLoaded = useProgress((state) => state.total);
-
-  useEffect(() => {
-    let loadingProgressTimeout: ReturnType<typeof setTimeout>;
-
-    if (loadingProgress > currentLoadingProgress) {
-      setCurrentLoadingProgress(loadingProgress);
-    }
-
-    if (loadingProgress === 100) {
-      loadingProgressTimeout = setTimeout(() => {
-        setHideLoadingBar(true);
-      }, 2000);
-    }
-
-    return () => clearTimeout(loadingProgressTimeout);
-  }, [loadingProgress]);
-
-  useEffect(() => {
-    let showPopUpTimeout: ReturnType<typeof setTimeout>;
-
-    if (hideLoadingBar === true) {
-      showPopUpTimeout = setTimeout(() => {
-        setShowPopUp(true);
-      }, 1000);
-    }
-
-    return () => clearTimeout(showPopUpTimeout);
-  }, [hideLoadingBar]);
-
   return (
     <>
-      <LoadingBar hide={hideLoadingBar} progress={currentLoadingProgress} loaded={loaded} totalLoaded={totalLoaded} />
-      <ClientPortal selector='client-portal' show={showPopUp}>
-        <PopUp show={showPopUp}>
-          <PopUpTitle>This is an adult website</PopUpTitle>
-          <PopUpText>
-            This website contains age-restricted materials including nudity and explicit depictions of sexual activity.
-            By entering, you affirm that you are at least 18 years of age or the age of majority in the jurisdiction you
-            are accessing the website from and you consent to viewing sexually explicit content.
-          </PopUpText>
-          <PopUpButtonsContainer>
-            <PopUpLink href='/game'>I am 18 or older - Enter</PopUpLink>
-            <PopUpLink href='https://google.com'>I am under 18 - Exit</PopUpLink>
-          </PopUpButtonsContainer>
-        </PopUp>
-      </ClientPortal>
+      <HomeClientLayout />
     </>
   );
 };

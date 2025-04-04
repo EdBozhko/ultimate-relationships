@@ -3,7 +3,7 @@
 import type { StoriesComponent } from './Stories.types.ts';
 
 const Stories: StoriesComponent = () => {
-  return <></>;
+  return <div></div>;
 };
 
 export default Stories;

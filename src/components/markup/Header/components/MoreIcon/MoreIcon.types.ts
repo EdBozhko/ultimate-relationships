@@ -4,4 +4,4 @@ export interface MoreIconProps extends SVGProps<SVGSVGElement> {
   color: string;
 }
 
-export interface MoreIconComponent extends FC<MoreIconProps> {}
+export type MoreIconComponent = FC<MoreIconProps>;

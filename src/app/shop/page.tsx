@@ -1,9 +1,7 @@
-'use client';
-
 import type { ShopComponent } from './Shop.types.ts';
 
 const Shop: ShopComponent = () => {
-  return <></>;
+  return <div></div>;
 };
 
 export default Shop;

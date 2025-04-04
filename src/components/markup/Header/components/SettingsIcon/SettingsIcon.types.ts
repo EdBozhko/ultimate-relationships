@@ -4,4 +4,4 @@ export interface SettingsIconProps extends SVGProps<SVGSVGElement> {
   color: string;
 }
 
-export interface SettingsIconComponent extends FC<SettingsIconProps> {}
+export type SettingsIconComponent = FC<SettingsIconProps>;

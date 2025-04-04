@@ -3,7 +3,7 @@
 import type { ChatComponent } from './Chat.types.ts';
 
 const Chat: ChatComponent = () => {
-  return <></>;
+  return <div></div>;
 };
 
 export default Chat;

@@ -41,7 +41,8 @@ useTexture.preload(wallsSrc);
 useTexture.preload(neonSignsSrc);
 useTexture.preload(ceilingLightsSrc);
 useTexture.preload(curtainsSrc);
-useTexture.preload(doorsSrc), useTexture.preload(stairsSrc);
+useTexture.preload(doorsSrc);
+useTexture.preload(stairsSrc);
 useTexture.preload(barWallSrc);
 useTexture.preload(barCounterSrc);
 useTexture.preload(barstoolsSrc);
@@ -93,14 +94,13 @@ const StripClubModel: StripClubModelComponent = (props) => {
   const controls = useThree((state) => state.controls as OrbitControlsImpl);
   const [spotLightDistance, setSpotLightDistance] = useState(0.1);
 
-  const stripClub = useGLTF('/models/strip_club/strip_club.glb');
-  const { nodes, materials } = stripClub as GLTFResult;
+  const { nodes } = useGLTF('/models/strip_club/strip_club.glb') as GLTFResult;
 
-  isDebugMode && useHelper(refs.spotLight, THREE.SpotLightHelper, 'yellow');
+  useHelper(isDebugMode ? refs.spotLight : null, THREE.SpotLightHelper, 'yellow');
 
   useEffect(() => {
     const initialPosition = refs.stayWildSign.current.position;
-    const markerPosition = refs.surfaceMarker.current.position;
+    // const markerPosition = refs.surfaceMarker.current.position;
     // const initialPosition = markerPosition;
     camera.position.copy(initialPosition);
     camera.position.x += 1.5;

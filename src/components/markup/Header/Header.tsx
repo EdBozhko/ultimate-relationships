@@ -1,3 +1,5 @@
+'use client';
+
 import { usePathname } from 'next/navigation';
 import { PAGES } from '@src/utils';
 import {
@@ -19,9 +21,9 @@ import {
   AdditionalMenuLinkName,
 } from './Header.styles.ts';
 import { Icon, ArrowIcon } from './components/';
-import { useState, forwardRef } from 'react';
+import { useState } from 'react';
 
-import type { HeaderComponent, HeaderProps } from './Header.types.ts';
+import type { HeaderComponent } from './Header.types.ts';
 
 const navigation = [
   { id: PAGES.GAME, href: '/game', name: 'game', iconSrc: '' },
@@ -36,8 +38,7 @@ const additionalNavigation = [
   { id: PAGES.SETTINGS, href: '/settings', name: 'settings', iconSrc: '' },
 ];
 
-// ForwardRef with correct type for ref
-export const Header: HeaderComponent = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
+export const Header: HeaderComponent = (props, ref) => {
   const pathname = usePathname();
 
   const [isSubmenuOpened, setIsSubmenuOpened] = useState(false);
@@ -47,7 +48,6 @@ export const Header: HeaderComponent = forwardRef<HTMLElement, HeaderProps>((pro
 
   const [isAdditionalMenuOpened, setIsAdditionalMenuOpened] = useState(false);
   const onMoreButtonClick = () => {
-    console.log('more');
     setIsAdditionalMenuOpened((prev) => !prev);
   };
 
@@ -102,4 +102,4 @@ export const Header: HeaderComponent = forwardRef<HTMLElement, HeaderProps>((pro
       </Nav>
     </HeaderStyled>
   );
-});
+};

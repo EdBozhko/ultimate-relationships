@@ -1,9 +1,7 @@
-'use client';
-
 import type { SettingsComponent } from './Settings.types.ts';
 
 const Settings: SettingsComponent = () => {
-  return <></>;
+  return <div></div>;
 };
 
 export default Settings;

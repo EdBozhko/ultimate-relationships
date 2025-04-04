@@ -1,7 +1,3 @@
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 
-export interface HomeProps {
-  children: ReactNode;
-}
-
-export type HomeComponent = FC<HomeProps>;
+export type HomeComponent = FC;

@@ -20,11 +20,3 @@ export interface PopUpContainerProps {
   $show: boolean;
   children: ReactNode;
 }
-
-export interface PopUpTitleProps {}
-
-export interface PopUpTextProps {}
-
-export interface PopUpButtonsContainerProps {}
-
-export interface PopUpButtonProps extends PopUpLinkProps {}

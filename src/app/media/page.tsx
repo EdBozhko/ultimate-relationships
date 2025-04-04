@@ -1,9 +1,7 @@
-'use client';
-
 import type { MediaComponent } from './Media.types.ts';
 
 const Media: MediaComponent = () => {
-  return <></>;
+  return <div></div>;
 };
 
 export default Media;

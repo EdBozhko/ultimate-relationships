@@ -6,17 +6,9 @@ export interface HeaderProps {
 
 export type HeaderComponent = FC<HeaderProps>;
 
-export interface HeaderStyledProps {}
-
-export interface NavProps {}
-
-export interface SubmenuProps extends NavProps {
+export interface SubmenuProps {
   $isOpened?: boolean;
 }
-
-export interface NavListProps {}
-
-export interface NavListItemProps {}
 
 export interface NavLinkProps {
   color?: string;
@@ -41,13 +33,3 @@ export interface SwitcherProps {
 export interface AdditionalMenuProps {
   $isOpened?: boolean;
 }
-
-export interface AdditionalMenuListProps {}
-
-export interface AdditionalMenuListItemProps {}
-
-export interface AdditionalMenuLinkProps {}
-
-export interface AdditionalMenuLinkIconProps {}
-
-export interface AdditionalMenuLinkNameProps {}
