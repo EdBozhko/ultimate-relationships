@@ -1,10 +1,6 @@
-import type { FC, ForwardedRef } from 'react';
+import type { FC } from 'react';
 
-export interface HeaderProps {
-  ref?: ForwardedRef<HTMLElement> | undefined;
-}
-
-export type HeaderComponent = FC<HeaderProps>;
+export type HeaderComponent = FC;
 
 export interface SubmenuProps {
   $isOpened?: boolean;
