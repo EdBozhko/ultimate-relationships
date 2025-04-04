@@ -38,7 +38,7 @@ const additionalNavigation = [
   { id: PAGES.SETTINGS, href: '/settings', name: 'settings', iconSrc: '' },
 ];
 
-export const Header: HeaderComponent = (props, ref) => {
+export const Header: HeaderComponent = () => {
   const pathname = usePathname();
 
   const [isSubmenuOpened, setIsSubmenuOpened] = useState(false);
@@ -88,7 +88,7 @@ export const Header: HeaderComponent = (props, ref) => {
   });
 
   return (
-    <HeaderStyled ref={ref}>
+    <HeaderStyled>
       <AdditionalMenu $isOpened={isAdditionalMenuOpened}>
         <AdditionalMenuList>{additionalNavigationList}</AdditionalMenuList>
       </AdditionalMenu>
