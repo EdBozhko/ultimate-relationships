@@ -46,8 +46,10 @@ export const MainLayout: MainLayoutComponent = ({ children }) => {
         position: 'relative',
         width: ' 100%',
         height: '100%',
-        overflow: 'auto',
+        overflow: 'hidden',
         touchAction: 'auto',
+        display: 'flex',
+        flexDirection: 'column-reverse',
       }}
     >
       {children}

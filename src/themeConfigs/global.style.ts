@@ -107,6 +107,7 @@ const GlobalStyle = styled.createGlobalStyle`
     background: #181818;
     background: linear-gradient(90deg, #181818 0%, #090979 50%, #181818 100%);
     padding: 16rem 16rem 16rem 16rem;
+    position: relative;
   }
 `;
 

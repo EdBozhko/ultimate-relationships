@@ -12,7 +12,7 @@ import type {
 } from './Header.types.ts';
 
 export const HeaderStyled = styled.header`
-  position: fixed;
+  position: relative;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -20,9 +20,7 @@ export const HeaderStyled = styled.header`
 `;
 
 export const Nav = styled.nav`
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   padding: 0 10rem;
   border-top: #272323 1px solid;
@@ -31,9 +29,9 @@ export const Nav = styled.nav`
 `;
 
 export const Submenu = styled(Nav).attrs({ as: 'div' })<SubmenuProps>`
-  position: relative;
-  padding: 0 10rem;
-  border-top: #272323 1px solid;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   will-change: transform;
   transition: transform 0.5s ease;
   transform: translate(0, 0);
