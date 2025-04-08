@@ -23,6 +23,8 @@ import {
 import { Icon, ArrowIcon } from './components/index.tsx';
 import { useState } from 'react';
 
+import useGlobalStore from '@src/stores/useGlobalStore.ts';
+
 import type { HeaderComponent } from './Header.types.ts';
 
 const navigation = [
@@ -41,14 +43,20 @@ const additionalNavigation = [
 export const Header: HeaderComponent = () => {
   const pathname = usePathname();
 
+  const isAdditionalMenuOpened = useGlobalStore((state) => state.isAdditionalMenuOpened);
+  const toggleAdditionalMenu = useGlobalStore((state) => state.toggleAdditionalMenu);
+  const closeAdditionalMenu = useGlobalStore((state) => state.closeAdditionalMenu);
+  const onMoreButtonClick = () => {
+    toggleAdditionalMenu();
+  };
+
   const [isSubmenuOpened, setIsSubmenuOpened] = useState(false);
   const onNavButtonClick = () => {
     setIsSubmenuOpened((prev) => !prev);
   };
 
-  const [isAdditionalMenuOpened, setIsAdditionalMenuOpened] = useState(false);
-  const onMoreButtonClick = () => {
-    setIsAdditionalMenuOpened((prev) => !prev);
+  const onNavLinkClick = () => {
+    closeAdditionalMenu();
   };
 
   const navigationList = navigation.map((item) => {
@@ -65,7 +73,7 @@ export const Header: HeaderComponent = () => {
             <NavLinkName>{name}</NavLinkName>
           </NavButton>
         ) : (
-          <NavLink href={href} onClick={id === PAGES.MORE ? onMoreButtonClick : undefined}>
+          <NavLink href={href} onClick={id === PAGES.MORE ? onMoreButtonClick : onNavLinkClick}>
             <NavLinkIcon>{iconSrc || <Icon type={id} color={'#656565'} />}</NavLinkIcon>
             <NavLinkName>{name}</NavLinkName>
           </NavLink>
@@ -79,7 +87,7 @@ export const Header: HeaderComponent = () => {
 
     return (
       <AdditionalMenuListItem key={id}>
-        <AdditionalMenuLink href={href}>
+        <AdditionalMenuLink href={href} onClick={onNavLinkClick}>
           <AdditionalMenuLinkIcon>{iconSrc || <Icon type={id} color={'#656565'} />}</AdditionalMenuLinkIcon>
           <AdditionalMenuLinkName>{name}</AdditionalMenuLinkName>
         </AdditionalMenuLink>
