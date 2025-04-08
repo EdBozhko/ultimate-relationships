@@ -89,9 +89,9 @@ export const Header: HeaderComponent = () => {
 
   return (
     <HeaderStyled>
-      {/* <AdditionalMenu $isOpened={isAdditionalMenuOpened}>
+      <AdditionalMenu $isOpened={isAdditionalMenuOpened}>
         <AdditionalMenuList>{additionalNavigationList}</AdditionalMenuList>
-      </AdditionalMenu> */}
+      </AdditionalMenu>
 
       <Submenu $isOpened={isSubmenuOpened}>
         <NavList>{navigationList}</NavList>
