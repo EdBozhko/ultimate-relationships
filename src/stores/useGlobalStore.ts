@@ -16,7 +16,8 @@ const useGlobalStore = create<GlobalStore>((set) => {
         return { isDebugMode: false };
       });
     },
-    isDebugPerfMode: false,
+
+    isDebugPerfMode: true,
     debugPerfMode: () => {
       set(() => {
         return { isDebugPerfMode: true };

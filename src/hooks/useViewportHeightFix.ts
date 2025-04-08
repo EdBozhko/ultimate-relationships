@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { BREAKPOINTS } from '@src/themeConfigs/constants/screen';
 
-export const useViewportHeightFix = (): void => {
+export const useViewportHeightFix = (): null => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -19,4 +19,6 @@ export const useViewportHeightFix = (): void => {
 
     return () => window.removeEventListener('resize', updateVh);
   }, []);
+
+  return null;
 };
