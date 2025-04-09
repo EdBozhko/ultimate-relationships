@@ -7,7 +7,7 @@ import { Header } from '@src/components/dom/Header';
 import { GlobalClientPreload } from '@src/components/dom/GlobalClientPreload/';
 import { MainLayout } from '@src/components/dom/Layouts/MainLayout';
 
-import type { RootLayoutComponent } from './RootLayout.types.ts';
+import type { FC, ReactNode } from 'react';
 
 const ubuntu: NextFont = Ubuntu({
   subsets: ['latin', 'cyrillic'],
@@ -22,7 +22,7 @@ const description: string = 'Perfect AI Partner';
 const author: string = 'EdBozhko';
 const twitter: string = '@';
 
-const RootLayout: RootLayoutComponent = ({ children }) => {
+const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <>
       <html lang='en' className='antialiased'>
