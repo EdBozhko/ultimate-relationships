@@ -7,3 +7,5 @@ export interface IconProps {
 }
 
 export type IconComponent = FC<IconProps>;
+
+export type IconMap = Record<string, FC<{ color: string }>>;
