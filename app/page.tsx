@@ -2,7 +2,9 @@
 
 import { Home } from '@comp/dom/pages/Home/';
 
-const HomePage = () => {
+import type { FC } from 'react';
+
+const HomePage: FC = () => {
   return <Home />;
 };
 
