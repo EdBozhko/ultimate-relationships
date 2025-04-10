@@ -6,13 +6,16 @@ import {
 } from 'react';
 import dynamic from 'next/dynamic';
 import { Leva } from 'leva';
-import useGlobalStore from '@src/stores/useGlobalStore';
+import useGlobalStore from '@src/stores/useGlobalStore/useGlobalStore.ts';
+
+import { useViewportHeightFix } from '@src/hooks';
 
 import type { MainLayoutComponent } from './MainLayout.types.ts';
 
 const Scene = dynamic(() => import('@comp/canvas/Scene').then((mod) => mod.Scene), { ssr: false });
 
 export const MainLayout: MainLayoutComponent = ({ children }) => {
+  useViewportHeightFix();
   const ref = useRef<HTMLDivElement>(null!);
 
   // const debugMode = useGlobalStore((store) => store.debugMode);
