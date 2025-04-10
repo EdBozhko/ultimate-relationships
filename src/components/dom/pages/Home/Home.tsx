@@ -7,6 +7,7 @@ import { ClientPortal } from '@src/components/dom/ClientPortal/index.tsx';
 import { PopUp } from '@src/components/dom/PopUp/index.tsx';
 import { PopUpTitle, PopUpText, PopUpButtonsContainer, PopUpLink } from '@src/components/dom/PopUp/PopUp.styles.ts';
 import { LoadingBar } from '@src/components/dom/LoadingBar/index.tsx';
+import { Container } from './Home.styles.ts';
 
 import type { HomeComponent } from './Home.types.ts';
 
@@ -51,7 +52,7 @@ export const Home: HomeComponent = () => {
   }, [hideLoadingBar]);
 
   return (
-    <>
+    <Container>
       <LoadingBar hide={hideLoadingBar} progress={currentLoadingProgress} loaded={loaded} totalLoaded={totalLoaded} />
       <ClientPortal selector='client-portal' show={showPopUp}>
         <PopUp show={showPopUp}>
@@ -69,6 +70,6 @@ export const Home: HomeComponent = () => {
           </PopUpButtonsContainer>
         </PopUp>
       </ClientPortal>
-    </>
+    </Container>
   );
 };
