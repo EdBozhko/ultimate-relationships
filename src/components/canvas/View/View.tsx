@@ -6,7 +6,7 @@ import { Three } from '@src/helpers/components/Three';
 import { useThree } from '@react-three/fiber';
 import { useControls } from 'leva';
 import { Perf } from 'r3f-perf';
-import useGlobalStore from '@src/stores/useGlobalStore/useGlobalStore.ts';
+import useGlobalStore from '@src/stores/useGlobalStore';
 
 import type { PerspectiveCameraProps, CommonComponent, ViewComponent, ViewProps } from './View.types.ts';
 

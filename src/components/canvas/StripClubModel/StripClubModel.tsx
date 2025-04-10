@@ -14,7 +14,7 @@ import type {
   StripClubModelComponent,
 } from './StripClubModel.types.ts';
 
-import useGlobalStore from '@src/stores/useGlobalStore/useGlobalStore.ts';
+import useGlobalStore from '@src/stores/useGlobalStore';
 import floorSrc from '@public/models/strip_club/textures/floor.webp';
 import mixerSrc from '@public/models/strip_club/textures/mixer.webp';
 import tablesSrc from '@public/models/strip_club/textures/tables.webp';

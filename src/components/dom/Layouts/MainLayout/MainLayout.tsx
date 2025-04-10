@@ -6,7 +6,7 @@ import {
 } from 'react';
 import dynamic from 'next/dynamic';
 import { Leva } from 'leva';
-import useGlobalStore from '@src/stores/useGlobalStore/useGlobalStore.ts';
+import useGlobalStore from '@src/stores/useGlobalStore/';
 
 import { useViewportHeightFix } from '@src/hooks';
 

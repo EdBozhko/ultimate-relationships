@@ -23,7 +23,7 @@ import {
 import { Icon, ArrowIcon } from './components/index.tsx';
 import { useState } from 'react';
 
-import useGlobalStore from '@src/stores/useGlobalStore/useGlobalStore.ts';
+import useGlobalStore from '@src/stores/useGlobalStore/';
 
 import type { HeaderComponent } from './Header.types.ts';
 
