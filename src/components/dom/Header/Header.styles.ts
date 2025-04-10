@@ -140,6 +140,7 @@ export const AdditionalMenu = styled.div<AdditionalMenuProps>`
   background-color: #181818;
   width: 100vw;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   bottom: 0;
   left: 0;
   padding: 16rem 16rem 80rem 16rem;
