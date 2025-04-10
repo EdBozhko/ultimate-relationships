@@ -73,9 +73,9 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
               </main>
             </MainLayout>
           </StyledComponentsRegistry>
+          <GlobalClientPreload />
         </body>
       </html>
-      <GlobalClientPreload />
     </>
   );
 };
