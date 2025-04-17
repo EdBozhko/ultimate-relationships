@@ -8,3 +8,13 @@ export const PAGES = {
   MEDIA: 'media',
   SETTINGS: 'settings',
 };
+
+export const USER_DATA = {
+  NICK_NAME: 'nickName',
+  AI_NICK_NAME: 'aiNickName',
+  PREFERENCES: 'preferences',
+  TYPE_OF_CONNECTION: 'typeOfConnection',
+  CHARACTER_TEMPLATE: 'characterTemplate',
+  TONE_TIPS: 'toneTips',
+  TRAITS: 'traits',
+} as const;

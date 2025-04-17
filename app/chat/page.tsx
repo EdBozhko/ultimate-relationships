@@ -1,9 +1,11 @@
 'use client';
 
-import type { ChatComponent } from './Chat.types.ts';
+import { Chat } from '@comp/dom/pages/Chat';
 
-const Chat: ChatComponent = () => {
-  return <div></div>;
+import type { FC } from 'react';
+
+const ChatPage: FC = () => {
+  return <Chat />;
 };
 
-export default Chat;
+export default ChatPage;

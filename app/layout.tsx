@@ -16,6 +16,7 @@ const ubuntu: NextFont = Ubuntu({
   style: 'normal',
 });
 
+// Virtual AI companion
 const title: string = 'Perfect AI Partner';
 const url: string = 'https://perfect-ai-partner.com/';
 const description: string = 'Perfect AI Partner';
