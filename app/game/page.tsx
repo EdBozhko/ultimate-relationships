@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 
 import type { GameComponent } from './Game.types.ts';
+import { useEffect } from 'react';
 
 const Blob = dynamic(() => import('@src/components/canvas/Examples.tsx').then((mod) => mod.Blob), { ssr: false });
 const StripClubModel = dynamic(
@@ -35,6 +36,13 @@ const GameView = dynamic(() => import('@comp/canvas/View/View.styles.ts').then((
 const Common = dynamic(() => import('@src/components/canvas/View/View.tsx').then((mod) => mod.Common), { ssr: false });
 
 const Game: GameComponent = () => {
+  useEffect(() => {
+    return () => {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
+    };
+  }, []);
   return (
     <>
       <GameView orbitControls>
