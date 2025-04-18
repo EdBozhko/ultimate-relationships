@@ -3,7 +3,6 @@
 import { create } from 'zustand';
 import { USER_DATA } from '@src/utils';
 import type { ChatStore } from './useChatStore.types.ts';
-import type { ChoiceOptions } from '@helpers/lib/characterTemplates.types';
 
 const useGlobalStore = create<ChatStore>((set) => {
   return {
