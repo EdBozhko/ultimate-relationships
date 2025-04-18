@@ -2,6 +2,8 @@ import TextareaAutosize from 'react-textarea-autosize';
 import styled, { css, keyframes } from 'styled-components';
 import ArrowUp from '@public/icons/arrow-up.svg';
 
+import type { OptionsInputProps } from './Chat.types.ts';
+
 const wave = keyframes`
   0% {
       transform: translateY(0px);
@@ -207,7 +209,7 @@ export const OptionsButton = styled.label`
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
 `;
 
-export const OptionsInput = styled.input`
+export const OptionsInput = styled.input<OptionsInputProps>`
   display: none;
 
   &:checked + ${OptionsButton} {
