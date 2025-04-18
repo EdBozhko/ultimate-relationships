@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
   Container,
   Display,
@@ -27,8 +27,15 @@ import useChatStore from '@src/stores/useChatStore/index.ts';
 import { characterTemplates } from '@helpers/lib/characterTemplates.ts';
 import { USER_DATA } from '@src/utils';
 
+import type { MouseEvent } from 'react';
 import type { ChatComponent, AiMessages, AiMessage } from './Chat.types.ts';
 import type { ChoiceOptions } from '@helpers/lib/characterTemplates.types';
+
+const extractCheckedOptions = (formElements: RadioNodeList): string[] => {
+  return Array.from(formElements)
+    .filter((el): el is HTMLInputElement => el instanceof HTMLInputElement && el.checked)
+    .map((el) => el.value);
+};
 
 const getRandomColor = () => {
   const letters = '0123456789ABCDEF';
@@ -80,13 +87,12 @@ const AI_MESSAGES: AiMessages = [
       choiceType: 'single',
     },
   },
-  { message: `Now I'm here for you!💖`, type: 'success' },
+  { message: `Now I'm here for you!💖`, type: USER_DATA.SUCCESS },
 ];
 
 export const Chat: ChatComponent = () => {
   const messages = useChatStore((store) => store.messages);
   const addMessage = useChatStore((store) => store.addMessage);
-
   const characterTemplate = useChatStore((store) => store.userData.characterTemplate);
 
   const updateNickName = useChatStore((store) => store.updateNickName);
@@ -97,7 +103,7 @@ export const Chat: ChatComponent = () => {
   const updateTraits = useChatStore((store) => store.updateTraits);
   const updatePreferences = useChatStore((store) => store.updatePreferences);
 
-  const displayRef = useRef<HTMLDivElement>(null!);
+  const displayRef = useRef<HTMLDivElement | null>(null);
   const [isTypingIndicatorVisible, setIsTypingIndicatorVisible] = useState(false);
   const [isAiTyping, setIsAiTyping] = useState(false);
   const [currentAiMessageIndex, setCurrentAiMessageIndex] = useState(0);
@@ -108,105 +114,55 @@ export const Chat: ChatComponent = () => {
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
   const [isTextareaDisabled, setIsTextareaDisabled] = useState(true);
 
-  const messagesLists = Object.keys(messages).map((messagesListsId) => {
-    const curtainDateMessages = messages[messagesListsId].messages;
+  const onAnswerOptionClick = (event: MouseEvent<HTMLInputElement>) => {
+    const form = event.currentTarget.form;
+    if (!form) return;
 
-    const messagesList = curtainDateMessages.map(({ id, author, time, message }) => {
-      return author === 'user' ? (
-        <MessagesListItemOwn key={id}>
-          <Message>{message}</Message>
-          <MessageTime>{time}</MessageTime>
-        </MessagesListItemOwn>
-      ) : (
-        <MessagesListItem key={id}>
-          <Message>{message}</Message>
-          <MessageTime>{time}</MessageTime>
-        </MessagesListItem>
-      );
-    });
+    const choiceOptions = form.elements.namedItem('choiceOptions') as RadioNodeList | null;
+    if (!choiceOptions) return;
 
-    return (
-      <MessagesListsItem key={messagesListsId}>
-        <MessagesListDate>{messagesListsId}</MessagesListDate>
-        <MessagesList>{messagesList}</MessagesList>
-      </MessagesListsItem>
-    );
-  });
+    const choiceOptionsChecked = extractCheckedOptions(choiceOptions);
+    const template = characterTemplates[choiceOptions.value];
 
-  const onAnswerOptionClick = (event) => {
-    const choiceOptions = event.target.form.elements.choiceOptions;
-
-    if (choiceOptions) {
-      const choiceOptionsChecked: string[] = [];
-
-      switch (currentMessageType) {
-        case USER_DATA.NICK_NAME:
-          updateNickName(textAreaValue);
-
-          break;
-
-        case USER_DATA.TYPE_OF_CONNECTION:
-          updateTypeOfConnection(choiceOptions.value);
-          setTextAreaValue(choiceOptions.value);
-
-          break;
-
-        case USER_DATA.PREFERENCES:
-          [...choiceOptions].forEach((choiceOption) => {
-            if (choiceOption.checked) {
-              choiceOptionsChecked.push(choiceOption.value);
-            }
-          });
-
-          updatePreferences(choiceOptionsChecked);
-          setTextAreaValue(choiceOptionsChecked.join(', '));
-
-          break;
-
-        case USER_DATA.AI_NICK_NAME:
-          updateAiNickName(textAreaValue);
-
-          break;
-
-        case USER_DATA.CHARACTER_TEMPLATE:
-          const characterTemplate = characterTemplates[choiceOptions.value];
-
-          updateCharacterTemplate(choiceOptions.value);
-          updateToneTips(characterTemplate.tone);
-          updateTraits(characterTemplate.traits);
-          setTextAreaValue(characterTemplate.name);
-
-          break;
-
-        case USER_DATA.TONE_TIPS:
-          [...choiceOptions].forEach((choiceOption) => {
-            if (choiceOption.checked) {
-              choiceOptionsChecked.push(choiceOption.value);
-            }
-          });
-
-          setTextAreaValue(choiceOptionsChecked.join(', '));
-
-          break;
-
-        case USER_DATA.TRAITS:
-          [...choiceOptions].forEach((choiceOption) => {
-            if (choiceOption.checked) {
-              choiceOptionsChecked.push(choiceOption.value);
-            }
-          });
-
-          setTextAreaValue(choiceOptionsChecked.join(', '));
-
-          break;
-
-        default:
-          break;
-      }
+    switch (currentMessageType) {
+      case USER_DATA.NICK_NAME:
+        updateNickName(textAreaValue);
+        break;
+      case USER_DATA.TYPE_OF_CONNECTION:
+        updateTypeOfConnection(choiceOptions.value);
+        setTextAreaValue(choiceOptions.value);
+        break;
+      case USER_DATA.PREFERENCES:
+        updatePreferences(choiceOptionsChecked);
+        setTextAreaValue(choiceOptionsChecked.join(', '));
+        break;
+      case USER_DATA.AI_NICK_NAME:
+        updateAiNickName(textAreaValue);
+        break;
+      case USER_DATA.CHARACTER_TEMPLATE:
+        updateCharacterTemplate(choiceOptions.value);
+        updateToneTips(template.tone);
+        updateTraits(template.traits);
+        setTextAreaValue(template.name);
+        break;
+      case USER_DATA.TONE_TIPS:
+      case USER_DATA.TRAITS:
+        setTextAreaValue(choiceOptionsChecked.join(', '));
+        break;
+      default:
+        break;
     }
   };
 
-  const answerOptionsList = answerOptions.options.map((answerOption) => {
+  const optionColors = useMemo(() => {
+    const result: Record<string, string> = {};
+    (answerOptions.options ?? []).forEach((option) => {
+      result[option] = getRandomColor();
+    });
+    return result;
+  }, [answerOptions.options]);
+
+  const answerOptionsList = (answerOptions.options ?? []).map((answerOption) => {
     return (
       <OptionsListItem key={answerOption}>
         <OptionsInput
@@ -215,13 +171,10 @@ export const Chat: ChatComponent = () => {
           name='choiceOptions'
           type={answerOptions.choiceType === 'multi' ? 'checkbox' : 'radio'}
           onClick={onAnswerOptionClick}
-          $checkedColor={getRandomColor()}
+          $checkedColor={optionColors[answerOption]}
         />
         <OptionsButton htmlFor={answerOption}>
-          {' '}
-          {currentMessageType === USER_DATA.CHARACTER_TEMPLATE &&
-          characterTemplates[answerOption] &&
-          characterTemplates[answerOption].name
+          {currentMessageType === USER_DATA.CHARACTER_TEMPLATE && characterTemplates[answerOption]?.name
             ? characterTemplates[answerOption].name
             : answerOption}
         </OptionsButton>
@@ -231,11 +184,7 @@ export const Chat: ChatComponent = () => {
 
   const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    if (textAreaValue.length === 0) {
-      return;
-    }
-
+    if (textAreaValue.length === 0) return;
     addMessage('user', textAreaValue);
     setTextAreaValue('');
     setIsAiTyping(true);
@@ -244,65 +193,60 @@ export const Chat: ChatComponent = () => {
 
   const onTextareaChange = (value: string) => {
     setTextAreaValue(value);
-
-    if (value.length > 0) {
-      setIsSubmitButtonDisabled(false);
-    } else {
-      setIsSubmitButtonDisabled(true);
-    }
+    setIsSubmitButtonDisabled(value.length === 0);
   };
 
-  const aiTypingIndicatorTimeout = (messageData: AiMessage, timeoutInMs = 2000) => {
-    setIsSubmitButtonDisabled(true);
-    setIsTextareaDisabled(true);
+  const aiTypingIndicatorTimeout = useCallback(
+    (messageData: AiMessage, timeoutInMs = 2000) => {
+      setIsSubmitButtonDisabled(true);
+      setIsTextareaDisabled(true);
+      setCurrentMessageType(messageData.type);
 
-    setCurrentMessageType(messageData.type);
+      const aIStartTypingTimeout = setTimeout(() => {
+        setIsTypingIndicatorVisible(true);
+      }, 500);
 
-    const aIStartTypingTimeout = setTimeout(() => {
-      setIsTypingIndicatorVisible(true);
-    }, 500);
+      const timeout = setTimeout(() => {
+        setIsTypingIndicatorVisible(false);
+        setIsAiTyping(false);
+        addMessage('ai', messageData.message);
+        setIsSubmitButtonDisabled(false);
+        setIsTextareaDisabled(false);
 
-    const timeout = setTimeout(() => {
-      setIsTypingIndicatorVisible(false);
-      setIsAiTyping(false);
-      addMessage('ai', messageData.message);
-
-      setIsSubmitButtonDisabled(false);
-      setIsTextareaDisabled(false);
-
-      if (currentAiMessageIndex !== AI_MESSAGES.length - 1) {
-        setCurrentAiMessageIndex((prev) => prev + 1);
-      } else {
-        setIsSubmitButtonDisabled(true);
-        setIsTextareaDisabled(true);
-      }
-
-      if (
-        messageData.type === USER_DATA.TYPE_OF_CONNECTION ||
-        messageData.type === USER_DATA.PREFERENCES ||
-        messageData.type === USER_DATA.TRAITS ||
-        messageData.type === USER_DATA.CHARACTER_TEMPLATE ||
-        messageData.type === USER_DATA.TONE_TIPS ||
-        messageData.type === USER_DATA.TRAITS
-      ) {
-        if (messageData.answerOptions?.options && Array.isArray(messageData.answerOptions.options)) {
-          setAnswerOptions(messageData.answerOptions);
-        } else if (messageData.type === USER_DATA.TONE_TIPS) {
-          setAnswerOptions(characterTemplates[characterTemplate].tone);
-        } else if (messageData.type === USER_DATA.TRAITS) {
-          setAnswerOptions(characterTemplates[characterTemplate].traits);
+        if (currentAiMessageIndex < AI_MESSAGES.length - 1) {
+          setCurrentAiMessageIndex((prev) => prev + 1);
+        } else {
+          setIsSubmitButtonDisabled(true);
+          setIsTextareaDisabled(true);
         }
 
-        setIsOptionsListVisible(true);
-      }
-    }, timeoutInMs + 500);
+        const template = characterTemplates[characterTemplate];
+        if (messageData.answerOptions?.options) {
+          setAnswerOptions(messageData.answerOptions);
+        } else if (messageData.type === USER_DATA.TONE_TIPS) {
+          setAnswerOptions(template.tone);
+        } else if (messageData.type === USER_DATA.TRAITS) {
+          setAnswerOptions(template.traits);
+        }
 
-    return { timeout, aIStartTypingTimeout };
-  };
+        if (
+          messageData.type === USER_DATA.TYPE_OF_CONNECTION ||
+          messageData.type === USER_DATA.PREFERENCES ||
+          messageData.type === USER_DATA.TRAITS ||
+          messageData.type === USER_DATA.CHARACTER_TEMPLATE ||
+          messageData.type === USER_DATA.TONE_TIPS
+        ) {
+          setIsOptionsListVisible(true);
+        }
+      }, timeoutInMs + 500);
+
+      return { timeout, aIStartTypingTimeout };
+    },
+    [currentAiMessageIndex, characterTemplate, addMessage],
+  );
 
   useEffect(() => {
     const { timeout, aIStartTypingTimeout } = aiTypingIndicatorTimeout(AI_MESSAGES[currentAiMessageIndex], 2000);
-
     return () => {
       clearTimeout(timeout);
       clearTimeout(aIStartTypingTimeout);
@@ -311,21 +255,45 @@ export const Chat: ChatComponent = () => {
 
   useEffect(() => {
     if (!isAiTyping) return;
-
     const { timeout, aIStartTypingTimeout } = aiTypingIndicatorTimeout(
       AI_MESSAGES[currentAiMessageIndex],
       Math.floor(Math.random() * 4000) + 2000,
     );
-
     return () => {
       clearTimeout(timeout);
       clearTimeout(aIStartTypingTimeout);
     };
-  }, [isAiTyping]);
+  }, [isAiTyping, currentAiMessageIndex, aiTypingIndicatorTimeout]);
 
   useLayoutEffect(() => {
-    displayRef.current.scrollTo(0, displayRef.current.scrollHeight);
-  }, [displayRef.current?.scrollHeight, messages, isTypingIndicatorVisible]);
+    if (displayRef.current) {
+      displayRef.current.scrollTo(0, displayRef.current.scrollHeight);
+    }
+  }, [messages, isTypingIndicatorVisible]);
+
+  const messagesLists = Object.keys(messages).map((messagesListsId) => {
+    const curtainDateMessages = messages[messagesListsId].messages;
+    const messagesList = curtainDateMessages.map(({ id, author, time, message }) =>
+      author === 'user' ? (
+        <MessagesListItemOwn key={id}>
+          <Message>{message}</Message>
+          <MessageTime>{time}</MessageTime>
+        </MessagesListItemOwn>
+      ) : (
+        <MessagesListItem key={id}>
+          <Message>{message}</Message>
+          <MessageTime>{time}</MessageTime>
+        </MessagesListItem>
+      ),
+    );
+
+    return (
+      <MessagesListsItem key={messagesListsId}>
+        <MessagesListDate>{messagesListsId}</MessagesListDate>
+        <MessagesList>{messagesList}</MessagesList>
+      </MessagesListsItem>
+    );
+  });
 
   return (
     <Container>
@@ -339,11 +307,7 @@ export const Chat: ChatComponent = () => {
           </TypingIndicatorContainer>
         )}
       </Display>
-      <Form
-        onSubmit={(event) => {
-          onFormSubmit(event);
-        }}
-      >
+      <Form onSubmit={onFormSubmit}>
         {!isOptionsListVisible && (
           <TextareaContainer>
             <Textarea
