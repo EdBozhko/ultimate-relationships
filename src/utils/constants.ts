@@ -17,4 +17,5 @@ export const USER_DATA = {
   CHARACTER_TEMPLATE: 'characterTemplate',
   TONE_TIPS: 'toneTips',
   TRAITS: 'traits',
+  SUCCESS: 'success',
 } as const;
