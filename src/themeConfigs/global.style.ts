@@ -90,6 +90,8 @@ const GlobalStyle = styled.createGlobalStyle`
   }
 
   html {
+    background-color: #181818;
+
     font-size: ${100 / BREAKPOINTS.mobileScreenWidth}vw;
 
     @media ${SCREENS.tablet} {
