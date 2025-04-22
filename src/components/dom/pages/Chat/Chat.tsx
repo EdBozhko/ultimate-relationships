@@ -1,6 +1,8 @@
 'use client';
 
 import { FormEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
+
 import {
   Container,
   Display,
@@ -30,6 +32,22 @@ import { USER_DATA } from '@src/utils';
 import type { MouseEvent } from 'react';
 import type { ChatComponent, AiMessages, AiMessage } from './Chat.types.ts';
 import type { ChoiceOptions } from '@helpers/lib/characterTemplates.types';
+
+const ChatView = dynamic(() => import('@comp/canvas/ChatView/ChatView.tsx').then((mod) => mod.ChatView), {
+  ssr: false,
+  loading: () => (
+    <div className='flex h-96 w-full flex-col items-center justify-center'>
+      <svg className='-ml-1 mr-3 h-5 w-5 animate-spin text-black' fill='none' viewBox='0 0 24 24'>
+        <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
+        <path
+          className='opacity-75'
+          fill='currentColor'
+          d='M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+        />
+      </svg>
+    </div>
+  ),
+});
 
 const extractCheckedOptions = (formElements: RadioNodeList): string[] => {
   return Array.from(formElements)
@@ -296,33 +314,36 @@ export const Chat: ChatComponent = () => {
   });
 
   return (
-    <Container>
-      <Display ref={displayRef}>
-        <MessagesLists>{messagesLists}</MessagesLists>
-        {isTypingIndicatorVisible && (
-          <TypingIndicatorContainer>
-            <TypingIndicatorDot />
-            <TypingIndicatorDot />
-            <TypingIndicatorDot />
-          </TypingIndicatorContainer>
-        )}
-      </Display>
-      <Form onSubmit={onFormSubmit}>
-        {!isOptionsListVisible && (
-          <TextareaContainer>
-            <Textarea
-              minRows={1}
-              maxRows={5}
-              onChange={(event) => onTextareaChange(event.target.value)}
-              placeholder='Enter your message'
-              value={textAreaValue}
-              disabled={isTextareaDisabled}
-            />
-          </TextareaContainer>
-        )}
-        {isOptionsListVisible && <OptionsList>{answerOptionsList}</OptionsList>}
-        <SubmitButton disabled={isSubmitButtonDisabled} />
-      </Form>
-    </Container>
+    <>
+      <Container>
+        <ChatView />
+        <Display ref={displayRef}>
+          <MessagesLists>{messagesLists}</MessagesLists>
+          {isTypingIndicatorVisible && (
+            <TypingIndicatorContainer>
+              <TypingIndicatorDot />
+              <TypingIndicatorDot />
+              <TypingIndicatorDot />
+            </TypingIndicatorContainer>
+          )}
+        </Display>
+        <Form onSubmit={onFormSubmit}>
+          {!isOptionsListVisible && (
+            <TextareaContainer>
+              <Textarea
+                minRows={1}
+                maxRows={5}
+                onChange={(event) => onTextareaChange(event.target.value)}
+                placeholder='Enter your message'
+                value={textAreaValue}
+                disabled={isTextareaDisabled}
+              />
+            </TextareaContainer>
+          )}
+          {isOptionsListVisible && <OptionsList>{answerOptionsList}</OptionsList>}
+          <SubmitButton disabled={isSubmitButtonDisabled} />
+        </Form>
+      </Container>
+    </>
   );
 };

@@ -26,6 +26,7 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   max-width: 100%;
+  position: relative;
 `;
 
 export const Display = styled.div`
@@ -34,6 +35,7 @@ export const Display = styled.div`
   width: 100%;
   overflow-y: auto;
   padding: 35rem 16rem 0 16rem;
+  z-index: 1;
 `;
 
 export const MessagesLists = styled.ul`
@@ -91,6 +93,9 @@ export const MessagesListItem = styled.li`
     border-radius: 10rem;
     padding: 7rem;
     border: 1px solid #c295c0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow:
       0 0 7px #c295c0,
       0 0 10px #c295c0,
@@ -105,9 +110,6 @@ export const MessagesListItemOwn = styled(MessagesListItem)`
   ${Message} {
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
   }
 `;
 
@@ -125,6 +127,7 @@ export const Form = styled.form`
 
   border-radius: 10rem;
   margin: 16rem 0 0 0;
+  z-index: 1;
 `;
 
 export const TextareaContainer = styled.div`
