@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { View } from './View.tsx';
+import dynamic from 'next/dynamic';
+const View = dynamic(() => import('@src/components/canvas/View/View.tsx').then((mod) => mod.View), { ssr: false });
 
 export const GameView = styled(View)`
   position: absolute;
