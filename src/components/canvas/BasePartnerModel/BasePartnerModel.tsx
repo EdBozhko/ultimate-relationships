@@ -1,25 +1,39 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-
-import { useBoxHelper } from '@src/hooks';
 
 import type { GLTFResult, BasePartnerModelComponent } from './BasePartnerModel.types.ts';
 
-gsap.registerPlugin(useGSAP);
-
-export const BasePartnerModel: BasePartnerModelComponent = (props) => {
+export const BasePartnerModel: BasePartnerModelComponent = ({ onFaceUpdate = () => {}, ...rest }) => {
   const basePartner = useGLTF('/models/base_partner/base_partner.glb') as GLTFResult;
   const { nodes, materials } = basePartner;
   const modelRef = useRef(null!);
-  useBoxHelper(modelRef);
+  const faceRef = useRef(null!);
+
+  useEffect(() => {
+    onFaceUpdate(faceRef.current);
+  }, [faceRef]);
+
+  useEffect(() => {
+    // const morphTargetDictionary = modelRef.current.children[0].children[0].children[0].morphTargetDictionary;
+    const morphTargetInfluences = modelRef.current.children;
+    morphTargetInfluences.forEach((element) => {
+      // element.morphTargetInfluences[26] = 0;
+      // element.morphTargetInfluences[3] = 0.8;
+      // element.morphTargetInfluences[29] = 1;
+      // element.morphTargetInfluences[10] = 0.5;
+      // element.morphTargetInfluences[17] = 0.5;
+      // element.morphTargetInfluences[12] = 0.25;
+      // element.morphTargetInfluences[19] = 0.25;
+      // morphTargetInfluences['26'] = 0;
+    });
+    // console.log(morphTargetInfluences);
+  }, [nodes]);
 
   return (
     <>
-      <group scale={1.5} position={[3.895, 1.159, -5.343]} {...props} dispose={null}>
+      <group {...rest} dispose={null}>
         <skinnedMesh
           castShadow
           name='Panties'
@@ -60,6 +74,7 @@ export const BasePartnerModel: BasePartnerModelComponent = (props) => {
             morphTargetInfluences={nodes.Genesis8_1Female.morphTargetInfluences}
           />
           <skinnedMesh
+            ref={faceRef}
             castShadow
             name='Genesis8_1Female_1'
             geometry={nodes.Genesis8_1Female_1.geometry}
