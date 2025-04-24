@@ -69,7 +69,7 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
             <MainLayout>
               <Header />
               <main>
-                {children}
+                <section style={{ display: 'contents' }}>{children}</section>
                 <div id='client-portal' />
               </main>
             </MainLayout>
