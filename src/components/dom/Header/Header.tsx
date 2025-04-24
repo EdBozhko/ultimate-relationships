@@ -28,16 +28,16 @@ import useGlobalStore from '@src/stores/useGlobalStore/';
 import type { HeaderComponent } from './Header.types.ts';
 
 const navigation = [
-  { id: PAGES.GAME, href: '/game', name: 'game', iconSrc: '' },
-  { id: PAGES.CHAT, href: '/chat', name: 'chat', iconSrc: '' },
-  { id: PAGES.SHOP, href: '/shop', name: 'shop', iconSrc: '' },
-  { id: PAGES.MORE, href: '', name: 'more', iconSrc: '' },
+  { id: PAGES.GAME, href: `/${PAGES.GAME}`, name: PAGES.GAME, iconSrc: '' },
+  { id: PAGES.CHAT, href: `/${PAGES.CHAT}`, name: PAGES.CHAT, iconSrc: '' },
+  { id: PAGES.SHOP, href: `/${PAGES.SHOP}`, name: PAGES.SHOP, iconSrc: '' },
+  { id: PAGES.MORE, href: '', name: PAGES.MORE, iconSrc: '' },
 ];
 
 const additionalNavigation = [
-  { id: PAGES.STORIES, href: '/stories', name: 'stories', iconSrc: '' },
-  { id: PAGES.MEDIA, href: '/media', name: 'media', iconSrc: '' },
-  { id: PAGES.SETTINGS, href: '/settings', name: 'settings', iconSrc: '' },
+  { id: PAGES.STORIES, href: `/${PAGES.STORIES}`, name: PAGES.STORIES, iconSrc: '' },
+  { id: PAGES.MEDIA, href: `/${PAGES.MEDIA}`, name: PAGES.MEDIA, iconSrc: '' },
+  { id: PAGES.SETTINGS, href: `/${PAGES.SETTINGS}`, name: PAGES.SETTINGS, iconSrc: '' },
 ];
 
 export const Header: HeaderComponent = () => {
