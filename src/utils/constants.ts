@@ -9,6 +9,14 @@ export const PAGES = {
   SETTINGS: 'settings',
 };
 
+export const SHOP_PAGES = {
+  MODELS: 'models',
+  TOYS: 'toys',
+  POSES: 'poses',
+  SCENES: 'scenes',
+  OUTFITS: 'outfits',
+};
+
 export const USER_DATA = {
   NICK_NAME: 'nickName',
   AI_NICK_NAME: 'aiNickName',

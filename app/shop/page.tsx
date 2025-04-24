@@ -1,7 +1,11 @@
+'use client';
+
+import { Shop } from '@comp/dom/pages/Shop';
+
 import type { ShopComponent } from './Shop.types.ts';
 
-const Shop: ShopComponent = () => {
-  return <div></div>;
+const ShopPage: ShopComponent = () => {
+  return <Shop />;
 };
 
-export default Shop;
+export default ShopPage;
