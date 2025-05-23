@@ -24,7 +24,7 @@ import { useDrag } from '@use-gesture/react';
 import { useSpring, config } from '@react-spring/web';
 
 import type { ListWithPopupComponent } from './ListWithPopup.types.ts';
-import type { ShopProduct } from '../pages/ShopSlider/ShopSlider.types.ts';
+import type { ShopProduct } from '../ShopSlider/ShopSlider.types.ts';
 
 export const ListWithPopup: ListWithPopupComponent = memo(({ list = [] }) => {
   const [height, setHeight] = useState(0);
@@ -99,7 +99,7 @@ export const ListWithPopup: ListWithPopupComponent = memo(({ list = [] }) => {
   const listToRender = list.map((listItem) => {
     const { id, imageSrc, name } = listItem;
     return (
-      <ListItem key={id} onClick={() => handleListItemClick(listItem)}>
+      <ListItem $itemsPerRow={2} key={id} onClick={() => handleListItemClick(listItem)}>
         <ListItemContainer>
           <ListItemImageContainer>
             <ListItemImage src={imageSrc} width={100} height={180} alt={`${name} icon`} />

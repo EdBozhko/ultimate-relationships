@@ -1,15 +1,11 @@
 'use client';
 
-import { shopNavigation } from '@src/helpers/lib/shopProducts.ts';
-import { ShopSlider } from '@comp/dom/pages/ShopSlider';
+import { Shop } from '@comp/dom/pages/Shop';
 
-import type { ShopComponent } from './Shop.types.ts';
-import { useMemo } from 'react';
+import type { FC } from 'react';
 
-const ShopPage: ShopComponent = () => {
-  const shopNavigationList = useMemo(() => Object.values(shopNavigation), [shopNavigation]);
-
-  return <ShopSlider heading={'shop'} shopNavigation={shopNavigationList} />;
+const ShopPage: FC = () => {
+  return <Shop />;
 };
 
 export default ShopPage;

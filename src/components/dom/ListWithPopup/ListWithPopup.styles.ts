@@ -1,9 +1,11 @@
 'use client';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Image from 'next/image';
 
 import { animated } from '@react-spring/web';
+
+import type { ListItemProps } from './ListWithPopup.types.ts';
 
 export const Container = styled.div`
   display: flex;
@@ -27,19 +29,38 @@ export const List = styled.ul`
   align-items: flex-start;
 `;
 
-export const ListItem = styled.li`
+export const ListItem = styled.li<ListItemProps>`
   display: flex;
-  width: 50%;
-  aspect-ratio: 1 / 1.5;
+
   padding-bottom: 20rem;
+  ${({ $itemsPerRow }) => {
+    switch ($itemsPerRow) {
+      case 1:
+        return css`
+          width: 100%;
+          aspect-ratio: 1.5 / 1;
+        `;
+      case 2:
+        return css`
+          width: 50%;
+          aspect-ratio: 1 / 1.5;
 
-  &:nth-child(odd) {
-    padding-right: 10rem;
-  }
+          &:nth-child(odd) {
+            padding-right: 10rem;
+          }
 
-  &:nth-child(even) {
-    padding-left: 10rem;
-  }
+          &:nth-child(even) {
+            padding-left: 10rem;
+          }
+        `;
+
+      default:
+        return css`
+          width: 100%;
+          aspect-ratio: 1.5 / 1;
+        `;
+    }
+  }}
 `;
 
 export const ListItemContainer = styled.div`
