@@ -8,6 +8,7 @@ export interface ViewProps {
 export type ViewComponent = FC<ViewProps>;
 
 interface CommonProps {
+  ambientLightIntensity?: number;
   color?: string;
 }
 export type CommonComponent = FC<CommonProps>;

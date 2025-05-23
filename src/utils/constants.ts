@@ -17,6 +17,20 @@ export const SHOP_PAGES = {
   OUTFITS: 'outfits',
 };
 
+export const POSES_PAGES = {
+  SINGLE: 'single',
+  COUPLE: 'couple',
+  TRIPLE: 'triple',
+  GROUP: 'group',
+};
+
+export const MODELS_PAGES = {
+  FEMALE: 'female',
+  FURRY: 'furry',
+  MALE: 'male',
+  TRANS: 'trans',
+};
+
 export const USER_DATA = {
   NICK_NAME: 'nickName',
   AI_NICK_NAME: 'aiNickName',

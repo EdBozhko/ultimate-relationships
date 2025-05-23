@@ -1,0 +1,263 @@
+'use client';
+
+import styled from 'styled-components';
+import Image from 'next/image';
+
+import { animated } from '@react-spring/web';
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 0 0 16rem 0;
+`;
+
+export const List = styled.ul`
+  margin: 16rem 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: auto;
+  padding: 0 16rem 0 16rem;
+  width: 100%;
+  overflow-y: auto;
+  align-items: flex-start;
+`;
+
+export const ListItem = styled.li`
+  display: flex;
+  width: 50%;
+  aspect-ratio: 1 / 1.5;
+  padding-bottom: 20rem;
+
+  &:nth-child(odd) {
+    padding-right: 10rem;
+  }
+
+  &:nth-child(even) {
+    padding-left: 10rem;
+  }
+`;
+
+export const ListItemContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+
+  border-radius: 5rem;
+  padding: 5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: transform 0.25s ease;
+
+  &:active {
+    transform: scale(0.9);
+  }
+`;
+
+export const ListItemImageContainer = styled.div`
+  border-radius: 10rem;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
+export const ListItemName = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: inherit;
+  font-size: 16rem;
+  color: #f0ffff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  min-height: 30%;
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  text-transform: uppercase;
+
+  border-radius: 10rem 10rem 0 0;
+  padding: 7rem;
+  background: linear-gradient(135deg, rgba(30, 31, 37, 0.2), rgba(42, 43, 52, 0));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+`;
+
+export const ListItemImage = styled(Image)`
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+`;
+
+export const AnimatedBackgroundWrapper = styled(animated.div)`
+  display: flex;
+  overflow-y: auto;
+  width: 100%;
+`;
+
+export const AnimatedPopup = styled(animated.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 100;
+  position: fixed;
+  left: 2vw;
+  height: calc(100vh + 100px); // 100px for bouncing animation
+  width: 96vw;
+  border-radius: 12px 12px 0px;
+  background: #fff;
+  touch-action: none;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10rem;
+  padding: 7rem;
+  padding-bottom: calc(20vh + 140rem + 7rem); // 20vh because popup height 80vh
+  background: linear-gradient(135deg, rgba(30, 31, 37, 0.2), rgba(42, 43, 52, 0));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+`;
+
+export const AnimatedPopupClose = styled.button`
+  width: 40rem;
+  height: 4rem;
+  border-radius: 10rem;
+  background-color: rgba(42, 43, 52, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+`;
+
+export const AnimatedPopupContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 10rem 0 0 0;
+`;
+
+export const AnimatedPopupDescriptionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex: 1 1 auto;
+  width: 100%;
+`;
+
+export const AnimatedPopupDescriptionTitle = styled.p`
+  color: #8de3fc;
+  font-size: 20rem;
+  margin: 10rem 0 0 0;
+
+  span {
+    text-transform: uppercase;
+    font-weight: 300;
+    color: #ffffff;
+  }
+`;
+
+export const AnimatedPopupDescription = styled.p`
+  color: #8de3fc;
+  font-size: 16rem;
+  margin: 10rem 0 0 0;
+
+  span {
+    font-weight: 300;
+    color: #ffffff;
+  }
+`;
+
+export const AnimatedPopupDescriptionImageContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+`;
+
+export const AnimatedPopupDescriptionImage = styled(Image)`
+  object-fit: contain;
+`;
+
+export const AnimatedPopupButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #d8acff;
+  width: 300rem;
+  max-width: 100%;
+  text-align: center;
+  font-size: 16rem;
+  padding: 14rem 10rem;
+  background-color: #d334e3;
+  border-radius: 200rem;
+  text-transform: uppercase;
+  transition: transform 0.25s linear;
+  cursor: pointer;
+  position: relative;
+
+  border: 1px solid #0360df;
+  background-color: #0360df;
+  background-image:
+    radial-gradient(75% 50% at 50% 0%, #f4feff, transparent), radial-gradient(75% 35% at 50% 80%, #8de3fc, transparent);
+  box-shadow:
+    inset 0 -2px 4px 1px rgba(17, 110, 231, 0.6),
+    inset 0 -4px 4px 1px #8de3fc,
+    inset 0 0 2px 1px rgba(255, 255, 255, 0.2),
+    0 1px 4px 1px rgba(17, 110, 231, 0.2),
+    0 1px 4px 1px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  text-shadow: 0 1px 1px #116ee7;
+  transition-property: border-color, transform, background-color;
+  transition-duration: 0.2s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50rem;
+    width: 80%;
+    height: 40%;
+    background-image: linear-gradient(to bottom, #f4feff, transparent);
+    opacity: 0.15;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  &:not(:first-child) {
+    margin: 10rem 0 0 0;
+  }
+`;

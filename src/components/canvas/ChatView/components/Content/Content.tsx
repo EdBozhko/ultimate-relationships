@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import * as THREE from 'three';
 import { useThree } from '@react-three/fiber';
 
 const BasePartnerModel = dynamic(
@@ -14,8 +15,9 @@ const Common = dynamic(() => import('@src/components/canvas/View/View.tsx').then
 
 export const Content = () => {
   const camera = useThree((state) => state.camera);
+  console.log(camera);
 
-  const [partnerModelFace, setPartnerModelFace] = useState(null!);
+  const [partnerModelFace, setPartnerModelFace] = useState<THREE.Mesh | null>(null);
 
   useEffect(() => {
     if (partnerModelFace?.position) {

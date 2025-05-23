@@ -2,7 +2,9 @@ import * as THREE from 'three';
 import type { GLTF } from 'three-stdlib';
 import type { FC } from 'react';
 
-export type BasePartnerModelProps = JSX.IntrinsicElements['group'];
+export type BasePartnerModelProps = JSX.IntrinsicElements['group'] & {
+  onFaceUpdate?: (face: THREE.Mesh | null) => void;
+};
 
 export type BasePartnerModelComponent = FC<BasePartnerModelProps>;
 

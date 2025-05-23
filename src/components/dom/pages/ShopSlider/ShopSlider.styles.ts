@@ -1,9 +1,11 @@
+'use client';
+
 import styled, { css } from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import type { ShopLinkImageProps } from './Shop.types.ts';
+import type { ShopSliderLinkImageProps } from './ShopSlider.types.ts';
 
 export const Container = styled.div`
   display: flex;
@@ -15,16 +17,17 @@ export const Container = styled.div`
   position: relative;
 `;
 
-export const ShopHeading = styled.h2`
+export const Heading = styled.h2`
   padding: 16rem 16rem 0 16rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
   font: inherit;
-  font-size: 40rem;
-  font-weight: 400;
+  font-size: 36rem;
+  font-weight: 500;
   color: #c295c0;
+  text-transform: capitalize;
   text-shadow:
     0 0 7px #c295c0,
     0 0 10px #c295c0,
@@ -59,7 +62,7 @@ export const SwiperSlideStyled = styled(SwiperSlide)`
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 `;
 
-export const ShopLink = styled(Link)`
+export const ShopSliderLink = styled(Link)`
   border-radius: 10rem;
   overflow: hidden;
   position: relative;
@@ -76,12 +79,13 @@ export const ShopLink = styled(Link)`
   }
 `;
 
-export const ShopLinkName = styled.p`
+export const ShopSliderLinkName = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
   font: inherit;
   font-size: 30rem;
+  color: #f0ffff;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -99,7 +103,7 @@ export const ShopLinkName = styled.p`
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 `;
 
-export const ShopLinkImage = styled(Image)<ShopLinkImageProps>`
+export const ShopSliderLinkImage = styled(Image)<ShopSliderLinkImageProps>`
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;

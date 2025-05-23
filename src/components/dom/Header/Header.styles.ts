@@ -65,7 +65,7 @@ export const NavLinkIcon = styled.div<NavLinkIconProps>`
 
 export const NavLinkName = styled.span<NavLinkNameProps>`
   font: inherit;
-  font-weight: 400;
+  font-weight: 500;
 `;
 
 export const NavLink = styled(Link)<NavLinkProps>`
@@ -95,7 +95,7 @@ export const NavButton = styled(NavLink).attrs({ as: 'button' })<NavButtonProps>
   }
 
   ${NavLinkName} {
-    font-weight: 400;
+    font-weight: 500;
     color: #c295c0;
     text-shadow:
       0 0 7px #c295c0,
@@ -190,5 +190,5 @@ export const AdditionalMenuLinkIcon = styled.div`
 
 export const AdditionalMenuLinkName = styled.span`
   font: inherit;
-  font-weight: 400;
+  font-weight: 500;
 `;

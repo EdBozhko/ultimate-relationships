@@ -1,5 +1,6 @@
 'use client';
 
+import * as THREE from 'three';
 import { useEffect, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 
@@ -8,7 +9,7 @@ import type { GLTFResult, BasePartnerModelComponent } from './BasePartnerModel.t
 export const BasePartnerModel: BasePartnerModelComponent = ({ onFaceUpdate = () => {}, ...rest }) => {
   const basePartner = useGLTF('/models/base_partner/base_partner.glb') as GLTFResult;
   const { nodes, materials } = basePartner;
-  const modelRef = useRef(null!);
+  const modelRef = useRef<THREE.Group>(null!);
   const faceRef = useRef(null!);
 
   useEffect(() => {
@@ -19,6 +20,8 @@ export const BasePartnerModel: BasePartnerModelComponent = ({ onFaceUpdate = () 
     // const morphTargetDictionary = modelRef.current.children[0].children[0].children[0].morphTargetDictionary;
     const morphTargetInfluences = modelRef.current.children;
     morphTargetInfluences.forEach((element) => {
+      console.log(element);
+
       // element.morphTargetInfluences[26] = 0;
       // element.morphTargetInfluences[3] = 0.8;
       // element.morphTargetInfluences[29] = 1;

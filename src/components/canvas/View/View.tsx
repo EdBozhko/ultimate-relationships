@@ -49,7 +49,7 @@ const View: ViewComponent = forwardRef<HTMLDivElement, ViewProps>(
         <div ref={localRef} {...props} />
         <Three>
           <ViewImpl track={localRef}>
-            {/* {isDebugPerfMode || (isDebugMode && isPerfVisible) ? <Perf position='top-left' /> : null} */}
+            {isDebugPerfMode || (isDebugMode && isPerfVisible) ? <Perf position='top-left' /> : null}
             {children}
             {orbitControls && (
               <OrbitControls
