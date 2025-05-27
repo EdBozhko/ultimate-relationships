@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useState, useLayoutEffect, useEffect } from 'react';
+import { memo, useState, useLayoutEffect, useEffect, useCallback } from 'react';
 import {
   List,
   ListItem,
@@ -20,15 +20,24 @@ import {
   AnimatedPopupDescriptionTitle,
 } from './ListWithPopup.styles.ts';
 
+import { ClientPortal } from '@comp/dom/ClientPortal/ClientPortal.tsx';
+import { RestrictedPopup } from '@comp/dom/RestrictedPopup/RestrictedPopup.tsx';
+
 import { useDrag } from '@use-gesture/react';
 import { useSpring, config } from '@react-spring/web';
 
 import type { ListWithPopupComponent } from './ListWithPopup.types.ts';
-import type { ShopProduct } from '../ShopSlider/ShopSlider.types.ts';
+import type { ShopProduct } from '@comp/dom/ShopSlider/ShopSlider.types.ts';
 
-export const ListWithPopup: ListWithPopupComponent = memo(({ list = [] }) => {
+export const ListWithPopup: ListWithPopupComponent = memo(({ list = [], itemsPerRow = 2 }) => {
+  const [showRestrictedPopUp, setRestrictedShowPopUp] = useState(false);
+
   const [height, setHeight] = useState(0);
   const [popupContent, setPopupContent] = useState({ image: { scr: '' }, title: '', description: '' });
+
+  const handleAnimatedPopupButtonClick = useCallback(() => {
+    setRestrictedShowPopUp(true);
+  }, [showRestrictedPopUp]);
 
   useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
@@ -99,10 +108,10 @@ export const ListWithPopup: ListWithPopupComponent = memo(({ list = [] }) => {
   const listToRender = list.map((listItem) => {
     const { id, imageSrc, name } = listItem;
     return (
-      <ListItem $itemsPerRow={2} key={id} onClick={() => handleListItemClick(listItem)}>
+      <ListItem $itemsPerRow={itemsPerRow} key={id} onClick={() => handleListItemClick(listItem)}>
         <ListItemContainer>
           <ListItemImageContainer>
-            <ListItemImage src={imageSrc} width={100} height={180} alt={`${name} icon`} />
+            <ListItemImage src={imageSrc} fill={true} alt={`${name} icon`} />
           </ListItemImageContainer>
           <ListItemName>{name}</ListItemName>
         </ListItemContainer>
@@ -136,9 +145,12 @@ export const ListWithPopup: ListWithPopupComponent = memo(({ list = [] }) => {
               Description: <span>{popupContent.description}</span>
             </AnimatedPopupDescription>
           </AnimatedPopupDescriptionContainer>
-          <AnimatedPopupButton>use it</AnimatedPopupButton>
+          <AnimatedPopupButton onClick={handleAnimatedPopupButtonClick} textContent={'use it'} />
         </AnimatedPopupContent>
       </AnimatedPopup>
+      <ClientPortal selector='client-portal' show={showRestrictedPopUp}>
+        <RestrictedPopup onClosePopupClick={useCallback(() => setRestrictedShowPopUp(false), [showRestrictedPopUp])} />
+      </ClientPortal>
     </>
   );
 });

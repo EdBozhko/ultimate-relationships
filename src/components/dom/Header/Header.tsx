@@ -35,7 +35,7 @@ const navigation = [
 ];
 
 const additionalNavigation = [
-  { id: PAGES.STORIES, href: `/${PAGES.STORIES}`, name: PAGES.STORIES, iconSrc: '' },
+  { id: PAGES.STORIES, href: `/${PAGES.STORIES}`, name: PAGES.STORIES.replace('-', ' '), iconSrc: '' },
   { id: PAGES.MEDIA, href: `/${PAGES.MEDIA}`, name: PAGES.MEDIA, iconSrc: '' },
   { id: PAGES.SETTINGS, href: `/${PAGES.SETTINGS}`, name: PAGES.SETTINGS, iconSrc: '' },
 ];

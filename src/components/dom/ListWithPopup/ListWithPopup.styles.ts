@@ -2,6 +2,7 @@
 
 import styled, { css } from 'styled-components';
 import Image from 'next/image';
+import { ThreeDimensionalButton } from '../ThreeDimensionalButton/ThreeDimensionalButton.tsx';
 
 import { animated } from '@react-spring/web';
 
@@ -142,7 +143,7 @@ export const AnimatedPopup = styled(animated.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 100;
+  z-index: 9;
   position: fixed;
   left: 2vw;
   height: calc(100vh + 100px); // 100px for bouncing animation
@@ -154,7 +155,7 @@ export const AnimatedPopup = styled(animated.div)`
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 10rem;
   padding: 7rem;
-  padding-bottom: calc(20vh + 140rem + 7rem); // 20vh because popup height 80vh
+  padding-bottom: calc(20vh + 170rem + 7rem); // 20vh because popup height 80vh
   background: linear-gradient(135deg, rgba(30, 31, 37, 0.2), rgba(42, 43, 52, 0));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -229,56 +230,4 @@ export const AnimatedPopupDescriptionImage = styled(Image)`
   object-fit: contain;
 `;
 
-export const AnimatedPopupButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #d8acff;
-  width: 300rem;
-  max-width: 100%;
-  text-align: center;
-  font-size: 16rem;
-  padding: 14rem 10rem;
-  background-color: #d334e3;
-  border-radius: 200rem;
-  text-transform: uppercase;
-  transition: transform 0.25s linear;
-  cursor: pointer;
-  position: relative;
-
-  border: 1px solid #0360df;
-  background-color: #0360df;
-  background-image:
-    radial-gradient(75% 50% at 50% 0%, #f4feff, transparent), radial-gradient(75% 35% at 50% 80%, #8de3fc, transparent);
-  box-shadow:
-    inset 0 -2px 4px 1px rgba(17, 110, 231, 0.6),
-    inset 0 -4px 4px 1px #8de3fc,
-    inset 0 0 2px 1px rgba(255, 255, 255, 0.2),
-    0 1px 4px 1px rgba(17, 110, 231, 0.2),
-    0 1px 4px 1px rgba(0, 0, 0, 0.1);
-  color: #fff;
-  text-shadow: 0 1px 1px #116ee7;
-  transition-property: border-color, transform, background-color;
-  transition-duration: 0.2s;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 1px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 50rem;
-    width: 80%;
-    height: 40%;
-    background-image: linear-gradient(to bottom, #f4feff, transparent);
-    opacity: 0.15;
-  }
-
-  &:active {
-    transform: scale(0.9);
-  }
-
-  &:not(:first-child) {
-    margin: 10rem 0 0 0;
-  }
-`;
+export const AnimatedPopupButton = styled(ThreeDimensionalButton)``;

@@ -42,7 +42,7 @@ export const ShopSlider: ShopSliderComponent = memo(({ heading, shopNavigation }
 
   return (
     <Container>
-      <Heading>{heading}</Heading>
+      <Heading textContent={heading} />
       <Swiper
         speed={600}
         parallax={true}

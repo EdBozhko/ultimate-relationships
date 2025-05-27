@@ -5,6 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+import { PageHeading } from '@comp/dom/PageHeading/PageHeading.tsx';
+
 import type { ShopSliderLinkImageProps } from './ShopSlider.types.ts';
 
 export const Container = styled.div`
@@ -17,23 +19,7 @@ export const Container = styled.div`
   position: relative;
 `;
 
-export const Heading = styled.h2`
-  padding: 16rem 16rem 0 16rem;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  font: inherit;
-  font-size: 36rem;
-  font-weight: 500;
-  color: #c295c0;
-  text-transform: capitalize;
-  text-shadow:
-    0 0 7px #c295c0,
-    0 0 10px #c295c0,
-    0 0 42px #c300b6,
-    0 0 82px #c300b6;
-`;
+export const Heading = styled(PageHeading)``;
 
 export const SwiperStyled = styled(Swiper)`
   width: 100%;

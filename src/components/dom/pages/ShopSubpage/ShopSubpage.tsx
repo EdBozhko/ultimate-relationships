@@ -2,7 +2,7 @@
 
 import { ListWithPopup } from '@comp/dom/ListWithPopup';
 import { Container } from '@comp/dom/ListWithPopup/ListWithPopup.styles.ts';
-import { Heading } from '@src/components/dom/ShopSlider/ShopSlider.styles';
+import { PageHeading } from '@src/components/dom/PageHeading/';
 import { shopNavigation } from '@src/helpers/lib/shopProducts.ts';
 import { ShopSlider } from '@src/components/dom/ShopSlider';
 
@@ -43,8 +43,8 @@ export const ShopSubpage: ShopSubpageComponent = ({ slug }) => {
       )}
       {shopNavigationList && 'products' in shopNavigationList && (
         <Container>
-          <Heading>{heading}</Heading>
-          <ListWithPopup list={shopNavigationList.products} />
+          <PageHeading textContent={heading} />
+          <ListWithPopup itemsPerRow={2} list={shopNavigationList.products} />
         </Container>
       )}
     </>

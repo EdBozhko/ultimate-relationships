@@ -4,7 +4,7 @@ export const PAGES = {
   SHOP: 'shop',
   MORE: 'more',
 
-  STORIES: 'stories',
+  STORIES: 'dirty-adventures',
   MEDIA: 'media',
   SETTINGS: 'settings',
 };
