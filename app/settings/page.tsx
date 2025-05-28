@@ -1,7 +1,11 @@
-import type { SettingsComponent } from './Settings.types.ts';
+'use client';
 
-const Settings: SettingsComponent = () => {
-  return <div></div>;
+import { Settings } from '@comp/dom/pages/Settings';
+
+import type { FC } from 'react';
+
+const SettingsPage: FC = () => {
+  return <Settings />;
 };
 
-export default Settings;
+export default SettingsPage;
