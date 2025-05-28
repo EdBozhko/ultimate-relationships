@@ -1,7 +1,11 @@
-import type { MediaComponent } from './Media.types.ts';
+'use client';
 
-const Media: MediaComponent = () => {
-  return <div></div>;
+import { Media } from '@comp/dom/pages/Media';
+
+import type { FC } from 'react';
+
+const MediaPage: FC = () => {
+  return <Media />;
 };
 
-export default Media;
+export default MediaPage;

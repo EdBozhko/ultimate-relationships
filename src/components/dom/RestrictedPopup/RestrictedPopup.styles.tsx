@@ -12,8 +12,8 @@ export const Container = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(24, 24, 24, 0.9);
-  z-index: 10;
+  background-color: rgba(24, 24, 24, 0.8);
+  z-index: 9;
 `;
 
 export const Title = styled.p`

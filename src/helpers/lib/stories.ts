@@ -1,5 +1,3 @@
-import { SHOP_PAGES, PAGES, POSES_PAGES, MODELS_PAGES } from '@src/utils/constants';
-
 import bdsm from '@public/icons/stories/bdsm.webp';
 import hospital from '@public/icons/stories/hospital.webp';
 import photostudio from '@public/icons/stories/photostudio.webp';
