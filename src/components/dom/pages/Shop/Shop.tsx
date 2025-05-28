@@ -9,5 +9,5 @@ import { useMemo } from 'react';
 export const Shop: ShopComponent = () => {
   const shopNavigationList = useMemo(() => Object.values(shopNavigation), [shopNavigation]);
 
-  return <ShopSlider heading={'shop'} shopNavigation={shopNavigationList} />;
+  return <ShopSlider heading={'modifiers'} shopNavigation={shopNavigationList} />;
 };

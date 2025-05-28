@@ -1,7 +1,7 @@
 export const PAGES = {
   GAME: 'game',
   CHAT: 'chat',
-  SHOP: 'shop',
+  SHOP: 'modifiers',
   MORE: 'more',
 
   STORIES: 'dirty-adventures',
