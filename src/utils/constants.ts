@@ -7,7 +7,16 @@ export const PAGES = {
   STORIES: 'dirty-adventures',
   MEDIA: 'media',
   SETTINGS: 'settings',
-};
+} as const;
+
+export type Pages = (typeof PAGES)[keyof typeof PAGES];
+
+export const CONTROLS = {
+  VR: 'vr',
+  FULLSCREEN: 'fullscreen',
+} as const;
+
+export type Controls = (typeof CONTROLS)[keyof typeof CONTROLS];
 
 export const SHOP_PAGES = {
   MODELS: 'models',

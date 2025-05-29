@@ -88,25 +88,32 @@ export const NavLink = styled(Link)<NavLinkProps>`
 export const NavButton = styled(NavLink).attrs({ as: 'button' })<NavButtonProps>`
   position: relative;
 
-  ${NavLinkIcon} {
-    // Lots of drop-shadows are bad for performance
-    filter: drop-shadow(0 0 7px #c295c0) drop-shadow(0 0 21px #c295c0) drop-shadow(0 0 42px #c300b6)
-      drop-shadow(0 0 82px #c300b6) drop-shadow(0 0 151px #c300b6);
-  }
+  ${({ $isGlowing }) => {
+    return (
+      $isGlowing &&
+      css`
+        ${NavLinkIcon} {
+          // Lots of drop-shadows are bad for performance
+          filter: drop-shadow(0 0 7px #c295c0) drop-shadow(0 0 21px #c295c0) drop-shadow(0 0 42px #c300b6)
+            drop-shadow(0 0 82px #c300b6) drop-shadow(0 0 151px #c300b6);
+        }
 
-  ${NavLinkName} {
-    font-weight: 500;
-    color: #c295c0;
-    text-shadow:
-      0 0 7px #c295c0,
-      0 0 10px #c295c0,
-      0 0 21px #c295c0,
-      0 0 42px #c300b6,
-      0 0 82px #c300b6,
-      0 0 92px #c300b6,
-      0 0 102px #c300b6,
-      0 0 151px #c300b6;
-  }
+        ${NavLinkName} {
+          font-weight: 500;
+          color: #c295c0;
+          text-shadow:
+            0 0 7px #c295c0,
+            0 0 10px #c295c0,
+            0 0 21px #c295c0,
+            0 0 42px #c300b6,
+            0 0 82px #c300b6,
+            0 0 92px #c300b6,
+            0 0 102px #c300b6,
+            0 0 151px #c300b6;
+        }
+      `
+    );
+  }}
 `;
 
 export const Switcher = styled.div<SwitcherProps>`
@@ -136,6 +143,8 @@ export const Switcher = styled.div<SwitcherProps>`
 `;
 
 export const AdditionalMenu = styled.div<AdditionalMenuProps>`
+  display: flex;
+  flex-direction: column;
   position: absolute;
   background-color: #181818;
   width: 100vw;
@@ -158,7 +167,6 @@ export const AdditionalMenu = styled.div<AdditionalMenuProps>`
 export const AdditionalMenuList = styled.ul`
   list-style: none;
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -191,4 +199,15 @@ export const AdditionalMenuLinkIcon = styled.div`
 export const AdditionalMenuLinkName = styled.span`
   font: inherit;
   font-weight: 500;
+`;
+
+export const AdditionalControls = styled.ul`
+  border-top: #272323 1px solid;
+
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
 `;

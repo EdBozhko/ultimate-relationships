@@ -20,7 +20,13 @@ export const Home: HomeComponent = () => {
   const totalLoaded = useProgress((state) => state.total);
 
   const onAgeConfirmButtonClick = () => {
-    document.body.requestFullscreen();
+    if (document.body.requestFullscreen) {
+      document.body.requestFullscreen();
+      //@ts-expect-error
+    } else if (document.body.webkitRequestFullscreen) {
+      //@ts-expect-error
+      document.body.webkitRequestFullscreen();
+    }
   };
 
   useEffect(() => {

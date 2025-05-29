@@ -1,5 +1,15 @@
-import { PAGES } from '@src/utils';
-import { GameIcon, ChatIcon, MoreIcon, ShopIcon, StoriesIcon, MediaIcon, SettingsIcon } from '../index.tsx';
+import { PAGES, CONTROLS } from '@src/utils';
+import {
+  GameIcon,
+  ChatIcon,
+  MoreIcon,
+  ShopIcon,
+  StoriesIcon,
+  MediaIcon,
+  SettingsIcon,
+  VRIcon,
+  FullscreenIcon,
+} from '../index.tsx';
 
 import type { IconComponent, IconMap } from './Icon.types.ts';
 
@@ -11,6 +21,8 @@ const ICONS_MAP: IconMap = {
   [PAGES.STORIES]: StoriesIcon,
   [PAGES.MEDIA]: MediaIcon,
   [PAGES.SETTINGS]: SettingsIcon,
+  [CONTROLS.VR]: VRIcon,
+  [CONTROLS.FULLSCREEN]: FullscreenIcon,
 };
 
 export const Icon: IconComponent = ({ color, type }) => {

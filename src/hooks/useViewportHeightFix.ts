@@ -1,23 +1,30 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { BREAKPOINTS } from '@src/themeConfigs/constants/screen';
 
 export const useViewportHeightFix = (): null => {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof window === 'undefined') return;
 
     if (window.innerWidth >= BREAKPOINTS.tabletScreenWidth) return;
 
     const updateVh = () => {
-      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+      if (window) {
+        document.documentElement.style.setProperty(
+          '--vh',
+          `${window.visualViewport ? window.visualViewport?.height : window.innerHeight * 0.01}px`,
+        );
+        // window.visualViewport?.addEventListener('resize', ()=>{})
+        // document.body.style.height = `${window.visualViewport?.height}px`;
+      }
     };
 
     updateVh();
 
-    window.addEventListener('resize', updateVh);
+    window.visualViewport?.addEventListener('resize', updateVh);
 
-    return () => window.removeEventListener('resize', updateVh);
+    return () => window.visualViewport?.removeEventListener('resize', updateVh);
   }, []);
 
   return null;

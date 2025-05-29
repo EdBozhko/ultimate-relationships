@@ -6,4 +6,6 @@ export { ArrowIcon } from './ArrowIcon';
 export { StoriesIcon } from './StoriesIcon';
 export { MediaIcon } from './MediaIcon';
 export { SettingsIcon } from './SettingsIcon';
+export { VRIcon } from './VRIcon';
+export { FullscreenIcon } from './Fullscreen';
 export { Icon } from './Icon';

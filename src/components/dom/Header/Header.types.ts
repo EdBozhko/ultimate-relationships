@@ -20,6 +20,7 @@ export interface NavLinkNameProps {
 
 export interface NavButtonProps extends NavLinkProps {
   href?: string;
+  $isGlowing?: boolean;
 }
 
 export interface SwitcherProps {

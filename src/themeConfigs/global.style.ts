@@ -74,10 +74,7 @@ const GlobalStyle = styled.createGlobalStyle`
     box-shadow: none;
   }
 
-  html,
-  body,
-  #root,
-  #__next {
+  html {
     max-width: 100vw;
     width: 100vw;
     height: 100vh;
@@ -87,9 +84,7 @@ const GlobalStyle = styled.createGlobalStyle`
     overflow: hidden;
     scroll-behavior: smooth;
     line-height: 1.2;
-  }
 
-  html {
     background-color: #181818;
 
     font-size: ${100 / BREAKPOINTS.mobileScreenWidth}vw;
@@ -101,6 +96,13 @@ const GlobalStyle = styled.createGlobalStyle`
     @media ${SCREENS.fullHd} {
       font-size: ${100 / BREAKPOINTS.fullHdScreenWidth}vw;
     }
+  }
+
+  body,
+  #root,
+  #__next {
+    width: 100%;
+    height: 100%;
   }
 
   main {

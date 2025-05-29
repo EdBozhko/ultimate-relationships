@@ -3,7 +3,6 @@
 import dynamic from 'next/dynamic';
 
 import type { GameComponent } from './Game.types.ts';
-import { useEffect } from 'react';
 
 // models;
 // toys;
@@ -43,14 +42,6 @@ const GameView = dynamic(() => import('@comp/canvas/View/View.styles.ts').then((
 const Common = dynamic(() => import('@src/components/canvas/View/View.tsx').then((mod) => mod.Common), { ssr: false });
 
 export const Game: GameComponent = () => {
-  useEffect(() => {
-    return () => {
-      if (document.fullscreenElement) {
-        document.exitFullscreen();
-      }
-    };
-  }, []);
-
   return (
     <>
       <GameView orbitControls>
