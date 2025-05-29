@@ -48,6 +48,8 @@ const additionalControls = [
 ];
 
 export const Header: HeaderComponent = () => {
+  const isHeaderVisible = useGlobalStore((state) => state.isHeaderVisible);
+
   const pathname = usePathname();
 
   const isAdditionalMenuOpened = useGlobalStore((state) => state.isAdditionalMenuOpened);
@@ -164,19 +166,23 @@ export const Header: HeaderComponent = () => {
   });
 
   return (
-    <HeaderStyled>
-      <AdditionalMenu $isOpened={isAdditionalMenuOpened}>
-        <AdditionalMenuList>{additionalNavigationList}</AdditionalMenuList>
-        <AdditionalControls>{additionalControlsList}</AdditionalControls>
-      </AdditionalMenu>
+    <>
+      {isHeaderVisible && (
+        <HeaderStyled>
+          <AdditionalMenu $isOpened={isAdditionalMenuOpened}>
+            <AdditionalMenuList>{additionalNavigationList}</AdditionalMenuList>
+            <AdditionalControls>{additionalControlsList}</AdditionalControls>
+          </AdditionalMenu>
 
-      <Submenu $isOpened={isSubmenuOpened}>
-        <NavList>{navigationList}</NavList>
-      </Submenu>
+          <Submenu $isOpened={isSubmenuOpened}>
+            <NavList>{navigationList}</NavList>
+          </Submenu>
 
-      <Nav>
-        <NavList>{navigationList}</NavList>
-      </Nav>
-    </HeaderStyled>
+          <Nav>
+            <NavList>{navigationList}</NavList>
+          </Nav>
+        </HeaderStyled>
+      )}
+    </>
   );
 };

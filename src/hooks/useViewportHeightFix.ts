@@ -11,10 +11,7 @@ export const useViewportHeightFix = (): null => {
 
     const updateVh = () => {
       if (window) {
-        document.documentElement.style.setProperty(
-          '--vh',
-          `${window.visualViewport ? window.visualViewport?.height : window.innerHeight * 0.01}px`,
-        );
+        document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
         // window.visualViewport?.addEventListener('resize', ()=>{})
         // document.body.style.height = `${window.visualViewport?.height}px`;
       }

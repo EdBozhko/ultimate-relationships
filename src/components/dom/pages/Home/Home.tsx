@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useLayoutEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { useProgress } from '@react-three/drei';
 
+import { PAGES } from '@src/utils/constants.ts';
 import { ClientPortal } from '@src/components/dom/ClientPortal/index.tsx';
 import { PopUp } from '@src/components/dom/PopUp/index.tsx';
 import { PopUpTitle, PopUpText, PopUpButtonsContainer, PopUpLink } from '@src/components/dom/PopUp/PopUp.styles.ts';
@@ -12,6 +14,14 @@ import { Container } from './Home.styles.ts';
 import type { HomeComponent } from './Home.types.ts';
 
 export const Home: HomeComponent = () => {
+  const router = useRouter();
+  if (typeof window !== 'undefined') {
+    const isAgeConfirmed = localStorage.getItem('ageConfirmed');
+    if (isAgeConfirmed) {
+      router.push(PAGES.SETTINGS);
+    }
+  }
+
   const [hideLoadingBar, setHideLoadingBar] = useState(false);
   const [showPopUp, setShowPopUp] = useState(false);
   const [currentLoadingProgress, setCurrentLoadingProgress] = useState(0);
@@ -26,6 +36,13 @@ export const Home: HomeComponent = () => {
     } else if (document.body.webkitRequestFullscreen) {
       //@ts-expect-error
       document.body.webkitRequestFullscreen();
+    }
+
+    if (typeof window !== 'undefined') {
+      const isAgeConfirmed = localStorage.getItem('ageConfirmed');
+      if (!isAgeConfirmed) {
+        localStorage.setItem('ageConfirmed', 'true');
+      }
     }
   };
 

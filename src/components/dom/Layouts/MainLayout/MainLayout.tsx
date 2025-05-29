@@ -1,10 +1,8 @@
 'use client';
 
-import {
-  useRef,
-  // useEffect
-} from 'react';
+import { useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
 import { Leva } from 'leva';
 import useGlobalStore from '@src/stores/useGlobalStore/';
 
@@ -15,6 +13,10 @@ import type { MainLayoutComponent } from './MainLayout.types.ts';
 const Scene = dynamic(() => import('@comp/canvas/Scene').then((mod) => mod.Scene), { ssr: false });
 
 export const MainLayout: MainLayoutComponent = ({ children }) => {
+  const pathname = usePathname();
+  const isHeaderVisible = useGlobalStore((state) => state.isHeaderVisible);
+  const showHeader = useGlobalStore((state) => state.showHeader);
+
   useViewportHeightFix();
   const ref = useRef<HTMLDivElement>(null!);
 
@@ -24,23 +26,28 @@ export const MainLayout: MainLayoutComponent = ({ children }) => {
   // const userPerfMode = useGlobalStore((store) => store.userPerfMode);
   const isDebugMode = useGlobalStore((store) => store.isDebugMode);
 
-  // useEffect(() => {
-  //   const search = typeof window !== 'undefined' ? window.location.search : '';
-  //   const searchParams = new URLSearchParams(search);
+  useEffect(() => {
+    //   const search = typeof window !== 'undefined' ? window.location.search : '';
+    //   const searchParams = new URLSearchParams(search);
+    //   if (Boolean(searchParams.get('debug-mode-on'))) {
+    //     debugMode();
+    //   }
+    //   if (Boolean(searchParams.get('debug-perf-mode-on'))) {
+    //     debugPerfMode();
+    //   }
+    //   if (Boolean(searchParams.get('debug-mode-off'))) {
+    //     userMode();
+    //   }
+    //   if (Boolean(searchParams.get('debug-perf-mode-off'))) {
+    //     userPerfMode();
+    //   }
+  }, []);
 
-  //   if (Boolean(searchParams.get('debug-mode-on'))) {
-  //     debugMode();
-  //   }
-  //   if (Boolean(searchParams.get('debug-perf-mode-on'))) {
-  //     debugPerfMode();
-  //   }
-  //   if (Boolean(searchParams.get('debug-mode-off'))) {
-  //     userMode();
-  //   }
-  //   if (Boolean(searchParams.get('debug-perf-mode-off'))) {
-  //     userPerfMode();
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!isHeaderVisible && pathname !== '/') {
+      showHeader();
+    }
+  }, [pathname]);
 
   return (
     <div

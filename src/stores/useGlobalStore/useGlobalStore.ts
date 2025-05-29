@@ -5,6 +5,18 @@ import type { GlobalStore } from './useGlobalStore.types.ts';
 
 const useGlobalStore = create<GlobalStore>((set) => {
   return {
+    isHeaderVisible: false,
+    showHeader: () => {
+      set(() => {
+        return { isHeaderVisible: true };
+      });
+    },
+    hideHeader: () => {
+      set(() => {
+        return { isHeaderVisible: false };
+      });
+    },
+
     isAdditionalMenuOpened: false,
     closeAdditionalMenu: () => {
       set(() => {
