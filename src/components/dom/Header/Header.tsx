@@ -24,18 +24,19 @@ import {
 import { Icon, ArrowIcon } from './components/index.tsx';
 import { useState } from 'react';
 
+import { RestrictedPopup } from '@comp/dom/RestrictedPopup/RestrictedPopup.tsx';
+
 import useGlobalStore from '@src/stores/useGlobalStore/';
 
 import type { HeaderComponent } from './Header.types.ts';
 import type { Pages, Controls } from '@src/utils/constants.ts';
 
-const navigation = [
-  { id: PAGES.GAME, href: `/${PAGES.GAME}`, name: PAGES.GAME, iconSrc: '', submenu: [{}] },
-  { id: PAGES.CHAT, href: `/${PAGES.CHAT}`, name: PAGES.CHAT, iconSrc: '' },
-  { id: PAGES.SHOP, href: `/${PAGES.SHOP}`, name: PAGES.SHOP, iconSrc: '' },
-  { id: PAGES.MORE, href: '', name: PAGES.MORE, iconSrc: '' },
-];
-
+const navigation = {
+  [PAGES.GAME]: { id: PAGES.GAME, href: `/${PAGES.GAME}`, name: PAGES.GAME, iconSrc: '', submenu: [{}] },
+  [PAGES.CHAT]: { id: PAGES.CHAT, href: `/${PAGES.CHAT}`, name: PAGES.CHAT, iconSrc: '', submenu: [] },
+  [PAGES.SHOP]: { id: PAGES.SHOP, href: `/${PAGES.SHOP}`, name: PAGES.SHOP, iconSrc: '', submenu: [] },
+  [PAGES.MORE]: { id: PAGES.MORE, href: '', name: PAGES.MORE, iconSrc: '', submenu: [] },
+};
 const additionalNavigation = [
   { id: PAGES.STORIES, href: `/${PAGES.STORIES}`, name: PAGES.STORIES.replace('-', ' '), iconSrc: '' },
   { id: PAGES.MEDIA, href: `/${PAGES.MEDIA}`, name: PAGES.MEDIA, iconSrc: '' },
@@ -59,42 +60,68 @@ export const Header: HeaderComponent = () => {
     toggleAdditionalMenu();
   };
 
+  const [isRestrictedPopupVisible, setIsRestrictedPopupVisible] = useState(false);
+
   const [isSubmenuOpened, setIsSubmenuOpened] = useState(false);
   const onNavButtonClick = (id: Pages | Controls) => {
+    //@ts-expect-error: TypeScript’s type definitions for Document don’t include the non-standard webkitFullscreenElement property by default
+    const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+
     switch (id) {
       case CONTROLS.FULLSCREEN:
-        //@ts-expect-error
-        const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
         if (!isFullscreen) {
           if (document.body.requestFullscreen) {
             document.body.requestFullscreen();
-            //@ts-expect-error
+            //@ts-expect-error: TypeScript’s type definitions for Document don’t include the non-standard webkitFullscreenElement property by default
           } else if (document.body.webkitRequestFullscreen) {
-            //@ts-expect-error
+            //@ts-expect-error: TypeScript’s type definitions for Document don’t include the non-standard webkitFullscreenElement property by default
             document.body.webkitRequestFullscreen();
           }
         } else {
           if (document.exitFullscreen) {
             document.exitFullscreen();
-            //@ts-expect-error
+            //@ts-expect-error: TypeScript’s type definitions for Document don’t include the non-standard webkitFullscreenElement property by default
           } else if (document.webkitExitFullscreen) {
-            //@ts-expect-error
+            //@ts-expect-error: TypeScript’s type definitions for Document don’t include the non-standard webkitFullscreenElement property by default
             document.webkitExitFullscreen();
           }
         }
         break;
 
+      case CONTROLS.VR:
+        closeAdditionalMenu();
+        setIsRestrictedPopupVisible(true);
+        break;
+
+      case PAGES.MORE:
+        onMoreButtonClick();
+        break;
+
       default:
         break;
     }
-    // setIsSubmenuOpened((prev) => !prev);
+
+    onNavLinkClick();
+
+    if (id in navigation) {
+      const navItem = navigation[id as keyof typeof navigation];
+      if (navItem.submenu && navItem.submenu.length > 0) {
+        setIsSubmenuOpened((prev) => !prev);
+      }
+    }
   };
 
   const onNavLinkClick = () => {
-    closeAdditionalMenu();
+    if (isAdditionalMenuOpened) {
+      closeAdditionalMenu();
+    }
+
+    if (isRestrictedPopupVisible) {
+      setIsRestrictedPopupVisible(false);
+    }
   };
 
-  const navigationList = navigation.map((item) => {
+  const navigationList = Object.values(navigation).map((item) => {
     const { id, href, name, iconSrc, submenu } = item;
 
     return (
@@ -110,7 +137,7 @@ export const Header: HeaderComponent = () => {
             <NavLinkName>{name}</NavLinkName>
           </NavButton>
         ) : (
-          <NavLink href={href} onClick={id === PAGES.MORE ? onMoreButtonClick : onNavLinkClick}>
+          <NavLink href={href} onClick={() => onNavButtonClick(id)}>
             <NavLinkIcon>{iconSrc || <Icon type={id} color={'#656565'} />}</NavLinkIcon>
             <NavLinkName>{name}</NavLinkName>
           </NavLink>
@@ -147,7 +174,7 @@ export const Header: HeaderComponent = () => {
               <NavLinkName>{name}</NavLinkName>
             </NavButton>
           ) : (
-            <NavLink href={href} onClick={id === PAGES.MORE ? onMoreButtonClick : () => onNavButtonClick(id)}>
+            <NavLink href={href} onClick={() => onNavButtonClick(id)}>
               <NavLinkIcon>{iconSrc || <Icon type={id} color={'#656565'} />}</NavLinkIcon>
               <NavLinkName>{name}</NavLinkName>
             </NavLink>
@@ -183,6 +210,7 @@ export const Header: HeaderComponent = () => {
           </Nav>
         </HeaderStyled>
       )}
+      {isRestrictedPopupVisible && <RestrictedPopup onClosePopupClick={() => setIsRestrictedPopupVisible(false)} />}
     </>
   );
 };

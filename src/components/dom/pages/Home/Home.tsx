@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useLayoutEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useProgress } from '@react-three/drei';
 
@@ -32,9 +32,9 @@ export const Home: HomeComponent = () => {
   const onAgeConfirmButtonClick = () => {
     if (document.body.requestFullscreen) {
       document.body.requestFullscreen();
-      //@ts-expect-error
+      //@ts-expect-error: TypeScript’s type definitions for Document don’t include the non-standard webkitFullscreenElement property by default
     } else if (document.body.webkitRequestFullscreen) {
-      //@ts-expect-error
+      //@ts-expect-error: TypeScript’s type definitions for Document don’t include the non-standard webkitFullscreenElement property by default
       document.body.webkitRequestFullscreen();
     }
 

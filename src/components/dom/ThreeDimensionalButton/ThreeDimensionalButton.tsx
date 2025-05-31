@@ -2,6 +2,10 @@ import { ThreeDimensionalButtonStyled } from './ThreeDimensionalButton.styles.ts
 
 import type { ThreeDimensionalButtonComponent } from './ThreeDimensionalButton.types.ts';
 
-export const ThreeDimensionalButton: ThreeDimensionalButtonComponent = ({ textContent, onClick }) => {
-  return <ThreeDimensionalButtonStyled onClick={onClick}>{textContent}</ThreeDimensionalButtonStyled>;
+export const ThreeDimensionalButton: ThreeDimensionalButtonComponent = ({ textContent, onClick, ...props }) => {
+  return (
+    <ThreeDimensionalButtonStyled {...props} onClick={onClick}>
+      {textContent}
+    </ThreeDimensionalButtonStyled>
+  );
 };

@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { PAGES } from '@src/utils';
+import { Pages, Controls } from '@src/utils/constants.ts';
 
 export interface IconProps {
   color: string;
-  type: (typeof PAGES)[keyof typeof PAGES];
+  type: Pages | Controls;
 }
 
 export type IconComponent = FC<IconProps>;

@@ -30,7 +30,7 @@ export const ThreeDimensionalButtonStyled = styled.button`
   color: #fff;
   text-shadow: 0 1px 1px #116ee7;
   transition-property: border-color, transform, background-color;
-  transition-duration: 0.2s;
+  transition-duration: 0.15s;
 
   &::after {
     content: '';

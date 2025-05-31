@@ -7,6 +7,7 @@ export const PAGES = {
   STORIES: 'dirty-adventures',
   MEDIA: 'media',
   SETTINGS: 'settings',
+  SIGN_UP: 'sign-up',
 } as const;
 
 export type Pages = (typeof PAGES)[keyof typeof PAGES];

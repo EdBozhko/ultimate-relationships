@@ -1,6 +1,6 @@
-import type { FC } from 'react';
+import type { FC, ButtonHTMLAttributes } from 'react';
 
-export interface ThreeDimensionalButtonProps {
+export interface ThreeDimensionalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   textContent: string;
   onClick?: () => void;
 }

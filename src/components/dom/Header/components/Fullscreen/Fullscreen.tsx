@@ -6,14 +6,14 @@ import { FullscreenIconComponent } from './Fullscreen.types.ts';
 export const FullscreenIcon: FullscreenIconComponent = (props) => {
   const [isFullscreen, setIsFullscreen] = useState(() => {
     if (typeof document === 'undefined') return false;
-    //@ts-expect-error
+    //@ts-expect-error: TypeScript’s type definitions for Document don’t include the non-standard webkitFullscreenElement property by default
     return !!(document.fullscreenElement || document.webkitFullscreenElement);
   });
   const { color } = props;
 
   useEffect(() => {
     const handleChange = () => {
-      //@ts-expect-error
+      //@ts-expect-error: TypeScript’s type definitions for Document don’t include the non-standard webkitFullscreenElement property by default
       setIsFullscreen(!!(document.fullscreenElement || document.webkitFullscreenElement));
     };
 
