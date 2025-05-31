@@ -63,6 +63,7 @@ export const Header: HeaderComponent = () => {
   const [isRestrictedPopupVisible, setIsRestrictedPopupVisible] = useState(false);
 
   const [isSubmenuOpened, setIsSubmenuOpened] = useState(false);
+
   const onNavButtonClick = (id: Pages | Controls) => {
     //@ts-expect-error: TypeScript’s type definitions for Document don’t include the non-standard webkitFullscreenElement property by default
     const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
@@ -101,8 +102,6 @@ export const Header: HeaderComponent = () => {
         break;
     }
 
-    onNavLinkClick();
-
     if (id in navigation) {
       const navItem = navigation[id as keyof typeof navigation];
       if (navItem.submenu && navItem.submenu.length > 0) {
@@ -119,28 +118,40 @@ export const Header: HeaderComponent = () => {
     if (isRestrictedPopupVisible) {
       setIsRestrictedPopupVisible(false);
     }
+
+    if (isSubmenuOpened) {
+      setIsSubmenuOpened(false);
+    }
   };
 
   const navigationList = Object.values(navigation).map((item) => {
     const { id, href, name, iconSrc, submenu } = item;
+    console.log(href && href.length > 0);
 
     return (
       <NavListItem key={id}>
-        {pathname === href ? (
-          <NavButton $isGlowing={true} onClick={() => onNavButtonClick(id)}>
-            {submenu && submenu.length > 0 && (
-              <Switcher $isOpened={isSubmenuOpened}>
-                <ArrowIcon color={'#656565'} />
-              </Switcher>
-            )}
-            <NavLinkIcon>{iconSrc || <Icon type={id} color={'#ce81ca'} />}</NavLinkIcon>
-            <NavLinkName>{name}</NavLinkName>
-          </NavButton>
+        {href && href.length > 0 ? (
+          pathname === href ? (
+            <NavButton $isGlowing={true} onClick={() => onNavButtonClick(id)}>
+              {submenu && submenu.length > 0 && (
+                <Switcher $isOpened={isSubmenuOpened}>
+                  <ArrowIcon color={'#656565'} />
+                </Switcher>
+              )}
+              <NavLinkIcon>{iconSrc || <Icon type={id} color={'#ce81ca'} />}</NavLinkIcon>
+              <NavLinkName>{name}</NavLinkName>
+            </NavButton>
+          ) : (
+            <NavLink href={href} onClick={onNavLinkClick}>
+              <NavLinkIcon>{iconSrc || <Icon type={id} color={'#656565'} />}</NavLinkIcon>
+              <NavLinkName>{name}</NavLinkName>
+            </NavLink>
+          )
         ) : (
-          <NavLink href={href} onClick={() => onNavButtonClick(id)}>
+          <NavButton onClick={() => onNavButtonClick(id)}>
             <NavLinkIcon>{iconSrc || <Icon type={id} color={'#656565'} />}</NavLinkIcon>
             <NavLinkName>{name}</NavLinkName>
-          </NavLink>
+          </NavButton>
         )}
       </NavListItem>
     );
