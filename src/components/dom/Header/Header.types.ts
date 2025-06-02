@@ -2,10 +2,6 @@ import type { FC } from 'react';
 
 export type HeaderComponent = FC;
 
-export interface SubmenuProps {
-  $isOpened?: boolean;
-}
-
 export interface NavLinkProps {
   color?: string;
 }
@@ -27,6 +23,14 @@ export interface SwitcherProps {
   $isOpened?: boolean;
 }
 
-export interface SubmenuSwiperSlideProps {
-  $isAvailable?: boolean;
+export interface MenuItem {
+  id: string | number;
+  name: string;
+  imageSrc: string;
+  available?: boolean;
+  submenu?: MenuItem[];
+  products?: MenuItem[];
+  href?: string;
 }
+
+export type MenuGroup = MenuItem[];

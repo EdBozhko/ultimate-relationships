@@ -1,19 +1,11 @@
 'use client';
 
 import { memo } from 'react';
-import { usePathname } from 'next/navigation';
 
 import { PAGES, CONTROLS } from '@src/utils';
-import { Icon, ArrowIcon } from '@comp/dom/Header/components';
+import { Icon } from '@comp/dom/Header/components';
 
-import {
-  NavListItem,
-  NavLink,
-  NavButton,
-  NavLinkName,
-  NavLinkIcon,
-  Switcher,
-} from '@comp/dom/Header/Header.styles.tsx';
+import { NavListItem, NavLink, NavButton, NavLinkName, NavLinkIcon } from '@comp/dom/Header/Header.styles.tsx';
 
 import {
   AdditionalMenuStyled,
@@ -40,8 +32,6 @@ const additionalControls = [
 
 export const AdditionalMenu: AdditionalMenuComponent = memo(
   ({ isAdditionalMenuOpened, onNavButtonClick, onNavLinkClick }) => {
-    const pathname = usePathname();
-
     const additionalNavigationList = additionalNavigation.map((item) => {
       const { id, href, name, imageSrc } = item;
 
