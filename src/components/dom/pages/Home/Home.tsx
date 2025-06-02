@@ -7,21 +7,24 @@ import { useProgress } from '@react-three/drei';
 import { PAGES } from '@src/utils/constants.ts';
 import { ClientPortal } from '@src/components/dom/ClientPortal/index.tsx';
 import { PopUp } from '@src/components/dom/PopUp/index.tsx';
-import { PopUpTitle, PopUpText, PopUpButtonsContainer, PopUpLink } from '@src/components/dom/PopUp/PopUp.styles.ts';
+import {
+  PopUpTitle,
+  PopUpText,
+  PopUpButtonsContainer,
+  PopUpLink,
+  PopUpButton,
+} from '@src/components/dom/PopUp/PopUp.styles.ts';
 import { LoadingBar } from '@src/components/dom/LoadingBar/index.tsx';
 import { Container } from './Home.styles.ts';
 import { useFullscreen } from '@src/hooks/useFullscreen.ts';
 
+import useGlobalStore from '@src/stores/useGlobalStore/';
+
 import type { HomeComponent } from './Home.types.ts';
 
 export const Home: HomeComponent = () => {
+  const { isAgeConfirmed, confirmAge } = useGlobalStore();
   const router = useRouter();
-  if (typeof window !== 'undefined') {
-    const isAgeConfirmed = localStorage.getItem('ageConfirmed');
-    if (isAgeConfirmed) {
-      router.push(PAGES.SETTINGS);
-    }
-  }
 
   const [hideLoadingBar, setHideLoadingBar] = useState(false);
   const [showPopUp, setShowPopUp] = useState(false);
@@ -33,14 +36,14 @@ export const Home: HomeComponent = () => {
 
   const onAgeConfirmButtonClick = () => {
     enterFullscreen();
-
-    if (typeof window !== 'undefined') {
-      const isAgeConfirmed = localStorage.getItem('ageConfirmed');
-      if (!isAgeConfirmed) {
-        localStorage.setItem('ageConfirmed', 'true');
-      }
-    }
+    confirmAge();
   };
+
+  useEffect(() => {
+    if (isAgeConfirmed) {
+      router.push(PAGES.GAME);
+    }
+  }, [isAgeConfirmed]);
 
   useEffect(() => {
     let loadingProgressTimeout: ReturnType<typeof setTimeout>;
@@ -82,9 +85,7 @@ export const Home: HomeComponent = () => {
             are accessing the website from and you consent to viewing sexually explicit content.
           </PopUpText>
           <PopUpButtonsContainer>
-            <PopUpLink href='/game' onClick={onAgeConfirmButtonClick}>
-              I am 18 or older - Enter
-            </PopUpLink>
+            <PopUpButton onClick={onAgeConfirmButtonClick}>I am 18 or older - Enter</PopUpButton>
             <PopUpLink href='https://google.com'>I am under 18 - Exit</PopUpLink>
           </PopUpButtonsContainer>
         </PopUp>

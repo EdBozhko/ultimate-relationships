@@ -143,7 +143,7 @@ export const PopUpButtonsContainer = styled.div`
   width: 100%;
 `;
 
-export const PopUpLink = styled(Link)<PopUpLinkProps>`
+export const PopUpButtonCss = css`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -161,4 +161,10 @@ export const PopUpLink = styled(Link)<PopUpLinkProps>`
   }
 `;
 
-export const PopUpButton = styled(PopUpLink).attrs({ as: 'button' })``;
+export const PopUpLink = styled(Link)<PopUpLinkProps>`
+  ${PopUpButtonCss}
+`;
+
+export const PopUpButton = styled.button`
+  ${PopUpButtonCss}
+`;

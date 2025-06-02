@@ -1,63 +1,79 @@
 'use client';
 
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
 import type { GlobalStore } from './useGlobalStore.types.ts';
 
-const useGlobalStore = create<GlobalStore>((set) => {
-  return {
-    isHeaderVisible: false,
-    showHeader: () => {
-      set(() => {
-        return { isHeaderVisible: true };
-      });
-    },
-    hideHeader: () => {
-      set(() => {
-        return { isHeaderVisible: false };
-      });
-    },
+const useGlobalStore = create<GlobalStore>()(
+  persist(
+    (set) => {
+      return {
+        isAgeConfirmed: false,
+        confirmAge: () => {
+          set(() => {
+            return { isAgeConfirmed: true };
+          });
+        },
 
-    isAdditionalMenuOpened: false,
-    closeAdditionalMenu: () => {
-      set(() => {
-        return { isAdditionalMenuOpened: false };
-      });
-    },
-    openAdditionalMenu: () => {
-      set(() => {
-        return { isAdditionalMenuOpened: true };
-      });
-    },
-    toggleAdditionalMenu: () => {
-      set((prev) => {
-        return { isAdditionalMenuOpened: !prev.isAdditionalMenuOpened };
-      });
-    },
+        isHeaderVisible: false,
+        showHeader: () => {
+          set(() => {
+            return { isHeaderVisible: true };
+          });
+        },
+        hideHeader: () => {
+          set(() => {
+            return { isHeaderVisible: false };
+          });
+        },
 
-    isDebugMode: false,
-    debugMode: () => {
-      set(() => {
-        return { isDebugMode: true };
-      });
-    },
-    userMode: () => {
-      set(() => {
-        return { isDebugMode: false };
-      });
-    },
+        isAdditionalMenuOpened: false,
+        closeAdditionalMenu: () => {
+          set(() => {
+            return { isAdditionalMenuOpened: false };
+          });
+        },
+        openAdditionalMenu: () => {
+          set(() => {
+            return { isAdditionalMenuOpened: true };
+          });
+        },
+        toggleAdditionalMenu: () => {
+          set((prev) => {
+            return { isAdditionalMenuOpened: !prev.isAdditionalMenuOpened };
+          });
+        },
 
-    isDebugPerfMode: true,
-    debugPerfMode: () => {
-      set(() => {
-        return { isDebugPerfMode: true };
-      });
+        isDebugMode: false,
+        debugMode: () => {
+          set(() => {
+            return { isDebugMode: true };
+          });
+        },
+        userMode: () => {
+          set(() => {
+            return { isDebugMode: false };
+          });
+        },
+
+        isDebugPerfMode: true,
+        debugPerfMode: () => {
+          set(() => {
+            return { isDebugPerfMode: true };
+          });
+        },
+        userPerfMode: () => {
+          set(() => {
+            return { isDebugPerfMode: false };
+          });
+        },
+      };
     },
-    userPerfMode: () => {
-      set(() => {
-        return { isDebugPerfMode: false };
-      });
+    {
+      name: 'global-store',
     },
-  };
-});
+  ),
+);
 
 export default useGlobalStore;

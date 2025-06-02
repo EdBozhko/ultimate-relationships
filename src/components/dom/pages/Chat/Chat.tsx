@@ -25,7 +25,7 @@ import {
   TypingIndicatorContainer,
   TypingIndicatorDot,
 } from './Chat.styles.ts';
-import useChatStore from '@src/stores/useChatStore/index.ts';
+import useChatStore from '@src/stores/useChatStore/';
 import { characterTemplates } from '@helpers/lib/characterTemplates.ts';
 import { USER_DATA } from '@src/utils';
 

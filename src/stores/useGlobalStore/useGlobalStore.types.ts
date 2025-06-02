@@ -1,4 +1,7 @@
 export interface GlobalStore {
+  isAgeConfirmed: boolean;
+  confirmAge: () => void;
+
   isHeaderVisible: boolean;
   showHeader: () => void;
   hideHeader: () => void;
