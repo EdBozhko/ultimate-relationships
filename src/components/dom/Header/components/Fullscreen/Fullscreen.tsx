@@ -1,20 +1,19 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { FullscreenIconComponent } from './Fullscreen.types.ts';
+import { useFullscreen } from '@src/hooks/useFullscreen.ts';
+
+import type { FullscreenIconComponent } from './Fullscreen.types.ts';
 
 export const FullscreenIcon: FullscreenIconComponent = (props) => {
-  const [isFullscreen, setIsFullscreen] = useState(() => {
-    if (typeof document === 'undefined') return false;
-    //@ts-expect-error: TypeScript’s type definitions for Document don’t include the non-standard webkitFullscreenElement property by default
-    return !!(document.fullscreenElement || document.webkitFullscreenElement);
-  });
+  const { isFullscreen: getIsFullscreen } = useFullscreen();
+
+  const [isFullscreen, setIsFullscreen] = useState(getIsFullscreen());
   const { color } = props;
 
   useEffect(() => {
     const handleChange = () => {
-      //@ts-expect-error: TypeScript’s type definitions for Document don’t include the non-standard webkitFullscreenElement property by default
-      setIsFullscreen(!!(document.fullscreenElement || document.webkitFullscreenElement));
+      setIsFullscreen(getIsFullscreen());
     };
 
     document.addEventListener('fullscreenchange', handleChange);

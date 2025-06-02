@@ -9,3 +9,4 @@ export { SettingsIcon } from './SettingsIcon';
 export { VRIcon } from './VRIcon';
 export { FullscreenIcon } from './Fullscreen';
 export { Icon } from './Icon';
+export { AdditionalMenu } from './AdditionalMenu';

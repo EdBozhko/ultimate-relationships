@@ -48,7 +48,7 @@ export const SwiperSlideStyled = styled(SwiperSlide)`
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 `;
 
-export const ShopSliderLink = styled(Link)`
+export const shopSliderLinkCss = css`
   border-radius: 10rem;
   overflow: hidden;
   position: relative;
@@ -63,6 +63,10 @@ export const ShopSliderLink = styled(Link)`
   &:active {
     transform: scale(0.9);
   }
+`;
+
+export const ShopSliderLink = styled(Link)`
+  ${shopSliderLinkCss}
 `;
 
 export const ShopSliderLinkName = styled.p`

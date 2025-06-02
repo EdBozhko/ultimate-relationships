@@ -10,6 +10,7 @@ import { PopUp } from '@src/components/dom/PopUp/index.tsx';
 import { PopUpTitle, PopUpText, PopUpButtonsContainer, PopUpLink } from '@src/components/dom/PopUp/PopUp.styles.ts';
 import { LoadingBar } from '@src/components/dom/LoadingBar/index.tsx';
 import { Container } from './Home.styles.ts';
+import { useFullscreen } from '@src/hooks/useFullscreen.ts';
 
 import type { HomeComponent } from './Home.types.ts';
 
@@ -28,15 +29,10 @@ export const Home: HomeComponent = () => {
   const loadingProgress = useProgress((state) => state.progress);
   const loaded = useProgress((state) => state.loaded);
   const totalLoaded = useProgress((state) => state.total);
+  const { enterFullscreen } = useFullscreen();
 
   const onAgeConfirmButtonClick = () => {
-    if (document.body.requestFullscreen) {
-      document.body.requestFullscreen();
-      //@ts-expect-error: TypeScript’s type definitions for Document don’t include the non-standard webkitFullscreenElement property by default
-    } else if (document.body.webkitRequestFullscreen) {
-      //@ts-expect-error: TypeScript’s type definitions for Document don’t include the non-standard webkitFullscreenElement property by default
-      document.body.webkitRequestFullscreen();
-    }
+    enterFullscreen();
 
     if (typeof window !== 'undefined') {
       const isAgeConfirmed = localStorage.getItem('ageConfirmed');

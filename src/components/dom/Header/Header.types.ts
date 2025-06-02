@@ -27,6 +27,6 @@ export interface SwitcherProps {
   $isOpened?: boolean;
 }
 
-export interface AdditionalMenuProps {
-  $isOpened?: boolean;
+export interface SubmenuSwiperSlideProps {
+  $isAvailable?: boolean;
 }

@@ -13,7 +13,7 @@ export interface ShopNavigationItem {
   id: string;
   href: string;
   name: string;
-  iconSrc: string;
+  imageSrc: string;
   imageFit?: ObjectFit;
   subpages?: { [x: string]: ShopNavigationItem };
   products?: ShopProduct[];

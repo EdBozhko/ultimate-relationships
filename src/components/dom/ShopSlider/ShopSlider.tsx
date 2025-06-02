@@ -19,14 +19,14 @@ import type { ShopSliderComponent } from './ShopSlider.types.ts';
 export const ShopSlider: ShopSliderComponent = memo(({ heading, shopNavigation }) => {
   const shopItems = useMemo(() => {
     return shopNavigation.map((shopNavigationItem) => {
-      const { id, href, name, iconSrc, imageFit = 'contain' } = shopNavigationItem;
+      const { id, href, name, imageSrc, imageFit = 'contain' } = shopNavigationItem;
 
       return (
         <SwiperSlide key={id}>
           <ShopSliderLink href={href}>
             <ShopSliderLinkImage
               data-swiper-parallax='-40%'
-              src={iconSrc}
+              src={imageSrc}
               width={440}
               height={1739}
               alt={`${name} icon`}

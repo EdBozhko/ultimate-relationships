@@ -4,13 +4,6 @@ import dynamic from 'next/dynamic';
 
 import type { GameComponent } from './Game.types.ts';
 
-// models;
-// toys;
-// poses;
-// scenes;
-// outfits;
-// character customizer
-
 const Blob = dynamic(() => import('@src/components/canvas/Examples.tsx').then((mod) => mod.Blob), { ssr: false });
 const StripClubModel = dynamic(
   () => import('@src/components/canvas/StripClubModel/').then((mod) => mod.StripClubModel),
