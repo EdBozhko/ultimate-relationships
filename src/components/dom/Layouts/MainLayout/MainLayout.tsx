@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import { Leva } from 'leva';
@@ -13,6 +13,7 @@ import type { MainLayoutComponent } from './MainLayout.types.ts';
 const Scene = dynamic(() => import('@comp/canvas/Scene').then((mod) => mod.Scene), { ssr: false });
 
 export const MainLayout: MainLayoutComponent = ({ children }) => {
+  const [height, setHeight] = useState('100%');
   const pathname = usePathname();
   const isHeaderVisible = useGlobalStore((state) => state.isHeaderVisible);
   const showHeader = useGlobalStore((state) => state.showHeader);
@@ -44,6 +45,17 @@ export const MainLayout: MainLayoutComponent = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    const onVisualViewportChange = () => {
+      if (window.visualViewport) {
+        setHeight(`${window.visualViewport?.height}px`);
+      }
+    };
+    window.visualViewport?.addEventListener('resize', onVisualViewportChange);
+
+    return () => window.visualViewport?.removeEventListener('resize', onVisualViewportChange);
+  }, []);
+
+  useEffect(() => {
     if (!isHeaderVisible && pathname !== '/') {
       showHeader();
     }
@@ -55,7 +67,7 @@ export const MainLayout: MainLayoutComponent = ({ children }) => {
       style={{
         position: 'relative',
         width: ' 100%',
-        height: '100%',
+        height: height,
         overflow: 'hidden',
         touchAction: 'auto',
         display: 'flex',
