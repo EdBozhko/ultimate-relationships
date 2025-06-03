@@ -15,6 +15,7 @@ export type Pages = (typeof PAGES)[keyof typeof PAGES];
 export const CONTROLS = {
   VR: 'vr',
   FULLSCREEN: 'fullscreen',
+  INSTALL: 'install',
 } as const;
 
 export type Controls = (typeof CONTROLS)[keyof typeof CONTROLS];

@@ -96,6 +96,7 @@ export const Header: HeaderComponent = () => {
           break;
 
         case CONTROLS.VR:
+        case CONTROLS.INSTALL:
           closeAdditionalMenu();
           setIsRestrictedPopupVisible(true);
           break;

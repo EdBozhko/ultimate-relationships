@@ -28,6 +28,7 @@ const additionalNavigation = [
 const additionalControls = [
   { id: CONTROLS.VR, href: '', name: CONTROLS.VR, imageSrc: '' },
   { id: CONTROLS.FULLSCREEN, href: '', name: CONTROLS.FULLSCREEN, imageSrc: '' },
+  { id: CONTROLS.INSTALL, href: '', name: CONTROLS.INSTALL, imageSrc: '' },
 ];
 
 export const AdditionalMenu: AdditionalMenuComponent = memo(

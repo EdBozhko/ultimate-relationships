@@ -9,6 +9,7 @@ import {
   SettingsIcon,
   VRIcon,
   FullscreenIcon,
+  InstallIcon,
 } from '../index.tsx';
 
 import type { IconComponent, IconMap } from './Icon.types.ts';
@@ -23,6 +24,7 @@ const ICONS_MAP: IconMap = {
   [PAGES.SETTINGS]: SettingsIcon,
   [CONTROLS.VR]: VRIcon,
   [CONTROLS.FULLSCREEN]: FullscreenIcon,
+  [CONTROLS.INSTALL]: InstallIcon,
 };
 
 export const Icon: IconComponent = ({ color, type }) => {

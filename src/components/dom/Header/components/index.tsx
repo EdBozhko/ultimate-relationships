@@ -8,6 +8,7 @@ export { MediaIcon } from './MediaIcon';
 export { SettingsIcon } from './SettingsIcon';
 export { VRIcon } from './VRIcon';
 export { FullscreenIcon } from './Fullscreen';
+export { InstallIcon } from './InstallIcon';
 export { Icon } from './Icon';
 export { AdditionalMenu } from './AdditionalMenu';
 export { Submenu } from './Submenu';
