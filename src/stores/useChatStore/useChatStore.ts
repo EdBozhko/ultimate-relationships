@@ -10,6 +10,79 @@ const useChatStore = create<ChatStore>()(
   persist(
     (set) => {
       return {
+        isTypingIndicatorVisible: false,
+        setIsTypingIndicatorVisible: (isTypingIndicatorVisible) => {
+          set(() => {
+            return { isTypingIndicatorVisible: isTypingIndicatorVisible };
+          });
+        },
+
+        isAiTyping: false,
+        setIsAiTyping: (isAiTyping) => {
+          set(() => {
+            return { isAiTyping: isAiTyping };
+          });
+        },
+
+        isOptionsListVisible: false,
+        setIsOptionsListVisible: (isOptionsListVisible) => {
+          set(() => {
+            return { isOptionsListVisible: isOptionsListVisible };
+          });
+        },
+
+        currentMessageType: '',
+        setCurrentMessageType: (currentMessageType) => {
+          set(() => {
+            return { currentMessageType: currentMessageType };
+          });
+        },
+        textAreaValue: '',
+        setTextAreaValue: (textAreaValue) => {
+          set(() => {
+            return { textAreaValue: textAreaValue };
+          });
+        },
+        isSubmitButtonDisabled: true,
+        setIsSubmitButtonDisabled: (isSubmitButtonDisabled) => {
+          set(() => {
+            return { isSubmitButtonDisabled: isSubmitButtonDisabled };
+          });
+        },
+        isTextareaDisabled: true,
+        setIsTextareaDisabled: (isTextareaDisabled) => {
+          set(() => {
+            return { isTextareaDisabled: isTextareaDisabled };
+          });
+        },
+        answerOptions: { choiceType: 'single', options: [] },
+        setAnswerOptions: (answerOptions) => {
+          set(() => {
+            return { answerOptions: answerOptions };
+          });
+        },
+
+        _hasHydrated: false,
+        setHasHydrated: (state) => {
+          set({
+            _hasHydrated: state,
+          });
+        },
+
+        currentAiMessageIndex: 0,
+        setCurrentAiMessageIndex: () => {
+          set((state) => {
+            return { currentAiMessageIndex: state.currentAiMessageIndex + 1 };
+          });
+        },
+
+        isChatting: false,
+        setIsChatting: (isChatting) => {
+          set(() => {
+            return { isChatting: isChatting };
+          });
+        },
+
         messages: {},
         addMessage: (author, message) => {
           const now = new Date();
@@ -90,6 +163,9 @@ const useChatStore = create<ChatStore>()(
     },
     {
       name: 'chat-store',
+      onRehydrateStorage: (state) => {
+        return () => state.setHasHydrated(true);
+      },
     },
   ),
 );

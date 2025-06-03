@@ -14,6 +14,39 @@ export interface DailyMessages {
 }
 
 export interface ChatStore {
+  isTypingIndicatorVisible: boolean;
+  setIsTypingIndicatorVisible: (isTypingIndicatorVisible: boolean) => void;
+
+  isAiTyping: boolean;
+  setIsAiTyping: (isAiTyping: boolean) => void;
+
+  isOptionsListVisible: boolean;
+  setIsOptionsListVisible: (isOptionsListVisible: boolean) => void;
+
+  currentMessageType: string;
+  setCurrentMessageType: (currentMessageType: string) => void;
+
+  textAreaValue: string;
+  setTextAreaValue: (textAreaValue: string) => void;
+
+  isSubmitButtonDisabled: boolean;
+  setIsSubmitButtonDisabled: (isSubmitButtonDisabled: boolean) => void;
+
+  isTextareaDisabled: boolean;
+  setIsTextareaDisabled: (isTextareaDisabled: boolean) => void;
+
+  answerOptions: ChoiceOptions;
+  setAnswerOptions: (answerOptions: ChoiceOptions) => void;
+
+  _hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
+
+  isChatting: boolean;
+  setIsChatting: (isChatting: boolean) => void;
+
+  currentAiMessageIndex: number;
+  setCurrentAiMessageIndex: () => void;
+
   messages: Record<string, DailyMessages>;
   addMessage: (author: string, message: string) => void;
 

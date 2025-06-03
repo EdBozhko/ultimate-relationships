@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import dynamic from 'next/dynamic';
 
 import {
@@ -120,17 +120,37 @@ export const Chat: ChatComponent = () => {
   const updateToneTips = useChatStore((store) => store.updateToneTips);
   const updateTraits = useChatStore((store) => store.updateTraits);
   const updatePreferences = useChatStore((store) => store.updatePreferences);
+  const currentAiMessageIndex = useChatStore((store) => store.currentAiMessageIndex);
+  const setCurrentAiMessageIndex = useChatStore((store) => store.setCurrentAiMessageIndex);
+  const isChatting = useChatStore((store) => store.isChatting);
+  const setIsChatting = useChatStore((store) => store.setIsChatting);
+  const hasHydrated = useChatStore((store) => store._hasHydrated);
+
+  const isTypingIndicatorVisible = useChatStore((store) => store.isTypingIndicatorVisible);
+  const setIsTypingIndicatorVisible = useChatStore((store) => store.setIsTypingIndicatorVisible);
+
+  const isAiTyping = useChatStore((store) => store.isAiTyping);
+  const setIsAiTyping = useChatStore((store) => store.setIsAiTyping);
+
+  const isOptionsListVisible = useChatStore((store) => store.isOptionsListVisible);
+  const setIsOptionsListVisible = useChatStore((store) => store.setIsOptionsListVisible);
+
+  const currentMessageType = useChatStore((store) => store.currentMessageType);
+  const setCurrentMessageType = useChatStore((store) => store.setCurrentMessageType);
+
+  const textAreaValue = useChatStore((store) => store.textAreaValue);
+  const setTextAreaValue = useChatStore((store) => store.setTextAreaValue);
+
+  const isSubmitButtonDisabled = useChatStore((store) => store.isSubmitButtonDisabled);
+  const setIsSubmitButtonDisabled = useChatStore((store) => store.setIsSubmitButtonDisabled);
+
+  const isTextareaDisabled = useChatStore((store) => store.isTextareaDisabled);
+  const setIsTextareaDisabled = useChatStore((store) => store.setIsTextareaDisabled);
+
+  const answerOptions = useChatStore((store) => store.answerOptions);
+  const setAnswerOptions = useChatStore((store) => store.setAnswerOptions);
 
   const displayRef = useRef<HTMLDivElement | null>(null);
-  const [isTypingIndicatorVisible, setIsTypingIndicatorVisible] = useState(false);
-  const [isAiTyping, setIsAiTyping] = useState(false);
-  const [currentAiMessageIndex, setCurrentAiMessageIndex] = useState(0);
-  const [answerOptions, setAnswerOptions] = useState<ChoiceOptions>({ choiceType: 'single', options: [] });
-  const [isOptionsListVisible, setIsOptionsListVisible] = useState(false);
-  const [currentMessageType, setCurrentMessageType] = useState('');
-  const [textAreaValue, setTextAreaValue] = useState('');
-  const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
-  const [isTextareaDisabled, setIsTextareaDisabled] = useState(true);
 
   const onAnswerOptionClick = (event: MouseEvent<HTMLInputElement>) => {
     const form = event.currentTarget.form;
@@ -232,7 +252,7 @@ export const Chat: ChatComponent = () => {
         setIsTextareaDisabled(false);
 
         if (currentAiMessageIndex < AI_MESSAGES.length - 1) {
-          setCurrentAiMessageIndex((prev) => prev + 1);
+          setCurrentAiMessageIndex();
         } else {
           setIsSubmitButtonDisabled(true);
           setIsTextareaDisabled(true);
@@ -256,6 +276,10 @@ export const Chat: ChatComponent = () => {
         ) {
           setIsOptionsListVisible(true);
         }
+
+        if (!isChatting) {
+          setIsChatting(true);
+        }
       }, timeoutInMs + 500);
 
       return { timeout, aIStartTypingTimeout };
@@ -264,12 +288,17 @@ export const Chat: ChatComponent = () => {
   );
 
   useEffect(() => {
+    console.log(hasHydrated, isChatting);
+
+    if (hasHydrated && isChatting) return;
+
     const { timeout, aIStartTypingTimeout } = aiTypingIndicatorTimeout(AI_MESSAGES[currentAiMessageIndex], 2000);
     return () => {
       clearTimeout(timeout);
       clearTimeout(aIStartTypingTimeout);
     };
-  }, []);
+    // }, []);
+  }, [hasHydrated]);
 
   useEffect(() => {
     if (!isAiTyping) return;
