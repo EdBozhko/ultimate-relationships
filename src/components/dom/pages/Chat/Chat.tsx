@@ -31,7 +31,6 @@ import { USER_DATA } from '@src/utils';
 
 import type { MouseEvent } from 'react';
 import type { ChatComponent, AiMessages, AiMessage } from './Chat.types.ts';
-import type { ChoiceOptions } from '@helpers/lib/characterTemplates.types';
 
 const ChatView = dynamic(() => import('@comp/canvas/ChatView/ChatView.tsx').then((mod) => mod.ChatView), {
   ssr: false,
@@ -236,8 +235,10 @@ export const Chat: ChatComponent = () => {
 
   const aiTypingIndicatorTimeout = useCallback(
     (messageData: AiMessage, timeoutInMs = 2000) => {
-      setIsSubmitButtonDisabled(true);
-      setIsTextareaDisabled(true);
+      if (isAiTyping) {
+        setIsSubmitButtonDisabled(true);
+        setIsTextareaDisabled(true);
+      }
       setCurrentMessageType(messageData.type);
 
       const aIStartTypingTimeout = setTimeout(() => {
@@ -288,8 +289,6 @@ export const Chat: ChatComponent = () => {
   );
 
   useEffect(() => {
-    console.log(hasHydrated, isChatting);
-
     if (hasHydrated && isChatting) return;
 
     const { timeout, aIStartTypingTimeout } = aiTypingIndicatorTimeout(AI_MESSAGES[currentAiMessageIndex], 2000);
@@ -297,7 +296,6 @@ export const Chat: ChatComponent = () => {
       clearTimeout(timeout);
       clearTimeout(aIStartTypingTimeout);
     };
-    // }, []);
   }, [hasHydrated]);
 
   useEffect(() => {
