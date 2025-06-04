@@ -146,7 +146,7 @@ export const AnimatedPopup = styled(animated.div)`
   z-index: 9;
   position: fixed;
   left: 2vw;
-  height: calc(100vh + 100px); // 100px for bouncing animation
+  height: calc(100vh + 10%); // 100px for bouncing animation
   width: 96vw;
   border-radius: 12px 12px 0px;
   background: #fff;
@@ -155,7 +155,8 @@ export const AnimatedPopup = styled(animated.div)`
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 10rem;
   padding: 7rem;
-  padding-bottom: calc(20vh + 170rem + 7rem); // 20vh because popup height 80vh
+  /* padding-bottom: calc(20vh + 170rem + 7rem); // 20vh because popup height 80vh */
+  /* padding-bottom: calc(20vh); // 20vh because popup height 80vh */
   background: linear-gradient(135deg, rgba(30, 31, 37, 0.2), rgba(42, 43, 52, 0));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -179,7 +180,6 @@ export const AnimatedPopupContent = styled.div`
   height: 100%;
   max-width: 100%;
   max-height: 100%;
-  overflow-y: auto;
   padding: 10rem 0 0 0;
 `;
 
@@ -190,6 +190,8 @@ export const AnimatedPopupDescriptionContainer = styled.div`
   align-items: flex-start;
   flex: 1 1 auto;
   width: 100%;
+
+  overflow-y: auto;
 `;
 
 export const AnimatedPopupDescriptionTitle = styled.p`
@@ -230,4 +232,20 @@ export const AnimatedPopupDescriptionImage = styled(Image)`
   object-fit: contain;
 `;
 
-export const AnimatedPopupButton = styled(ThreeDimensionalButton)``;
+export const AnimatedPopupButtonsContainer = styled.div`
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5rem;
+  padding: 7rem 0 0 0;
+`;
+
+export const AnimatedPopupButton = styled(ThreeDimensionalButton)`
+  flex: 1 1 30%;
+
+  &:not(:first-child) {
+    margin: 0;
+  }
+`;

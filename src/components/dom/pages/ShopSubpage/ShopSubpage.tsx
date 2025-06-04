@@ -1,5 +1,3 @@
-// nextjs.org/docs/app/api-reference/functions/generate-static-params
-
 import { ListWithPopup } from '@comp/dom/ListWithPopup';
 import { Container } from '@comp/dom/ListWithPopup/ListWithPopup.styles.ts';
 import { PageHeading } from '@src/components/dom/PageHeading/';
@@ -8,14 +6,7 @@ import { ShopSlider } from '@src/components/dom/ShopSlider';
 
 import type { ShopSubpageComponent } from './ShopSubpage.types.ts';
 import type { ShopNavigationItem } from '@src/components/dom/ShopSlider/ShopSlider.types';
-
-// export async function generateStaticParams() {
-//   const posts = await fetch('https://.../posts').then((res) => res.json());
-
-//   return posts.map((post) => ({
-//     slug: post.slug,
-//   }));
-// }
+import { MODELS_PAGES, PAGES } from '@src/utils/constants.ts';
 
 const getValueByPath = (
   object: { [x: string]: ShopNavigationItem },
@@ -32,6 +23,13 @@ const getValueByPath = (
   return current;
 };
 
+const popupButtons = [{ textContent: 'select' }];
+const popupButtonsForModels = [
+  { textContent: 'chat', redirect: PAGES.CHAT },
+  { textContent: 'customize', redirect: PAGES.CUSTOMIZE },
+  { textContent: 'select' },
+];
+
 export const ShopSubpage: ShopSubpageComponent = ({ slug }) => {
   const shopNavigationList = getValueByPath(shopNavigation, slug);
   const heading = slug[slug.length - 1];
@@ -44,7 +42,11 @@ export const ShopSubpage: ShopSubpageComponent = ({ slug }) => {
       {shopNavigationList && 'products' in shopNavigationList && (
         <Container>
           <PageHeading textContent={heading} />
-          <ListWithPopup itemsPerRow={2} list={shopNavigationList.products} />
+          <ListWithPopup
+            popupButtons={heading === MODELS_PAGES.FEMALE ? popupButtonsForModels : popupButtons}
+            itemsPerRow={2}
+            list={shopNavigationList.products?.sort((a, b) => Number(b.available) - Number(a.available))}
+          />
         </Container>
       )}
     </>

@@ -8,6 +8,7 @@ export const PAGES = {
   MEDIA: 'media',
   SETTINGS: 'settings',
   SIGN_UP: 'sign-up',
+  CUSTOMIZE: 'customize',
 } as const;
 
 export type Pages = (typeof PAGES)[keyof typeof PAGES];
@@ -26,7 +27,7 @@ export const SHOP_PAGES = {
   POSES: 'poses',
   SCENES: 'scenes',
   OUTFITS: 'outfits',
-};
+} as const;
 
 export const POSES_PAGES = {
   SINGLE: 'single',

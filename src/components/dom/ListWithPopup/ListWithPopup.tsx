@@ -1,6 +1,8 @@
 'use client';
 
 import { memo, useState, useLayoutEffect, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+
 import {
   List,
   ListItem,
@@ -13,6 +15,7 @@ import {
   AnimatedPopupClose,
   AnimatedPopupContent,
   AnimatedPopupDescriptionContainer,
+  AnimatedPopupButtonsContainer,
   AnimatedPopupButton,
   AnimatedPopupDescriptionImage,
   AnimatedPopupDescriptionImageContainer,
@@ -28,22 +31,49 @@ import { useSpring, config } from '@react-spring/web';
 
 import type { ListWithPopupComponent } from './ListWithPopup.types.ts';
 import type { ShopProduct } from '@comp/dom/ShopSlider/ShopSlider.types.ts';
+import { useFullscreen } from '@src/hooks/useFullscreen.ts';
+import { Pages } from '@src/utils/constants.ts';
 
-export const ListWithPopup: ListWithPopupComponent = memo(({ list = [], itemsPerRow = 2 }) => {
+export const ListWithPopup: ListWithPopupComponent = memo(({ popupButtons = [], list = [], itemsPerRow = 2 }) => {
+  const router = useRouter();
+
+  const { isFullscreen } = useFullscreen();
   const [showRestrictedPopUp, setRestrictedShowPopUp] = useState(false);
 
   const [height, setHeight] = useState(0);
-  const [popupContent, setPopupContent] = useState({ image: { scr: '' }, title: '', description: '' });
+  const [popupContent, setPopupContent] = useState({
+    image: { scr: '' },
+    title: '',
+    description: '',
+    isAvailable: true,
+  });
 
-  const handleAnimatedPopupButtonClick = useCallback(() => {
-    setRestrictedShowPopUp(true);
-  }, [showRestrictedPopUp]);
+  const handleAnimatedPopupButtonClick = useCallback(
+    (redirect: Pages | undefined) => {
+      if (!popupContent.isAvailable) {
+        setRestrictedShowPopUp(true);
+
+        return;
+      }
+
+      if (popupContent.isAvailable && redirect && redirect.length > 0) {
+        router.push(`/${redirect}`);
+      }
+    },
+    [showRestrictedPopUp, popupContent.isAvailable],
+  );
 
   useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
       setHeight(window.innerHeight * 0.8);
     }
   }, []);
+
+  useLayoutEffect(() => {
+    if (typeof window !== 'undefined') {
+      setHeight(window.innerHeight * 0.8);
+    }
+  }, [isFullscreen]);
 
   const [{ y }, api] = useSpring(() => ({ y: height }));
 
@@ -58,10 +88,16 @@ export const ListWithPopup: ListWithPopupComponent = memo(({ list = [], itemsPer
   }, [popupContent]);
 
   const handleListItemClick = (listItemData: ShopProduct) => {
-    const { imageSrc, imageAltSrc, name, description = 'Fulfill your fantasies.' } = listItemData;
+    const { imageSrc, imageAltSrc, name, description = 'Fulfill your fantasies.', available = true } = listItemData;
 
     setPopupContent((prev) => {
-      return { ...prev, image: { ...prev.image, scr: imageAltSrc || imageSrc }, title: name, description };
+      return {
+        ...prev,
+        image: { ...prev.image, scr: imageAltSrc || imageSrc },
+        title: name,
+        description,
+        isAvailable: available,
+      };
     });
   };
 
@@ -119,12 +155,26 @@ export const ListWithPopup: ListWithPopupComponent = memo(({ list = [], itemsPer
     );
   });
 
+  const popupButtonsList = popupButtons.map((button) => {
+    const { textContent, redirect = undefined } = button;
+
+    return <AnimatedPopupButton textContent={textContent} onClick={() => handleAnimatedPopupButtonClick(redirect)} />;
+  });
+
   return (
     <>
       <AnimatedBackgroundWrapper style={bgStyle}>
         <List>{listToRender}</List>
       </AnimatedBackgroundWrapper>
-      <AnimatedPopup {...bind()} style={{ display, bottom: `calc(-100vh + ${height - 100}px)`, y }}>
+      <AnimatedPopup
+        {...bind()}
+        style={{
+          display,
+          bottom: `calc(-100vh + ${height - 100}px)`,
+          paddingBottom: `calc(50vh + 7rem)`,
+          y,
+        }}
+      >
         <AnimatedPopupClose onClick={() => close()} />
         <AnimatedPopupContent>
           <AnimatedPopupDescriptionContainer>
@@ -145,7 +195,7 @@ export const ListWithPopup: ListWithPopupComponent = memo(({ list = [], itemsPer
               Description: <span>{popupContent.description}</span>
             </AnimatedPopupDescription>
           </AnimatedPopupDescriptionContainer>
-          <AnimatedPopupButton onClick={handleAnimatedPopupButtonClick} textContent={'use it'} />
+          <AnimatedPopupButtonsContainer>{popupButtonsList}</AnimatedPopupButtonsContainer>
         </AnimatedPopupContent>
       </AnimatedPopup>
       <ClientPortal selector='client-portal' show={showRestrictedPopUp}>

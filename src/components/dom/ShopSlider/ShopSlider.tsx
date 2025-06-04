@@ -1,7 +1,7 @@
 'use client';
 
 import { EffectCoverflow, Parallax } from 'swiper/modules';
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useState, useCallback } from 'react';
 import {
   Container,
   SwiperSlideStyled as SwiperSlide,
@@ -14,16 +14,26 @@ import {
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 
+import { ClientPortal } from '@comp/dom/ClientPortal/ClientPortal.tsx';
+import { RestrictedPopup } from '@comp/dom/RestrictedPopup/RestrictedPopup.tsx';
+
 import type { ShopSliderComponent } from './ShopSlider.types.ts';
 
 export const ShopSlider: ShopSliderComponent = memo(({ heading, shopNavigation }) => {
+  const [showRestrictedPopUp, setRestrictedShowPopUp] = useState(false);
+
   const shopItems = useMemo(() => {
     return shopNavigation.map((shopNavigationItem) => {
-      const { id, href, name, imageSrc, imageFit = 'contain' } = shopNavigationItem;
+      const { id, href, name, imageSrc, imageFit = 'contain', available } = shopNavigationItem;
 
       return (
         <SwiperSlide key={id}>
-          <ShopSliderLink href={href}>
+          <ShopSliderLink
+            onClick={() => {
+              if (!available) setRestrictedShowPopUp(true);
+            }}
+            href={available ? href : ''}
+          >
             <ShopSliderLinkImage
               data-swiper-parallax='-40%'
               src={imageSrc}
@@ -64,6 +74,9 @@ export const ShopSlider: ShopSliderComponent = memo(({ heading, shopNavigation }
       >
         {shopItems}
       </Swiper>
+      <ClientPortal selector='client-portal' show={showRestrictedPopUp}>
+        <RestrictedPopup onClosePopupClick={useCallback(() => setRestrictedShowPopUp(false), [showRestrictedPopUp])} />
+      </ClientPortal>
     </Container>
   );
 });

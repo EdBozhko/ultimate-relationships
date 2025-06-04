@@ -6,6 +6,7 @@ export interface ShopProduct {
   imageSrc: string;
   imageAltSrc?: string;
   name: string;
+  available?: boolean;
   description?: string;
 }
 
@@ -13,6 +14,7 @@ export interface ShopNavigationItem {
   id: string;
   href: string;
   name: string;
+  available?: boolean;
   imageSrc: string;
   imageFit?: ObjectFit;
   subpages?: { [x: string]: ShopNavigationItem };
