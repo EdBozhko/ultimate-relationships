@@ -8,6 +8,9 @@ export interface AiMessage {
   message: string;
   type: (typeof USER_DATA)[keyof typeof USER_DATA];
   answerOptions?: ChoiceOptions;
+  audio?: {
+    src: string;
+  };
 }
 export type AiMessages = AiMessage[];
 

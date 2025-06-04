@@ -156,9 +156,15 @@ export const ListWithPopup: ListWithPopupComponent = memo(({ popupButtons = [], 
   });
 
   const popupButtonsList = popupButtons.map((button) => {
-    const { textContent, redirect = undefined } = button;
+    const { id, textContent, redirect = undefined } = button;
 
-    return <AnimatedPopupButton textContent={textContent} onClick={() => handleAnimatedPopupButtonClick(redirect)} />;
+    return (
+      <AnimatedPopupButton
+        key={`animated-popup-button-${id}`}
+        textContent={textContent}
+        onClick={() => handleAnimatedPopupButtonClick(redirect)}
+      />
+    );
   });
 
   return (

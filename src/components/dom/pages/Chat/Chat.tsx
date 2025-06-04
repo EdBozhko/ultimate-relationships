@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { FormEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 
 import {
@@ -28,6 +28,10 @@ import {
 import useChatStore from '@src/stores/useChatStore/';
 import { characterTemplates } from '@helpers/lib/characterTemplates.ts';
 import { USER_DATA } from '@src/utils';
+import { AudioVisualizer } from '@comp/dom/AudioVisualizer';
+
+import { ClientPortal } from '@comp/dom/ClientPortal/ClientPortal.tsx';
+import { RestrictedPopup } from '@comp/dom/RestrictedPopup/RestrictedPopup.tsx';
 
 import type { MouseEvent } from 'react';
 import type { ChatComponent, AiMessages, AiMessage } from './Chat.types.ts';
@@ -64,10 +68,19 @@ const getRandomColor = () => {
 };
 
 const AI_MESSAGES: AiMessages = [
-  { message: `Hey, handsome!😘 What's your name?)`, type: USER_DATA.NICK_NAME },
+  {
+    message: `Hey, handsome!😘 What's your name?)`,
+    type: USER_DATA.NICK_NAME,
+    audio: {
+      src: '/audio/hey_handsome_whats_your_name.wav',
+    },
+  },
   {
     message: `Do you want me to be your lover or friend?😇`,
     type: USER_DATA.TYPE_OF_CONNECTION,
+    audio: {
+      src: '/audio/do_you_want_me_to_be_your_lover_or_friend.wav',
+    },
     answerOptions: {
       options: ['lover', 'friend'],
       choiceType: 'single',
@@ -76,15 +89,27 @@ const AI_MESSAGES: AiMessages = [
   {
     message: `And who do you prefer?`,
     type: USER_DATA.PREFERENCES,
+    audio: {
+      src: '/audio/and_who_do_you_prefer.wav',
+    },
     answerOptions: {
       options: ['female', 'male', 'transgender', 'femboy'],
       choiceType: 'multi',
     },
   },
-  { message: `How would you like to call me?`, type: USER_DATA.AI_NICK_NAME },
+  {
+    message: `How would you like to call me?`,
+    type: USER_DATA.AI_NICK_NAME,
+    audio: {
+      src: '/audio/how_would_you_like_to_call_me.wav',
+    },
+  },
   {
     message: `What like do you want me to be for you?😊`,
     type: USER_DATA.CHARACTER_TEMPLATE,
+    audio: {
+      src: '/audio/what_like_do_you_want_me_to_be_for_you.wav',
+    },
     answerOptions: {
       options: Object.keys(characterTemplates),
       choiceType: 'single',
@@ -93,6 +118,9 @@ const AI_MESSAGES: AiMessages = [
   {
     message: `Choose for me some tone tips`,
     type: USER_DATA.TONE_TIPS,
+    audio: {
+      src: '/audio/choose_for_me_some_tone_tips.wav',
+    },
     answerOptions: {
       choiceType: 'single',
     },
@@ -100,14 +128,28 @@ const AI_MESSAGES: AiMessages = [
   {
     message: `And some traits)`,
     type: USER_DATA.TRAITS,
+    audio: {
+      src: '/audio/and_some_traits.wav',
+    },
     answerOptions: {
       choiceType: 'single',
     },
   },
-  { message: `Now I'm here for you!💖`, type: USER_DATA.SUCCESS },
+  {
+    message: `Now I'm here for you!💖`,
+    type: USER_DATA.SUCCESS,
+    audio: {
+      src: '/audio/now_im_here_for_you.wav',
+    },
+  },
 ];
 
 export const Chat: ChatComponent = () => {
+  const audioRef = useRef<HTMLAudioElement>(null!);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const [showRestrictedPopUp, setRestrictedShowPopUp] = useState(false);
+
   const messages = useChatStore((store) => store.messages);
   const addMessage = useChatStore((store) => store.addMessage);
   const characterTemplate = useChatStore((store) => store.userData.characterTemplate);
@@ -236,6 +278,8 @@ export const Chat: ChatComponent = () => {
   const aiTypingIndicatorTimeout = useCallback(
     (messageData: AiMessage, timeoutInMs = 2000) => {
       if (isAiTyping) {
+        setIsPlaying(false);
+
         setIsSubmitButtonDisabled(true);
         setIsTextareaDisabled(true);
       }
@@ -243,9 +287,17 @@ export const Chat: ChatComponent = () => {
 
       const aIStartTypingTimeout = setTimeout(() => {
         setIsTypingIndicatorVisible(true);
+        if (messageData.audio?.src) {
+          audioRef.current.src = messageData.audio.src;
+          audioRef.current.load();
+        }
       }, 500);
 
       const timeout = setTimeout(() => {
+        if (messageData.audio?.src) {
+          audioRef.current.play();
+          setIsPlaying(true);
+        }
         setIsTypingIndicatorVisible(false);
         setIsAiTyping(false);
         addMessage('ai', messageData.message);
@@ -257,6 +309,7 @@ export const Chat: ChatComponent = () => {
         } else {
           setIsSubmitButtonDisabled(true);
           setIsTextareaDisabled(true);
+          setRestrictedShowPopUp(true);
         }
 
         const template = characterTemplates[characterTemplate];
@@ -344,6 +397,8 @@ export const Chat: ChatComponent = () => {
     <>
       <Container>
         <ChatView />
+        <audio ref={audioRef} />
+        <AudioVisualizer isPlaying={isPlaying} audio={audioRef} />
         <Display ref={displayRef}>
           <MessagesLists>{messagesLists}</MessagesLists>
           {isTypingIndicatorVisible && (
@@ -370,6 +425,11 @@ export const Chat: ChatComponent = () => {
           {isOptionsListVisible && <OptionsList>{answerOptionsList}</OptionsList>}
           <SubmitButton disabled={isSubmitButtonDisabled} />
         </Form>
+        <ClientPortal selector='client-portal' show={showRestrictedPopUp}>
+          <RestrictedPopup
+            onClosePopupClick={useCallback(() => setRestrictedShowPopUp(false), [showRestrictedPopUp])}
+          />
+        </ClientPortal>
       </Container>
     </>
   );

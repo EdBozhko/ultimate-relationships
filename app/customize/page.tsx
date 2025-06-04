@@ -1,5 +1,3 @@
-import { ShopSubpage } from '@comp/dom/pages/ShopSubpage';
-
 import type { FC } from 'react';
 
 interface ShopPageProps {
@@ -9,7 +7,7 @@ interface ShopPageProps {
 const ShopPage: FC<ShopPageProps> = async ({ params }) => {
   const { slug } = await params;
 
-  return <ShopSubpage slug={slug} />;
+  return <>{slug}</>;
 };
 
 export default ShopPage;

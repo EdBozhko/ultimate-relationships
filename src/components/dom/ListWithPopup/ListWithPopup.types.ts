@@ -11,6 +11,6 @@ export interface ListItemProps {
 export interface ListWithPopupProps {
   list: ShopProduct[] | undefined;
   itemsPerRow: ListItemsPerRow;
-  popupButtons?: { textContent: string; redirect?: Pages }[] | undefined;
+  popupButtons?: { id: number | string; textContent: string; redirect?: Pages }[] | undefined;
 }
 export type ListWithPopupComponent = FC<ListWithPopupProps>;

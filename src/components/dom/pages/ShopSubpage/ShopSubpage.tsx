@@ -23,11 +23,11 @@ const getValueByPath = (
   return current;
 };
 
-const popupButtons = [{ textContent: 'select' }];
+const popupButtons = [{ id: 1, textContent: 'select' }];
 const popupButtonsForModels = [
-  { textContent: 'chat', redirect: PAGES.CHAT },
-  { textContent: 'customize', redirect: PAGES.CUSTOMIZE },
-  { textContent: 'select' },
+  { id: 1, textContent: 'chat', redirect: PAGES.CHAT },
+  { id: 2, textContent: 'customize', redirect: PAGES.CUSTOMIZE },
+  { id: 3, textContent: 'select' },
 ];
 
 export const ShopSubpage: ShopSubpageComponent = ({ slug }) => {

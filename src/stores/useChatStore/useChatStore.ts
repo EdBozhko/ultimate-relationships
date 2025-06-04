@@ -27,38 +27,38 @@ const useChatStore = create<ChatStore>()(
         isOptionsListVisible: false,
         setIsOptionsListVisible: (isOptionsListVisible) => {
           set(() => {
-            return { isOptionsListVisible: isOptionsListVisible };
+            return { isOptionsListVisible };
           });
         },
 
         currentMessageType: '',
         setCurrentMessageType: (currentMessageType) => {
           set(() => {
-            return { currentMessageType: currentMessageType };
+            return { currentMessageType };
           });
         },
         textAreaValue: '',
         setTextAreaValue: (textAreaValue) => {
           set(() => {
-            return { textAreaValue: textAreaValue };
+            return { textAreaValue };
           });
         },
         isSubmitButtonDisabled: true,
         setIsSubmitButtonDisabled: (isSubmitButtonDisabled) => {
           set(() => {
-            return { isSubmitButtonDisabled: isSubmitButtonDisabled };
+            return { isSubmitButtonDisabled };
           });
         },
         isTextareaDisabled: true,
         setIsTextareaDisabled: (isTextareaDisabled) => {
           set(() => {
-            return { isTextareaDisabled: isTextareaDisabled };
+            return { isTextareaDisabled };
           });
         },
         answerOptions: { choiceType: 'single', options: [] },
         setAnswerOptions: (answerOptions) => {
           set(() => {
-            return { answerOptions: answerOptions };
+            return { answerOptions };
           });
         },
 
