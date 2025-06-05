@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { ListWithPopup } from '@comp/dom/ListWithPopup';
 import { Container } from '@comp/dom/ListWithPopup/ListWithPopup.styles.ts';
 import { PageHeading } from '@src/components/dom/PageHeading/';
@@ -7,6 +10,9 @@ import { ShopSlider } from '@src/components/dom/ShopSlider';
 import type { ShopSubpageComponent } from './ShopSubpage.types.ts';
 import type { ShopNavigationItem } from '@src/components/dom/ShopSlider/ShopSlider.types';
 import { MODELS_PAGES, PAGES } from '@src/utils/constants.ts';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
+
+import type { ListItemsPerRow } from '@comp/dom/ListWithPopup/ListWithPopup.types.ts';
 
 const getValueByPath = (
   object: { [x: string]: ShopNavigationItem },
@@ -33,6 +39,15 @@ const popupButtonsForModels = [
 export const ShopSubpage: ShopSubpageComponent = ({ slug }) => {
   const shopNavigationList = getValueByPath(shopNavigation, slug);
   const heading = slug[slug.length - 1];
+  const [itemsPerRow, setItemsPerRow] = useState<ListItemsPerRow>(2);
+
+  useEffect(() => {
+    if (window.matchMedia(SCREENS.fullHd).matches) {
+      setItemsPerRow(3);
+    } else {
+      setItemsPerRow(2);
+    }
+  }, []);
 
   return (
     <>
@@ -44,7 +59,7 @@ export const ShopSubpage: ShopSubpageComponent = ({ slug }) => {
           <PageHeading textContent={heading} />
           <ListWithPopup
             popupButtons={heading === MODELS_PAGES.FEMALE ? popupButtonsForModels : popupButtons}
-            itemsPerRow={2}
+            itemsPerRow={itemsPerRow}
             list={shopNavigationList.products?.sort((a, b) => Number(b.available) - Number(a.available))}
           />
         </Container>

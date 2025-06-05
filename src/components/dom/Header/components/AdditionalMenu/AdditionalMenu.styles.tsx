@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 import Link from 'next/link';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
+import { NavButton } from '@comp/dom/Header/Header.styles.tsx';
 
 import type { AdditionalMenuStyledProps } from './AdditionalMenu.types.ts';
 
@@ -23,6 +25,15 @@ export const AdditionalMenuStyled = styled.div<AdditionalMenuStyledProps>`
     css`
       transform: translate(0, 0);
     `}
+
+  @media ${SCREENS.fullHd} {
+    bottom: unset;
+    left: unset;
+    top: 0;
+    right: 0;
+    width: 30vw;
+    padding: 20rem 100rem 20rem 20rem;
+  }
 `;
 
 export const AdditionalMenuList = styled.ul`
@@ -48,6 +59,10 @@ export const AdditionalMenuLink = styled(Link)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  @media ${SCREENS.fullHd} {
+    font-size: 34rem;
+  }
 `;
 
 export const AdditionalMenuLinkIcon = styled.div`
@@ -71,4 +86,8 @@ export const AdditionalControls = styled.ul`
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
+`;
+
+export const AdditionalControlsNavButton = styled(NavButton)`
+  margin: 0 10rem;
 `;

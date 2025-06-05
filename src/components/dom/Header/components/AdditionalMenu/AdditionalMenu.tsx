@@ -5,7 +5,7 @@ import { memo } from 'react';
 import { PAGES, CONTROLS } from '@src/utils';
 import { Icon } from '@comp/dom/Header/components';
 
-import { NavListItem, NavLink, NavButton, NavLinkName, NavLinkIcon } from '@comp/dom/Header/Header.styles.tsx';
+import { NavListItem, NavLink, NavLinkName, NavLinkIcon } from '@comp/dom/Header/Header.styles.tsx';
 
 import {
   AdditionalMenuStyled,
@@ -15,6 +15,7 @@ import {
   AdditionalMenuLinkIcon,
   AdditionalMenuLinkName,
   AdditionalControls,
+  AdditionalControlsNavButton,
 } from './AdditionalMenu.styles.tsx';
 
 import type { AdditionalMenuComponent } from './AdditionalMenu.types.ts';
@@ -57,10 +58,10 @@ export const AdditionalMenu: AdditionalMenuComponent = memo(
               <NavLinkName>{name}</NavLinkName>
             </NavLink>
           ) : (
-            <NavButton onClick={() => onNavButtonClick(id)}>
+            <AdditionalControlsNavButton onClick={() => onNavButtonClick(id)}>
               <NavLinkIcon>{imageSrc || <Icon type={id} color={'#656565'} />}</NavLinkIcon>
               <NavLinkName>{name}</NavLinkName>
-            </NavButton>
+            </AdditionalControlsNavButton>
           )}
         </NavListItem>
       );

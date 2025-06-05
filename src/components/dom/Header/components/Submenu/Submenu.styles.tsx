@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Nav, NavList } from '@comp/dom/Header/Header.styles.tsx';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
 
 import {
   SwiperStyled,
@@ -23,6 +24,11 @@ export const SubmenuStyled = styled(Nav).attrs({ as: 'div' })<SubmenuStyledProps
     $isOpened &&
     css`
       transform: translate(0, -100%);
+
+      @media ${SCREENS.fullHd} {
+        transform: translate(-100%, 0);
+        padding: 0 20rem;
+      }
     `}
 `;
 
@@ -51,6 +57,10 @@ export const SubmenuSwiperSlideStyled = styled(SwiperSlideStyled)<SubmenuSwiperS
         z-index: 1;
       }
     `}
+
+  @media ${SCREENS.fullHd} {
+    width: 200rem;
+  }
 `;
 
 export const SubmenuButton = styled.button`
@@ -62,4 +72,8 @@ export const SubmenuButtonImage = styled(ShopSliderLinkImage)``;
 
 export const SubmenuButtonName = styled(ShopSliderLinkName)`
   font-size: 16rem;
+
+  @media ${SCREENS.fullHd} {
+    font-size: 24rem;
+  }
 `;

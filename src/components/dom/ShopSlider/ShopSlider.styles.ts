@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
 
 import { PageHeading } from '@comp/dom/PageHeading/PageHeading.tsx';
 
@@ -17,14 +18,23 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+
+  @media ${SCREENS.fullHd} {
+    padding: 0 10%;
+  }
 `;
 
 export const Heading = styled(PageHeading)``;
 
 export const SwiperStyled = styled(Swiper)`
   width: 100%;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 50rem;
+  padding-bottom: 50rem;
+
+  @media ${SCREENS.fullHd} {
+    flex: 1 1 auto;
+    padding: 100rem 100rem 50rem;
+  }
 `;
 
 export const SwiperSlideStyled = styled(SwiperSlide)`
@@ -46,6 +56,10 @@ export const SwiperSlideStyled = styled(SwiperSlide)`
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+  @media ${SCREENS.fullHd} {
+    border-radius: 20rem;
+  }
 `;
 
 export const shopSliderLinkCss = css`
@@ -91,6 +105,11 @@ export const ShopSliderLinkName = styled.p`
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+  @media ${SCREENS.fullHd} {
+    font-size: 50rem;
+    border-radius: 20rem;
+  }
 `;
 
 export const ShopSliderLinkImage = styled(Image)<ShopSliderLinkImageProps>`

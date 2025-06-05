@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
 
 export const PageHeadingStyled = styled.h2`
   padding: 16rem 16rem 0 16rem;
@@ -16,4 +17,8 @@ export const PageHeadingStyled = styled.h2`
     0 0 10px #c295c0,
     0 0 42px #c300b6,
     0 0 82px #c300b6;
+
+  @media ${SCREENS.fullHd} {
+    font-size: 50rem;
+  }
 `;

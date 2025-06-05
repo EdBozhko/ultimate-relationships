@@ -44,6 +44,7 @@ const navigation = {
           { ...(shopNavigation[SHOP_PAGES.MODELS].subpages?.[MODELS_PAGES.TRANS] ?? {}) },
         ],
       },
+      { ...shopNavigation[SHOP_PAGES.OUTFITS], submenu: shopNavigation[SHOP_PAGES.OUTFITS].products },
       { ...shopNavigation[SHOP_PAGES.TOYS], submenu: shopNavigation[SHOP_PAGES.TOYS].products },
       {
         ...shopNavigation[SHOP_PAGES.POSES],
@@ -58,7 +59,6 @@ const navigation = {
         ],
       },
       { ...shopNavigation[SHOP_PAGES.SCENES], submenu: shopNavigation[SHOP_PAGES.SCENES].products },
-      { ...shopNavigation[SHOP_PAGES.OUTFITS], submenu: shopNavigation[SHOP_PAGES.OUTFITS].products },
     ],
   },
   [PAGES.CHAT]: { id: PAGES.CHAT, href: `/${PAGES.CHAT}`, name: PAGES.CHAT, imageSrc: '', submenu: [] },
@@ -205,7 +205,15 @@ export const Header: HeaderComponent = () => {
           </Nav>
         </HeaderStyled>
       )}
-      {isRestrictedPopupVisible && <RestrictedPopup onClosePopupClick={() => setIsRestrictedPopupVisible(false)} />}
+      {isRestrictedPopupVisible && (
+        <RestrictedPopup
+          onClosePopupClick={() => {
+            setIsRestrictedPopupVisible(false);
+            closeAdditionalMenu();
+            setIsSubmenuOpened(false);
+          }}
+        />
+      )}
     </>
   );
 };

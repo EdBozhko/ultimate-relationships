@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
 
 export const Container = styled.div`
   display: flex;
@@ -9,4 +10,8 @@ export const Container = styled.div`
   height: 100%;
   position: relative;
   padding: 0 0 16rem 0;
+
+  @media ${SCREENS.fullHd} {
+    padding: 0 20%;
+  }
 `;

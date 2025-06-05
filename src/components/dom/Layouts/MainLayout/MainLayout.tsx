@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Leva } from 'leva';
 import useGlobalStore from '@src/stores/useGlobalStore/';
 
+import { MainLayoutStyled } from './MainLayout.styles.tsx';
 import { useViewportHeightFix } from '@src/hooks';
 
 import type { MainLayoutComponent } from './MainLayout.types.ts';
@@ -62,18 +63,7 @@ export const MainLayout: MainLayoutComponent = ({ children }) => {
   }, [pathname]);
 
   return (
-    <div
-      ref={ref}
-      style={{
-        position: 'relative',
-        width: ' 100%',
-        height: height,
-        overflow: 'hidden',
-        touchAction: 'auto',
-        display: 'flex',
-        flexDirection: 'column-reverse',
-      }}
-    >
+    <MainLayoutStyled ref={ref} $height={height}>
       {children}
       <Leva collapsed hidden={!isDebugMode} />
       <Scene
@@ -89,6 +79,6 @@ export const MainLayout: MainLayoutComponent = ({ children }) => {
         eventSource={ref}
         eventPrefix='client'
       />
-    </div>
+    </MainLayoutStyled>
   );
 };

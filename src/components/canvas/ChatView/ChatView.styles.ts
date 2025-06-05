@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
+
 const View = dynamic(() => import('@src/components/canvas/View/View.tsx').then((mod) => mod.View), { ssr: false });
 
 export const ChatViewStyled = styled(View)`
@@ -13,4 +15,8 @@ export const ChatViewStyled = styled(View)`
   align-items: center;
   justify-content: center;
   z-index: -1;
+
+  @media ${SCREENS.fullHd} {
+    width: 30%;
+  }
 `;

@@ -1,5 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import Link from 'next/link';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
 
 import type {
   NavButtonProps,
@@ -9,12 +10,24 @@ import type {
   SwitcherProps,
 } from './Header.types.ts';
 
+const bounce2 = keyframes`
+	0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+	40% {transform: translateY(-40%);}
+	60% {transform: translateY(-20%);}
+
+`;
+
 export const HeaderStyled = styled.header`
   position: relative;
   bottom: 0;
   left: 0;
   width: 100%;
   z-index: 10;
+
+  @media ${SCREENS.fullHd} {
+    height: 100%;
+    width: unset;
+  }
 `;
 
 export const Nav = styled.nav`
@@ -24,6 +37,13 @@ export const Nav = styled.nav`
   border-top: #272323 1px solid;
   background-color: #181818;
   overflow: hidden;
+
+  @media ${SCREENS.fullHd} {
+    height: 100%;
+    width: unset;
+    border-top: unset;
+    border-left: #272323 1px solid;
+  }
 `;
 
 export const NavList = styled.ul`
@@ -33,6 +53,15 @@ export const NavList = styled.ul`
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
+
+  @media ${SCREENS.fullHd} {
+    height: 100%;
+    width: unset;
+    flex-direction: column;
+
+    justify-content: flex-end;
+    align-items: center;
+  }
 `;
 
 export const NavListItem = styled.li``;
@@ -44,11 +73,19 @@ export const NavLinkIcon = styled.div<NavLinkIconProps>`
   align-items: center;
   width: 35rem;
   aspect-ratio: 1 / 1;
+
+  @media ${SCREENS.fullHd} {
+    width: 50rem;
+  }
 `;
 
 export const NavLinkName = styled.span<NavLinkNameProps>`
   font: inherit;
   font-weight: 500;
+
+  @media ${SCREENS.fullHd} {
+    font-size: 16rem;
+  }
 `;
 
 export const NavLink = styled(Link)<NavLinkProps>`
@@ -65,6 +102,10 @@ export const NavLink = styled(Link)<NavLinkProps>`
 
   &:active {
     transform: scale(0.9);
+  }
+
+  @media ${SCREENS.fullHd} {
+    margin: 12rem 0;
   }
 `;
 
@@ -108,6 +149,7 @@ export const Switcher = styled.div<SwitcherProps>`
   right: 0;
   width: 100%;
   height: 12rem;
+  animation: ${bounce2} 2s ease infinite;
 
   svg {
     width: 80%;
@@ -123,4 +165,12 @@ export const Switcher = styled.div<SwitcherProps>`
         transform: scale(-1);
       }
     `}
+
+  @media ${SCREENS.fullHd} {
+    height: 22rem;
+    svg {
+      width: 90%;
+      height: 90%;
+    }
+  }
 `;

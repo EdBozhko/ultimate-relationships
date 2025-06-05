@@ -13,6 +13,7 @@ import {
 } from './ShopSlider.styles.ts';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
+import { BREAKPOINTS } from '@themeConfigs/constants/screen.ts';
 
 import { ClientPortal } from '@comp/dom/ClientPortal/ClientPortal.tsx';
 import { RestrictedPopup } from '@comp/dom/RestrictedPopup/RestrictedPopup.tsx';
@@ -71,6 +72,12 @@ export const ShopSlider: ShopSliderComponent = memo(({ heading, shopNavigation }
         pagination={false}
         modules={[EffectCoverflow, Parallax]}
         className='mySwiper'
+        breakpoints={{
+          [BREAKPOINTS.fullHdScreenWidth]: {
+            slidesPerView: 1.5,
+            spaceBetween: 100,
+          },
+        }}
       >
         {shopItems}
       </Swiper>

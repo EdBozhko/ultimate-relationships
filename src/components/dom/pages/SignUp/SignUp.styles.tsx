@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ThreeDimensionalButton } from '@comp/dom/ThreeDimensionalButton';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
 
 export const Container = styled.div`
   display: flex;
@@ -10,6 +11,10 @@ export const Container = styled.div`
   height: 100%;
   position: relative;
   padding: 0 0 16rem 0;
+
+  @media ${SCREENS.fullHd} {
+    padding: 0 20%;
+  }
 `;
 
 export const FormContainer = styled.div`
@@ -39,11 +44,21 @@ export const Block = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
+
+  @media ${SCREENS.fullHd} {
+    &:not(:first-of-type) {
+      padding: 0 25%;
+    }
+  }
 `;
 
 export const Submit = styled(ThreeDimensionalButton)`
   align-self: center;
   margin: 20rem 0 0 0;
+
+  @media ${SCREENS.fullHd} {
+    font-size: 30rem;
+  }
 `;
 
 export const Title = styled.p`
@@ -56,6 +71,10 @@ export const Title = styled.p`
     font-weight: 300;
     color: #ffffff;
   }
+
+  @media ${SCREENS.fullHd} {
+    font-size: 30rem;
+  }
 `;
 
 export const TariffPlanList = styled.ul`
@@ -64,6 +83,14 @@ export const TariffPlanList = styled.ul`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  gap: 20rem;
+  margin: 0 0 20rem 0;
+
+  @media ${SCREENS.fullHd} {
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+  }
 `;
 
 export const TariffPlanLabel = styled.label`
@@ -73,6 +100,7 @@ export const TariffPlanLabel = styled.label`
   align-items: center;
   width: 100%;
   text-align: center;
+  min-height: 100%;
 
   font: inherit;
   font-size: 20rem;
@@ -82,10 +110,13 @@ export const TariffPlanLabel = styled.label`
 
   border-radius: 6rem;
   padding: 16rem;
-  margin: 0 0 20rem 0;
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+
+  @media ${SCREENS.fullHd} {
+    font-size: 24rem;
+  }
 `;
 
 export const TariffPlan = styled.input`
@@ -106,12 +137,20 @@ export const TariffPlanTitle = styled.p`
   margin: 0 0 5rem 0;
   padding: 0;
   font-size: 22rem;
+
+  @media ${SCREENS.fullHd} {
+    font-size: 35rem;
+  }
 `;
 
 export const TariffPlanPeriod = styled.p`
   margin: 0 0 5rem 0;
   padding: 0;
   font-weight: 300;
+
+  @media ${SCREENS.fullHd} {
+    font-size: 24rem;
+  }
 `;
 
 export const TariffPlanDescription = styled.p`
@@ -119,6 +158,10 @@ export const TariffPlanDescription = styled.p`
   padding: 0;
   font-weight: 300;
   font-size: 16rem;
+
+  @media ${SCREENS.fullHd} {
+    font-size: 20rem;
+  }
 `;
 
 export const TariffPrice = styled.p`
@@ -129,6 +172,15 @@ export const TariffPrice = styled.p`
   span {
     font-size: 24rem;
     color: #c295c0;
+  }
+
+  @media ${SCREENS.fullHd} {
+    font-size: 30rem;
+
+    span {
+      font-size: 34rem;
+      color: #c295c0;
+    }
   }
 `;
 

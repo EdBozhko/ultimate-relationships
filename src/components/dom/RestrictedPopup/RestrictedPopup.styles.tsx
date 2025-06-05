@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
 
 export const Container = styled.div`
   display: flex;
@@ -23,6 +24,10 @@ export const Title = styled.p`
   font-size: 30rem;
   margin: 0 0 10rem 0;
   padding: 0;
+
+  @media ${SCREENS.fullHd} {
+    font-size: 50rem;
+  }
 `;
 
 export const CTA = styled(Link)`
@@ -77,6 +82,10 @@ export const CTA = styled(Link)`
   &:not(:first-child) {
     margin: 10rem 0 0 0;
   }
+
+  @media ${SCREENS.fullHd} {
+    font-size: 28rem;
+  }
 `;
 
 export const ClosePopup = styled.button`
@@ -106,5 +115,11 @@ export const ClosePopup = styled.button`
 
   &::before {
     transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  @media ${SCREENS.fullHd} {
+    top: 20rem;
+    right: 50%;
+    transform: translate(50%, 0);
   }
 `;

@@ -10,12 +10,12 @@ export const BREAKPOINTS = {
 };
 
 export const SCREENS = {
-  mobile: `min-width: ${BREAKPOINTS.mobileScreenWidth}px`,
-  tablet: `min-width: ${BREAKPOINTS.tabletScreenWidth}px`,
-  laptop: `min-width: ${BREAKPOINTS.laptopScreenWidth}px`,
-  hd: `min-width: ${BREAKPOINTS.hdScreenWidth}px`,
-  medium: `min-width: ${BREAKPOINTS.mediumScreenWidth}px`,
-  fullHd: `min-width: ${BREAKPOINTS.fullHdScreenWidth}px`,
-  qhd: `min-width: ${BREAKPOINTS.qhdScreenWidth}px`,
-  uhd: `min-width: ${BREAKPOINTS.uhdScreenWidth}px`,
+  mobile: `(min-width: ${BREAKPOINTS.mobileScreenWidth}px)`,
+  tablet: `(min-width: ${BREAKPOINTS.tabletScreenWidth}px)`,
+  laptop: `(min-width: ${BREAKPOINTS.laptopScreenWidth}px)`,
+  hd: `(min-width: ${BREAKPOINTS.hdScreenWidth}px)`,
+  medium: `(min-width: ${BREAKPOINTS.mediumScreenWidth}px)`,
+  fullHd: `(min-width: ${BREAKPOINTS.fullHdScreenWidth}px)`,
+  qhd: `(min-width: ${BREAKPOINTS.qhdScreenWidth}px)`,
+  uhd: `(min-width: ${BREAKPOINTS.uhdScreenWidth}px)`,
 };

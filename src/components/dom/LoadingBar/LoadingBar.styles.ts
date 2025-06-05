@@ -1,10 +1,13 @@
 'use client';
 
 import styled, { css, keyframes } from 'styled-components';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
 
 import type { LoadingBarContainerProps, MeterProps } from './LoadingBar.types.ts';
 
 const loadingBarWidth = 150;
+const loadingBarWidthFullHd = 350;
+
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
@@ -59,11 +62,19 @@ export const InfoContainer = styled.p`
 export const LoadingBarCounter = styled.span`
   font: inherit;
   font-size: 36rem;
+
+  @media ${SCREENS.fullHd} {
+    font-size: 70rem;
+  }
 `;
 
 export const DisplayProgress = styled.span`
   font: inherit;
   font-size: 16rem;
+
+  @media ${SCREENS.fullHd} {
+    font-size: 40rem;
+  }
 `;
 
 export const SVG = styled.svg`
@@ -74,6 +85,10 @@ export const SVG = styled.svg`
   animation: ${rotate} 2s linear infinite;
   // Lots of drop-shadows are bad for performance
   filter: drop-shadow(0 0 21px #c295c0) drop-shadow(0 0 151px #c300b6);
+
+  @media ${SCREENS.fullHd} {
+    width: ${loadingBarWidthFullHd}rem;
+  }
 `;
 
 export const Background = styled.circle`
@@ -91,6 +106,11 @@ export const Meter = styled.circle<MeterProps>`
   stroke-dasharray: calc(${loadingBarWidth}rem * 3.14);
   stroke-dashoffset: ${({ $strokeDashoffset }) => $strokeDashoffset}px;
   transition: stroke-dashoffset 0.2s linear;
+
+  @media ${SCREENS.fullHd} {
+    stroke-width: 12rem;
+    stroke-dasharray: calc(${loadingBarWidthFullHd}rem * 3.14);
+  }
 `;
 
 export const LinearGradient = styled.linearGradient``;

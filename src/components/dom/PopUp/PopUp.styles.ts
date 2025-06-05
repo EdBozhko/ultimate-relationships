@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled, { css, keyframes } from 'styled-components';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
 
 import type { PopUpContainerProps, PopUpContentProps, PopUpLinkProps } from './PopUp.types.ts';
 
@@ -35,6 +36,32 @@ const popupIn = keyframes`
   100% {
     padding: 16rem;
     border-width: 5rem;
+    transform: translate(-50%, -50%);  
+  }
+`;
+
+const popupInFullHd = keyframes`
+  0% {
+    padding: 0 32rem;
+    border-width: 4rem;
+    transform: translate(-200%, -50%);
+  }
+
+  30% {
+    padding: 0 32rem;
+    border-width: 4rem;
+    transform: translate(-50%, -50%);
+  }
+
+  50% {
+    padding: 0 32rem;
+    border-width: 4rem;
+    transform: translate(-50%, -50%);
+  }
+
+  100% {
+    padding: 32rem;
+    border-width: 10rem;
     transform: translate(-50%, -50%);  
   }
 `;
@@ -111,6 +138,11 @@ export const PopUpContainer = styled.div<PopUpContainerProps>`
     css`
       animation: ${popupIn} 2s linear;
       animation-fill-mode: both;
+
+      @media ${SCREENS.fullHd} {
+        animation: ${popupInFullHd} 2s linear;
+        animation-fill-mode: both;
+      }
     `}
 `;
 
@@ -123,6 +155,11 @@ export const PopUpTitle = styled.p`
   text-transform: uppercase;
   margin: 0 0 10rem 0;
   padding: 0;
+
+  @media ${SCREENS.fullHd} {
+    font-size: 36rem;
+    margin: 0 0 20rem 0;
+  }
 `;
 
 export const PopUpText = styled.p`
@@ -133,6 +170,11 @@ export const PopUpText = styled.p`
   text-align: center;
   margin: 0 0 10rem 0;
   padding: 0;
+
+  @media ${SCREENS.fullHd} {
+    font-size: 24rem;
+    margin: 0 0 20rem 0;
+  }
 `;
 
 export const PopUpButtonsContainer = styled.div`
@@ -158,6 +200,16 @@ export const PopUpButtonCss = css`
 
   &:not(:first-child) {
     margin: 10rem 0 0 0;
+  }
+
+  @media ${SCREENS.fullHd} {
+    font-size: 24rem;
+    padding: 20rem 15rem;
+    width: 400rem;
+
+    &:not(:first-child) {
+      margin: 15rem 0 0 0;
+    }
   }
 `;
 

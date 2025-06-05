@@ -9,8 +9,9 @@ import {
   SubmenuButtonImage,
   SubmenuButtonName,
 } from './Submenu.styles.tsx';
+import { BREAKPOINTS } from '@themeConfigs/constants/screen.ts';
 
-import { FreeMode } from 'swiper/modules';
+import { FreeMode, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 
@@ -108,8 +109,16 @@ export const Submenu: SubmenuComponent = memo(
             slidesPerView={'auto'}
             spaceBetween={10}
             freeMode={true}
-            modules={[FreeMode]}
+            modules={[FreeMode, Mousewheel]}
             className='mySwiper'
+            mousewheel={true}
+            breakpoints={{
+              [BREAKPOINTS.fullHdScreenWidth]: {
+                direction: 'vertical',
+                slidesPerView: 3.5,
+                spaceBetween: 20,
+              },
+            }}
           >
             {submenuContent}
           </Swiper>

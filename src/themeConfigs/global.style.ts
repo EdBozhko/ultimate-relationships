@@ -1,11 +1,12 @@
 'use client';
 
 import * as styled from 'styled-components';
-import { SCREENS, BREAKPOINTS } from './constants/screen.ts';
+import { SCREENS, BREAKPOINTS } from '@themeConfigs/constants/screen.ts';
 
 const GlobalStyle = styled.createGlobalStyle`
   * {
     box-sizing: border-box;
+    scrollbar-color: #656565 transparent;
   }
 
   html,
