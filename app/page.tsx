@@ -1,5 +1,3 @@
-'use client';
-
 import { Home } from '@comp/dom/pages/Home/';
 
 import type { FC } from 'react';

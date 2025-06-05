@@ -10,29 +10,31 @@ export const BasePartnerModel: BasePartnerModelComponent = ({ onFaceUpdate = () 
   const basePartner = useGLTF('/models/base_partner/base_partner.glb') as GLTFResult;
   const { nodes, materials } = basePartner;
   const modelRef = useRef<THREE.Group>(null!);
-  const faceRef = useRef(null!);
+  const faceRef = useRef<THREE.SkinnedMesh>(null!);
 
   useEffect(() => {
-    onFaceUpdate(faceRef.current);
-  }, [faceRef]);
+    if (faceRef.current) {
+      onFaceUpdate(faceRef.current);
+    }
+  }, [faceRef.current]);
 
   useEffect(() => {
+    if (!modelRef.current) return;
     // const morphTargetDictionary = modelRef.current.children[0].children[0].children[0].morphTargetDictionary;
     const morphTargetInfluences = modelRef.current.children;
     morphTargetInfluences.forEach((element) => {
-      console.log(element);
-
-      // element.morphTargetInfluences[26] = 0;
-      // element.morphTargetInfluences[3] = 0.8;
-      // element.morphTargetInfluences[29] = 1;
-      // element.morphTargetInfluences[10] = 0.5;
-      // element.morphTargetInfluences[17] = 0.5;
-      // element.morphTargetInfluences[12] = 0.25;
-      // element.morphTargetInfluences[19] = 0.25;
-      // morphTargetInfluences['26'] = 0;
+      if (element instanceof THREE.Mesh && element.morphTargetInfluences) {
+        element.morphTargetInfluences[26] = 0;
+        element.morphTargetInfluences[3] = 0.8;
+        // element.morphTargetInfluences[29] = 1;
+        // element.morphTargetInfluences[10] = 0.5;
+        // element.morphTargetInfluences[17] = 0.5;
+        // element.morphTargetInfluences[12] = 0.25;
+        // element.morphTargetInfluences[19] = 0.25;
+        // morphTargetInfluences['26'] = 0;
+      }
     });
-    // console.log(morphTargetInfluences);
-  }, [nodes]);
+  }, [modelRef.current, nodes]);
 
   return (
     <>

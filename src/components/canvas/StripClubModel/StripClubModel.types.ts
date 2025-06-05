@@ -3,7 +3,11 @@ import type { GLTF } from 'three-stdlib';
 import type { OrbitControls } from 'three-stdlib';
 import type { FC } from 'react';
 
-export type StripClubModelProps = JSX.IntrinsicElements['group'];
+export type StripClubModelBaseProps = JSX.IntrinsicElements['group'];
+
+export interface StripClubModelProps extends StripClubModelBaseProps {
+  cameraTarget: THREE.SkinnedMesh;
+}
 
 export type StripClubModelComponent = FC<StripClubModelProps>;
 

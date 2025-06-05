@@ -1,3 +1,5 @@
+'use client';
+
 import styled, { css, keyframes } from 'styled-components';
 
 import type { LoadingBarContainerProps, MeterProps } from './LoadingBar.types.ts';

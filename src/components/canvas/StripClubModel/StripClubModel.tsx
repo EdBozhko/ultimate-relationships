@@ -8,11 +8,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useControls } from 'leva';
 
-import type {
-  GLTFResult,
-  //  OrbitControlsImpl,
-  StripClubModelComponent,
-} from './StripClubModel.types.ts';
+import type { GLTFResult, OrbitControlsImpl, StripClubModelComponent } from './StripClubModel.types.ts';
 
 import useGlobalStore from '@src/stores/useGlobalStore';
 import floorSrc from '@public/models/strip_club/textures/floor.webp';
@@ -55,7 +51,7 @@ useTexture.preload(ceilingSrc);
 
 gsap.registerPlugin(useGSAP);
 
-export const StripClubModel: StripClubModelComponent = (props) => {
+export const StripClubModel: StripClubModelComponent = ({ cameraTarget, ...props }) => {
   const bakedTextures = {
     floor: useTexture(floorSrc),
     mixerBakedTexture: useTexture(mixerSrc),
@@ -95,17 +91,19 @@ export const StripClubModel: StripClubModelComponent = (props) => {
   });
 
   const camera = useThree((state) => state.camera);
-  // const controls = useThree((state) => state.controls as OrbitControlsImpl);
+  const controls = useThree((state) => state.controls as OrbitControlsImpl);
   const [spotLightDistance, setSpotLightDistance] = useState(0.1);
+  const [shouldAnimationStart, setShouldAnimationStart] = useState(false);
 
   const { nodes } = useGLTF('/models/strip_club/strip_club.glb') as GLTFResult;
 
   useHelper(isDebugMode ? refs.spotLight : null, THREE.SpotLightHelper, 'yellow');
 
   useEffect(() => {
+    if (!refs.stayWildSign.current) return;
+    if (!controls || !controls.target) return;
+
     const initialPosition = refs.stayWildSign.current.position;
-    // const markerPosition = refs.surfaceMarker.current.position;
-    // const initialPosition = markerPosition;
     camera.position.copy(initialPosition);
     camera.position.x += 1.5;
     camera.position.y += 1;
@@ -113,48 +111,62 @@ export const StripClubModel: StripClubModelComponent = (props) => {
 
     const lookAtTarget = new THREE.Vector3().copy(initialPosition);
     lookAtTarget.x += 1.5;
-    // controls.target = lookAtTarget;
-  }, []);
+    controls.target = lookAtTarget;
+    setShouldAnimationStart(true);
+  }, [refs.stayWildSign.current]);
 
   useEffect(() => {
     refs.spotLight.current.position.copy(refs.ceilingStageLight.current.position);
     refs.spotLight.current.target = refs.surfaceMarker.current;
     setSpotLightDistance(refs.spotLight.current.position.distanceTo(refs.floor.current.position) * 1.5);
-  }, [refs.ceilingStageLight, refs.surfaceMarker]);
+  }, [controls, refs.ceilingStageLight]);
 
-  // useGSAP(() => {
-  //   setTimeout(() => {
-  //     const fromCoords = controls.target;
-  //     const toCoords = refs.surfaceMarker.current.position;
+  useGSAP(() => {
+    if (!controls || !controls.target) return;
+    if (!cameraTarget || !cameraTarget?.skeleton) return;
+    if (!shouldAnimationStart) return;
+    if (!refs.surfaceMarker.current) return;
 
-  //     const gsapTimeline1 = gsap.timeline({});
-  //     const gsapTimeline2 = gsap.timeline({});
+    setTimeout(() => {
+      const fromCoords = controls.target;
+      let toCoords = null;
 
-  //     gsapTimeline1
-  //       .fromTo(
-  //         camera.position,
-  //         { z: camera.position.z, delay: 1, ease: 'power1.out' },
-  //         {
-  //           z: 0,
-  //           duration: 2.5,
-  //           ease: 'power1.out',
-  //         },
-  //       )
-  //       .to(camera.position, {
-  //         x: toCoords.x - 0.5,
-  //         y: toCoords.y + 0.5,
-  //         z: toCoords.z + 0.5,
-  //         duration: 2.5,
-  //         ease: 'power1.out',
-  //       });
+      const headBone = cameraTarget.skeleton.getBoneByName('head');
+      if (headBone) {
+        const headWorldPos = new THREE.Vector3();
+        toCoords = headBone.getWorldPosition(headWorldPos);
+      } else {
+        toCoords = refs.surfaceMarker.current.position;
+      }
 
-  //     gsapTimeline2.fromTo(
-  //       controls.target,
-  //       { ...fromCoords, delay: 1, ease: 'power1.out' },
-  //       { ...toCoords, duration: 2.5, ease: 'power1.out' },
-  //     );
-  //   }, 3000);
-  // }, []);
+      const gsapTimeline1 = gsap.timeline({});
+      const gsapTimeline2 = gsap.timeline({});
+
+      gsapTimeline1
+        .fromTo(
+          camera.position,
+          { z: camera.position.z, delay: 1, ease: 'power1.out' },
+          {
+            z: 0,
+            duration: 2.5,
+            ease: 'power1.out',
+          },
+        )
+        .to(camera.position, {
+          x: toCoords.x + 0.25,
+          y: toCoords.y - 2,
+          z: toCoords.z + 1,
+          duration: 2.5,
+          ease: 'power1.out',
+        });
+
+      gsapTimeline2.fromTo(
+        controls.target,
+        { ...fromCoords, delay: 1, ease: 'power1.out' },
+        { ...toCoords, duration: 2.5, ease: 'power1.out' },
+      );
+    }, 2000);
+  }, [controls, camera, cameraTarget, shouldAnimationStart, refs.surfaceMarker.current]);
 
   return (
     <>

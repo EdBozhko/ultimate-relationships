@@ -26,7 +26,7 @@ export const Home: HomeComponent = () => {
   const { isAgeConfirmed, confirmAge } = useGlobalStore();
   const router = useRouter();
 
-  const [hideLoadingBar, setHideLoadingBar] = useState(false);
+  const [hideLoadingBar, setHideLoadingBar] = useState(true);
   const [showPopUp, setShowPopUp] = useState(false);
   const [currentLoadingProgress, setCurrentLoadingProgress] = useState(0);
   const loadingProgress = useProgress((state) => state.progress);
@@ -38,6 +38,10 @@ export const Home: HomeComponent = () => {
     enterFullscreen();
     confirmAge();
   };
+
+  useEffect(() => {
+    setHideLoadingBar(false);
+  }, []);
 
   useEffect(() => {
     if (isAgeConfirmed) {
