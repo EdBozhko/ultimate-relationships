@@ -167,7 +167,7 @@ export const StripClubModel: StripClubModelComponent = ({ cameraTarget, ...props
         { ...fromCoords, delay: 1, ease: 'power1.out' },
         { ...toCoords, duration: 2.5, ease: 'power1.out', onComplete: () => setIsAnimationFinished(true) },
       );
-    }, 2000);
+    }, 1500);
   }, [controls, camera, cameraTarget, shouldAnimationStart, refs.surfaceMarker.current]);
 
   return (
