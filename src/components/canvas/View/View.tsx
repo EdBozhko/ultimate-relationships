@@ -4,8 +4,8 @@ import { forwardRef, Suspense, useImperativeHandle, useRef } from 'react';
 import { OrbitControls, PerspectiveCamera, View as ViewImpl } from '@react-three/drei';
 import { Three } from '@src/helpers/components/Three';
 import { useThree } from '@react-three/fiber';
-import { useControls } from 'leva';
-import { Perf } from 'r3f-perf';
+// import { useControls } from 'leva';
+// import { Perf } from 'r3f-perf';
 import useGlobalStore from '@src/stores/useGlobalStore';
 
 import type { PerspectiveCameraProps, CommonComponent, ViewComponent, ViewProps } from './View.types.ts';
@@ -37,12 +37,12 @@ const View: ViewComponent = forwardRef<HTMLDivElement, ViewProps>(
     const localRef = useRef<HTMLDivElement>(null!);
     useImperativeHandle(ref, () => localRef.current);
 
-    const isDebugMode = useGlobalStore((store) => store.isDebugMode);
-    const isDebugPerfMode = useGlobalStore((store) => store.isDebugPerfMode);
+    // const isDebugMode = useGlobalStore((store) => store.isDebugMode);
+    // const isDebugPerfMode = useGlobalStore((store) => store.isDebugPerfMode);
 
-    const { isPerfVisible } = useControls('perf', {
-      isPerfVisible: true,
-    });
+    // const { isPerfVisible } = useControls('perf', {
+    //   isPerfVisible: true,
+    // });
 
     return (
       <>
