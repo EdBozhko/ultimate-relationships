@@ -9,6 +9,7 @@ export const stories = [
   {
     id: 1,
     imageSrc: school,
+    available: false,
     name: 'sex lessons',
     description:
       'Class is in session, but tonight’s lesson isn’t found in any textbook. In the secrecy of the empty classroom, curiosity leads to bold exploration—and every rule is meant to be broken.',
@@ -16,6 +17,7 @@ export const stories = [
   {
     id: 2,
     imageSrc: bdsm,
+    available: false,
     name: 'love, pain, sex',
     description:
       'In the shadows of the BDSM room, boundaries blur and desire reigns. Here, love and pain entwine—each touch, each command, awakening deeper passion and raw intimacy.',
@@ -23,6 +25,7 @@ export const stories = [
   {
     id: 3,
     imageSrc: hospital,
+    available: false,
     name: 'loving healing',
     description:
       'Within the sterile walls of the hospital, tenderness and desire intertwine. In secret corners and after-hours encounters, healing hands become instruments of pleasure and comfort',
@@ -30,6 +33,7 @@ export const stories = [
   {
     id: 4,
     imageSrc: photostudio,
+    available: false,
     name: 'Hollywood awaits',
     description:
       'Under the studio lights, every glance becomes a promise and every pose sparks temptation. In this private Hollywood haven, passion and ambition blur—capturing desire, frame by frame.',
@@ -37,6 +41,7 @@ export const stories = [
   {
     id: 5,
     imageSrc: sister,
+    available: false,
     name: 'stepsister loves me',
     description:
       'Behind a closed door, boundaries are tested and secrets unfold. In the quiet intimacy of my room, forbidden feelings ignite into passion neither of us can deny.',
@@ -44,6 +49,7 @@ export const stories = [
   {
     id: 6,
     imageSrc: strip_club,
+    available: false,
     name: 'private dances',
     description:
       'Bathed in neon and shadows, desire takes center stage. In the strip club’s private room, every dance is an intimate promise—where fantasies are unveiled one tantalizing move at a time.',
