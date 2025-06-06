@@ -8,7 +8,7 @@ export const RestrictedPopup: RestrictedPopupComponent = ({ onClosePopupClick, i
     <Container>
       {isWithCloseButton && <ClosePopup onClick={onClosePopupClick} />}
       <Title>For members only!</Title>
-      <CTA onClick={onClosePopupClick} href={PAGES.SIGN_UP}>
+      <CTA onClick={onClosePopupClick} href={`/${PAGES.SIGN_UP}`}>
         join
       </CTA>
     </Container>
