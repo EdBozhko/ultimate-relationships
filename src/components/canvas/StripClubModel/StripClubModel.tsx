@@ -52,6 +52,7 @@ useTexture.preload(ceilingSrc);
 gsap.registerPlugin(useGSAP);
 
 export const StripClubModel: StripClubModelComponent = ({ cameraTarget, ...props }) => {
+  const [isAnimationFinished, setIsAnimationFinished] = useState(false);
   const bakedTextures = {
     floor: useTexture(floorSrc),
     mixerBakedTexture: useTexture(mixerSrc),
@@ -126,6 +127,7 @@ export const StripClubModel: StripClubModelComponent = ({ cameraTarget, ...props
     if (!cameraTarget || !cameraTarget?.skeleton) return;
     if (!shouldAnimationStart) return;
     if (!refs.surfaceMarker.current) return;
+    if (isAnimationFinished) return;
 
     setTimeout(() => {
       const fromCoords = controls.target;
@@ -163,7 +165,7 @@ export const StripClubModel: StripClubModelComponent = ({ cameraTarget, ...props
       gsapTimeline2.fromTo(
         controls.target,
         { ...fromCoords, delay: 1, ease: 'power1.out' },
-        { ...toCoords, duration: 2.5, ease: 'power1.out' },
+        { ...toCoords, duration: 2.5, ease: 'power1.out', onComplete: () => setIsAnimationFinished(true) },
       );
     }, 2000);
   }, [controls, camera, cameraTarget, shouldAnimationStart, refs.surfaceMarker.current]);

@@ -1,13 +1,9 @@
+import { Customize } from '@comp/dom/pages/Customize';
+
 import type { FC } from 'react';
 
-interface ShopPageProps {
-  params: Promise<{ slug: string[] }>;
-}
-
-const ShopPage: FC<ShopPageProps> = async ({ params }) => {
-  const { slug } = await params;
-
-  return <>{slug}</>;
+const CustomizePage: FC = () => {
+  return <Customize />;
 };
 
-export default ShopPage;
+export default CustomizePage;

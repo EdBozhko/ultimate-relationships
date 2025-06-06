@@ -10,6 +10,7 @@ import {
   SubmenuButtonName,
 } from './Submenu.styles.tsx';
 import { BREAKPOINTS } from '@themeConfigs/constants/screen.ts';
+import useGameStore from '@src/stores/useGameStore/';
 
 import { FreeMode, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
@@ -23,6 +24,21 @@ import type { MenuGroup } from '@comp/dom/Header/Header.types.ts';
 
 export const Submenu: SubmenuComponent = memo(
   ({ setSubmenuHistory, setIsRestrictedPopupVisible, submenuHistory, isSubmenuOpened }) => {
+    const isBraVisible = useGameStore((store) => store.isBraVisible);
+    const toggleBraVisible = useGameStore((store) => store.toggleBraVisible);
+
+    const isCorsetVisible = useGameStore((store) => store.isCorsetVisible);
+    const toggleCorsetVisible = useGameStore((store) => store.toggleCorsetVisible);
+
+    const isPantiesVisible = useGameStore((store) => store.isPantiesVisible);
+    const togglePantiesVisible = useGameStore((store) => store.togglePantiesVisible);
+
+    const isSkirtVisible = useGameStore((store) => store.isSkirtVisible);
+    const toggleSkirtVisible = useGameStore((store) => store.toggleSkirtVisible);
+
+    const isThighStrapsVisible = useGameStore((store) => store.isThighStrapsVisible);
+    const toggleThighStrapsVisible = useGameStore((store) => store.toggleThighStrapsVisible);
+
     const swiperRef = useRef<{ swiper: SwiperTypes } | null>(null);
 
     const openSubmenu = useCallback((submenu: MenuGroup) => {
@@ -42,12 +58,41 @@ export const Submenu: SubmenuComponent = memo(
           .sort((a, b) => Number(b.available) - Number(a.available))
           .map((menuItem) => {
             const { id, imageSrc, name, submenu = undefined, available } = menuItem;
+            const isChecked = () => {
+              if (name === 'lather bra' && isBraVisible) {
+                return true;
+              } else if (name === 'lather corset' && isCorsetVisible) {
+                return true;
+              } else if (name === 'lather panties' && isPantiesVisible) {
+                return true;
+              } else if (name === 'lather skirt' && isSkirtVisible) {
+                return true;
+              } else if (name === 'lather thigh straps' && isThighStrapsVisible) {
+                return true;
+              }
+
+              return false;
+            };
+
             return (
               <SwiperSlide
                 $isAvailable={available}
+                $isChecked={isChecked()}
                 onClick={() => {
                   if (!available) {
                     setIsRestrictedPopupVisible(true);
+                  }
+
+                  if (name === 'lather bra') {
+                    toggleBraVisible();
+                  } else if (name === 'lather corset') {
+                    toggleCorsetVisible();
+                  } else if (name === 'lather panties') {
+                    togglePantiesVisible();
+                  } else if (name === 'lather skirt') {
+                    toggleSkirtVisible();
+                  } else if (name === 'lather thigh straps') {
+                    toggleThighStrapsVisible();
                   }
                 }}
                 key={id}
@@ -87,7 +132,16 @@ export const Submenu: SubmenuComponent = memo(
         }
         return slides;
       },
-      [submenuHistory, openSubmenu, goBack],
+      [
+        submenuHistory,
+        openSubmenu,
+        goBack,
+        isBraVisible,
+        isCorsetVisible,
+        isPantiesVisible,
+        isSkirtVisible,
+        isThighStrapsVisible,
+      ],
     );
 
     const submenuContent = useMemo(

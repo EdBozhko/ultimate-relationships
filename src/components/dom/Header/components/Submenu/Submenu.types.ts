@@ -7,6 +7,7 @@ export interface SubmenuStyledProps {
 
 export interface SubmenuSwiperSlideProps {
   $isAvailable?: boolean;
+  $isChecked?: boolean;
 }
 
 export interface SubmenuProps {

@@ -16,6 +16,11 @@ import gag from '@public/icons/shop/outfits/gag.webp';
 import handcuffs from '@public/icons/shop/outfits/handcuffs.webp';
 import penisRings from '@public/icons/shop/outfits/penis-rings.webp';
 import whip from '@public/icons/shop/outfits/whip.webp';
+import latherBra from '@public/icons/shop/outfits/bra.webp';
+import latherCorset from '@public/icons/shop/outfits/corset.webp';
+import latherPanties from '@public/icons/shop/outfits/panties.webp';
+import latherSkirt from '@public/icons/shop/outfits/skirt.webp';
+import latherThighStraps from '@public/icons/shop/outfits/thigh_straps.webp';
 
 import bdsmRoom from '@public/icons/shop/scenes/bdsm_room_vert.webp';
 import bdsmRoomAlt from '@public/icons/shop/scenes/bdsm_room_hor.webp';
@@ -570,6 +575,41 @@ export const shopNavigation = {
         imageSrc: whip,
         name: 'whip',
         description: 'Feel the rush. This whip delivers just the right balance of sting and sensual play.',
+      },
+      {
+        id: 7,
+        available: true,
+        imageSrc: latherBra,
+        name: 'lather bra',
+        description: '',
+      },
+      {
+        id: 8,
+        available: true,
+        imageSrc: latherCorset,
+        name: 'lather corset',
+        description: '',
+      },
+      {
+        id: 9,
+        available: true,
+        imageSrc: latherPanties,
+        name: 'lather panties',
+        description: '',
+      },
+      {
+        id: 10,
+        available: true,
+        imageSrc: latherSkirt,
+        name: 'lather skirt',
+        description: '',
+      },
+      {
+        id: 11,
+        available: true,
+        imageSrc: latherThighStraps,
+        name: 'lather thigh straps',
+        description: '',
       },
     ],
   },

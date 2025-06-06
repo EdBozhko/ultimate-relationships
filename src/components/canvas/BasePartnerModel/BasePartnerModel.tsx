@@ -4,6 +4,8 @@ import * as THREE from 'three';
 import { useEffect, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 
+import useGameStore from '@src/stores/useGameStore';
+
 import type { GLTFResult, BasePartnerModelComponent } from './BasePartnerModel.types.ts';
 
 export const BasePartnerModel: BasePartnerModelComponent = ({ onFaceUpdate = () => {}, ...rest }) => {
@@ -11,6 +13,12 @@ export const BasePartnerModel: BasePartnerModelComponent = ({ onFaceUpdate = () 
   const { nodes, materials } = basePartner;
   const modelRef = useRef<THREE.Group>(null!);
   const faceRef = useRef<THREE.SkinnedMesh>(null!);
+
+  const isBraVisible = useGameStore((store) => store.isBraVisible);
+  const isCorsetVisible = useGameStore((store) => store.isCorsetVisible);
+  const isPantiesVisible = useGameStore((store) => store.isPantiesVisible);
+  const isSkirtVisible = useGameStore((store) => store.isSkirtVisible);
+  const isThighStrapsVisible = useGameStore((store) => store.isThighStrapsVisible);
 
   useEffect(() => {
     if (faceRef.current) {
@@ -25,7 +33,7 @@ export const BasePartnerModel: BasePartnerModelComponent = ({ onFaceUpdate = () 
     morphTargetInfluences.forEach((element) => {
       if (element instanceof THREE.Mesh && element.morphTargetInfluences) {
         element.morphTargetInfluences[26] = 0;
-        element.morphTargetInfluences[3] = 0.8;
+        element.morphTargetInfluences[3] = 0.7;
         // element.morphTargetInfluences[29] = 1;
         // element.morphTargetInfluences[10] = 0.5;
         // element.morphTargetInfluences[17] = 0.5;
@@ -39,34 +47,42 @@ export const BasePartnerModel: BasePartnerModelComponent = ({ onFaceUpdate = () 
   return (
     <>
       <group {...rest} dispose={null}>
-        <skinnedMesh
-          castShadow
-          name='Panties'
-          geometry={nodes.Panties.geometry}
-          material={materials.Panties}
-          skeleton={nodes.Panties.skeleton}
-        />
-        <skinnedMesh
-          castShadow
-          name='ThighStraps'
-          geometry={nodes.ThighStraps.geometry}
-          material={materials.ThighStraps}
-          skeleton={nodes.ThighStraps.skeleton}
-        />
-        <skinnedMesh
-          castShadow
-          name='Top'
-          geometry={nodes.Top.geometry}
-          material={materials.Top}
-          skeleton={nodes.Top.skeleton}
-        />
-        <skinnedMesh
-          castShadow
-          name='Top001'
-          geometry={nodes.Top001.geometry}
-          material={materials.Top3}
-          skeleton={nodes.Top001.skeleton}
-        />
+        {isPantiesVisible && (
+          <skinnedMesh
+            castShadow
+            name='Panties'
+            geometry={nodes.Panties.geometry}
+            material={materials.Panties}
+            skeleton={nodes.Panties.skeleton}
+          />
+        )}
+        {isThighStrapsVisible && (
+          <skinnedMesh
+            castShadow
+            name='ThighStraps'
+            geometry={nodes.ThighStraps.geometry}
+            material={materials.ThighStraps}
+            skeleton={nodes.ThighStraps.skeleton}
+          />
+        )}
+        {isBraVisible && (
+          <skinnedMesh
+            castShadow
+            name='Top'
+            geometry={nodes.Top.geometry}
+            material={materials.Top}
+            skeleton={nodes.Top.skeleton}
+          />
+        )}
+        {isSkirtVisible && (
+          <skinnedMesh
+            castShadow
+            name='Top001'
+            geometry={nodes.Top001.geometry}
+            material={materials.Top3}
+            skeleton={nodes.Top001.skeleton}
+          />
+        )}
         <primitive object={nodes.root} />
         <group ref={modelRef}>
           <skinnedMesh
@@ -242,20 +258,24 @@ export const BasePartnerModel: BasePartnerModelComponent = ({ onFaceUpdate = () 
             morphTargetInfluences={nodes.Genesis8_1Female_18.morphTargetInfluences}
           />
         </group>
-        <skinnedMesh
-          castShadow
-          name='Top_83133003'
-          geometry={nodes.Top_83133003.geometry}
-          material={materials.Top}
-          skeleton={nodes.Top_83133003.skeleton}
-        />
-        <skinnedMesh
-          castShadow
-          name='Top_83133003_1'
-          geometry={nodes.Top_83133003_1.geometry}
-          material={materials.Top2}
-          skeleton={nodes.Top_83133003_1.skeleton}
-        />
+        {isCorsetVisible && (
+          <>
+            <skinnedMesh
+              castShadow
+              name='Top_83133003'
+              geometry={nodes.Top_83133003.geometry}
+              material={materials.Top}
+              skeleton={nodes.Top_83133003.skeleton}
+            />
+            <skinnedMesh
+              castShadow
+              name='Top_83133003_1'
+              geometry={nodes.Top_83133003_1.geometry}
+              material={materials.Top2}
+              skeleton={nodes.Top_83133003_1.skeleton}
+            />
+          </>
+        )}
       </group>
       {/* <primitive scale={1.5} position={[3.895, 1.159, -5.343]} object={basePartner.scene} /> */}
     </>

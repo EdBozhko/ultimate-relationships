@@ -35,8 +35,7 @@ export const SubmenuStyled = styled(Nav).attrs({ as: 'div' })<SubmenuStyledProps
 export const SubmenuNavList = styled(NavList).attrs({ as: 'div' })``;
 
 export const SubmenuSwiperStyled = styled(SwiperStyled)`
-  padding-top: 10rem;
-  padding-bottom: 10rem;
+  padding: 10rem;
 `;
 
 export const SubmenuSwiperSlideStyled = styled(SwiperSlideStyled)<SubmenuSwiperSlideProps>`
@@ -57,6 +56,20 @@ export const SubmenuSwiperSlideStyled = styled(SwiperSlideStyled)<SubmenuSwiperS
         z-index: 1;
       }
     `}
+
+  ${({ $isChecked }) =>
+    $isChecked &&
+    css`
+      border: 1px solid #c295c0;
+      box-shadow:
+        0 0 7px #c295c0,
+        0 0 10px #c295c0;
+
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    `}
+  
+
 
   @media ${SCREENS.fullHd} {
     width: 200rem;
