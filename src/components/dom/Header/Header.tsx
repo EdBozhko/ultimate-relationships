@@ -14,13 +14,14 @@ import {
   Switcher,
 } from './Header.styles.tsx';
 
-import { Icon, ArrowIcon, AdditionalMenu, Submenu } from './components/index.tsx';
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { Icon, ArrowIcon, AdditionalMenu, Submenu } from './components/';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 
 import { shopNavigation } from '@src/helpers/lib/shopProducts.ts';
 import { RestrictedPopup } from '@comp/dom/RestrictedPopup/RestrictedPopup.tsx';
 import useGlobalStore from '@src/stores/useGlobalStore/';
 import { useFullscreen } from '@src/hooks/useFullscreen.ts';
+import { Tooltip } from '@comp/dom/Tooltip/Tooltip.tsx';
 
 import type { HeaderComponent, MenuGroup } from './Header.types.ts';
 import { type Pages, type Controls, SHOP_PAGES, POSES_PAGES } from '@src/utils/constants.ts';
@@ -67,6 +68,9 @@ const navigation = {
 };
 
 export const Header: HeaderComponent = () => {
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [isTooltipVisible, setIsTooltipVisible] = useState(true);
+  const gameButtonRef = useRef<HTMLLIElement | null>(null);
   const isHeaderVisible = useGlobalStore((state) => state.isHeaderVisible);
   const { isFullscreen, enterFullscreen, exitFullscreen } = useFullscreen();
 
@@ -84,9 +88,20 @@ export const Header: HeaderComponent = () => {
     setIsSubmenuOpened(submenuHistory.length > 0);
   }, [submenuHistory]);
 
+  const setGameButtonRef = useCallback((node: HTMLLIElement | null) => {
+    if (node) {
+      gameButtonRef.current = node;
+      const rect = node.getBoundingClientRect();
+      setTooltipPosition({ x: rect.y, y: rect.x + rect.width / 2 });
+    }
+  }, []);
+
   const onNavButtonClick = useCallback(
     (id: Pages | Controls) => {
       switch (id) {
+        case PAGES.GAME:
+          break;
+
         case CONTROLS.FULLSCREEN:
           if (!isFullscreen()) {
             enterFullscreen();
@@ -153,7 +168,7 @@ export const Header: HeaderComponent = () => {
         const { id, href, name, imageSrc, submenu } = item;
 
         return (
-          <NavListItem key={id}>
+          <NavListItem key={id} ref={name === PAGES.GAME ? setGameButtonRef : undefined}>
             {href && href.length > 0 ? (
               pathname === href ? (
                 <NavButton $isGlowing={true} onClick={() => onNavButtonClick(id)}>
@@ -186,24 +201,29 @@ export const Header: HeaderComponent = () => {
   return (
     <>
       {isHeaderVisible && (
-        <HeaderStyled>
-          <AdditionalMenu
-            isAdditionalMenuOpened={isAdditionalMenuOpened}
-            onNavButtonClick={onNavButtonClick}
-            onNavLinkClick={onNavLinkClick}
-          />
+        <>
+          {isTooltipVisible && <Tooltip position={tooltipPosition} />}
+          <HeaderStyled>
+            <AdditionalMenu
+              isAdditionalMenuOpened={isAdditionalMenuOpened}
+              onNavButtonClick={onNavButtonClick}
+              onNavLinkClick={onNavLinkClick}
+            />
 
-          <Submenu
-            setSubmenuHistory={setSubmenuHistory}
-            setIsRestrictedPopupVisible={setIsRestrictedPopupVisible}
-            submenuHistory={submenuHistory}
-            isSubmenuOpened={isSubmenuOpened}
-          />
+            <Submenu
+              setSubmenuHistory={setSubmenuHistory}
+              setIsRestrictedPopupVisible={setIsRestrictedPopupVisible}
+              setTooltipPosition={setTooltipPosition}
+              setIsTooltipVisible={setIsTooltipVisible}
+              submenuHistory={submenuHistory}
+              isSubmenuOpened={isSubmenuOpened}
+            />
 
-          <Nav>
-            <NavList>{navigationList}</NavList>
-          </Nav>
-        </HeaderStyled>
+            <Nav>
+              <NavList>{navigationList}</NavList>
+            </Nav>
+          </HeaderStyled>
+        </>
       )}
       {isRestrictedPopupVisible && (
         <RestrictedPopup

@@ -11,6 +11,7 @@ import {
 } from './Submenu.styles.tsx';
 import { BREAKPOINTS } from '@themeConfigs/constants/screen.ts';
 import useGameStore from '@src/stores/useGameStore/';
+import { SHOP_PAGES } from '@src/utils/constants.ts';
 
 import { FreeMode, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
@@ -23,7 +24,16 @@ import type { SubmenuComponent } from './Submenu.types.ts';
 import type { MenuGroup } from '@comp/dom/Header/Header.types.ts';
 
 export const Submenu: SubmenuComponent = memo(
-  ({ setSubmenuHistory, setIsRestrictedPopupVisible, submenuHistory, isSubmenuOpened }) => {
+  ({
+    setSubmenuHistory,
+    setIsRestrictedPopupVisible,
+    setTooltipPosition,
+    setIsTooltipVisible,
+    submenuHistory,
+    isSubmenuOpened,
+  }) => {
+    const outfitsButtonRef = useRef<HTMLButtonElement | null>(null);
+
     const isBraVisible = useGameStore((store) => store.isBraVisible);
     const toggleBraVisible = useGameStore((store) => store.toggleBraVisible);
 
@@ -50,6 +60,16 @@ export const Submenu: SubmenuComponent = memo(
         if (history.length <= 1) return history;
         return history.slice(0, -1);
       });
+    }, []);
+
+    const setOutfitsButtonRef = useCallback((node: HTMLButtonElement | null) => {
+      if (node) {
+        setTimeout(() => {
+          outfitsButtonRef.current = node;
+          const rect = node.getBoundingClientRect();
+          setTooltipPosition({ x: rect.y, y: rect.x + rect.width / 2 });
+        }, 1000);
+      }
     }, []);
 
     const renderSubmenu = useCallback(
@@ -97,7 +117,13 @@ export const Submenu: SubmenuComponent = memo(
                 }}
                 key={id}
               >
-                <SubmenuButton onClick={() => submenu && openSubmenu(submenu)}>
+                <SubmenuButton
+                  onClick={() => {
+                    setIsTooltipVisible(false);
+                    return submenu && openSubmenu(submenu);
+                  }}
+                  ref={name === SHOP_PAGES.OUTFITS ? setOutfitsButtonRef : undefined}
+                >
                   <SubmenuButtonImage
                     data-swiper-parallax='-40%'
                     src={imageSrc}
