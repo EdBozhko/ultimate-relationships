@@ -12,6 +12,7 @@ import {
 import { BREAKPOINTS } from '@themeConfigs/constants/screen.ts';
 import useGameStore from '@src/stores/useGameStore/';
 import { SHOP_PAGES } from '@src/utils/constants.ts';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
 
 import { FreeMode, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
@@ -68,6 +69,12 @@ export const Submenu: SubmenuComponent = memo(
           outfitsButtonRef.current = node;
           const rect = node.getBoundingClientRect();
           setTooltipPosition({ x: rect.y, y: rect.x + rect.width / 2 });
+
+          if (window.matchMedia(SCREENS.laptop).matches) {
+            setTooltipPosition({ x: rect.y, y: rect.x });
+          } else {
+            setTooltipPosition({ x: rect.y, y: rect.x + rect.width / 2 });
+          }
         }, 500);
       }
     }, []);

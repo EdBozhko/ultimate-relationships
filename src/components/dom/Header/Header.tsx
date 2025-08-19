@@ -22,6 +22,7 @@ import { RestrictedPopup } from '@comp/dom/RestrictedPopup/RestrictedPopup.tsx';
 import useGlobalStore from '@src/stores/useGlobalStore/';
 import { useFullscreen } from '@src/hooks/useFullscreen.ts';
 import { Tooltip } from '@comp/dom/Tooltip/Tooltip.tsx';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
 
 import type { HeaderComponent, MenuGroup } from './Header.types.ts';
 import { type Pages, type Controls, SHOP_PAGES, POSES_PAGES } from '@src/utils/constants.ts';
@@ -98,7 +99,12 @@ export const Header: HeaderComponent = () => {
   useEffect(() => {
     if (isTooltipVisible && gameButtonNode) {
       const rect = gameButtonNode.getBoundingClientRect();
-      setTooltipPosition({ x: rect.y, y: rect.x + rect.width / 2 });
+
+      if (window.matchMedia(SCREENS.laptop).matches) {
+        setTooltipPosition({ x: rect.y, y: rect.x });
+      } else {
+        setTooltipPosition({ x: rect.y, y: rect.x + rect.width / 2 });
+      }
     }
   }, [isTooltipVisible]);
 

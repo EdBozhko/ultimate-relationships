@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { SCREENS } from '@themeConfigs/constants/screen.ts';
 
 export const TooltipStyled = styled.div`
   width: 55rem;
@@ -17,4 +18,12 @@ export const TooltipStyled = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   z-index: 100;
+
+  @media ${SCREENS.laptop} {
+    width: unset;
+    height: 55rem;
+    aspect-ratio: 2 / 1;
+    background-image: url('/icons/undress-arrow-right.webp');
+    transform: translate(-100%, 50%);
+  }
 `;
