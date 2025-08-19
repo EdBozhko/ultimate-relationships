@@ -68,7 +68,7 @@ export const Submenu: SubmenuComponent = memo(
           outfitsButtonRef.current = node;
           const rect = node.getBoundingClientRect();
           setTooltipPosition({ x: rect.y, y: rect.x + rect.width / 2 });
-        }, 1000);
+        }, 500);
       }
     }, []);
 

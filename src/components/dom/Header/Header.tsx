@@ -69,10 +69,11 @@ const navigation = {
 
 export const Header: HeaderComponent = () => {
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-  const [isTooltipVisible, setIsTooltipVisible] = useState(true);
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const gameButtonRef = useRef<HTMLLIElement | null>(null);
   const isHeaderVisible = useGlobalStore((state) => state.isHeaderVisible);
   const { isFullscreen, enterFullscreen, exitFullscreen } = useFullscreen();
+  const [gameButtonNode, setGameButtonNode] = useState<HTMLLIElement | null>(null);
 
   const pathname = usePathname();
 
@@ -85,14 +86,30 @@ export const Header: HeaderComponent = () => {
   const [isSubmenuOpened, setIsSubmenuOpened] = useState(false);
 
   useEffect(() => {
+    if (gameButtonNode) {
+      const tooltipTimeout = setTimeout(() => {
+        setIsTooltipVisible(true);
+      }, 5000);
+
+      return () => clearTimeout(tooltipTimeout);
+    }
+  }, [gameButtonNode]);
+
+  useEffect(() => {
+    if (isTooltipVisible && gameButtonNode) {
+      const rect = gameButtonNode.getBoundingClientRect();
+      setTooltipPosition({ x: rect.y, y: rect.x + rect.width / 2 });
+    }
+  }, [isTooltipVisible]);
+
+  useEffect(() => {
     setIsSubmenuOpened(submenuHistory.length > 0);
   }, [submenuHistory]);
 
   const setGameButtonRef = useCallback((node: HTMLLIElement | null) => {
     if (node) {
       gameButtonRef.current = node;
-      const rect = node.getBoundingClientRect();
-      setTooltipPosition({ x: rect.y, y: rect.x + rect.width / 2 });
+      setGameButtonNode(node);
     }
   }, []);
 
