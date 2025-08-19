@@ -25,7 +25,7 @@ export const Title = styled.p`
   margin: 0 0 10rem 0;
   padding: 0;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 50rem;
   }
 `;
@@ -83,7 +83,7 @@ export const CTA = styled(Link)`
     margin: 10rem 0 0 0;
   }
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 28rem;
   }
 `;
@@ -117,7 +117,7 @@ export const ClosePopup = styled.button`
     transform: translate(-50%, -50%) rotate(45deg);
   }
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     top: 20rem;
     right: 50%;
     transform: translate(50%, 0);

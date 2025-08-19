@@ -25,7 +25,7 @@ export const SubmenuStyled = styled(Nav).attrs({ as: 'div' })<SubmenuStyledProps
     css`
       transform: translate(0, -100%);
 
-      @media ${SCREENS.fullHd} {
+      @media ${SCREENS.laptop} {
         transform: translate(-100%, 0);
         padding: 0 20rem;
       }
@@ -71,7 +71,7 @@ export const SubmenuSwiperSlideStyled = styled(SwiperSlideStyled)<SubmenuSwiperS
   
 
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     width: 200rem;
   }
 `;
@@ -86,7 +86,7 @@ export const SubmenuButtonImage = styled(ShopSliderLinkImage)``;
 export const SubmenuButtonName = styled(ShopSliderLinkName)`
   font-size: 16rem;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 24rem;
   }
 `;

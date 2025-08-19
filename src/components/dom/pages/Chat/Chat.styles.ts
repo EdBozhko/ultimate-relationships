@@ -39,7 +39,7 @@ export const Display = styled.div`
   padding: 35rem 16rem 0 16rem;
   z-index: 1;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     padding: 0 32%;
   }
 `;
@@ -74,7 +74,7 @@ export const MessagesListDate = styled.span`
   font-size: 11rem;
   z-index: 1;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 15rem;
   }
 `;
@@ -90,7 +90,7 @@ export const MessagesList = styled.ul`
 export const Message = styled.p`
   margin: 0 0 5rem 0;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     margin: 0 0 8rem 0;
   }
 `;
@@ -115,7 +115,7 @@ export const MessagesListItem = styled.li`
       0 0 10px #c295c0,
       0 0 42px #c300b6;
 
-    @media ${SCREENS.fullHd} {
+    @media ${SCREENS.laptop} {
       font-size: 16rem;
       padding: 8rem;
     }
@@ -135,7 +135,7 @@ export const MessagesListItemOwn = styled(MessagesListItem)`
 export const MessageTime = styled.span`
   font-size: 10rem;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 12rem;
   }
 `;
@@ -152,7 +152,7 @@ export const Form = styled.form`
   margin: 16rem 0 0 0;
   z-index: 1;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     padding: 0 32% 50rem;
   }
 `;
@@ -167,7 +167,7 @@ export const TextareaContainer = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     padding: 15rem;
   }
 `;
@@ -186,7 +186,7 @@ export const Textarea = styled(TextareaAutosize)`
     color: #656565;
   }
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 26rem;
   }
 `;
@@ -222,7 +222,7 @@ export const SubmitButton = styled.button`
     transform: scale(0.9);
   }
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     height: 60rem;
   }
 `;
@@ -250,7 +250,7 @@ export const OptionsButton = styled.label`
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 16rem;
     padding: 8rem;
   }

@@ -73,7 +73,7 @@ export const ShopSlider: ShopSliderComponent = memo(({ heading, shopNavigation }
         modules={[EffectCoverflow, Parallax]}
         className='mySwiper'
         breakpoints={{
-          [BREAKPOINTS.fullHdScreenWidth]: {
+          [BREAKPOINTS.laptopScreenWidth]: {
             slidesPerView: 1.5,
             spaceBetween: 100,
           },

@@ -19,7 +19,7 @@ export const Container = styled.div`
   height: 100%;
   position: relative;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     padding: 0 10%;
   }
 `;
@@ -31,7 +31,7 @@ export const SwiperStyled = styled(Swiper)`
   padding-top: 50rem;
   padding-bottom: 50rem;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     flex: 1 1 auto;
     padding: 100rem 100rem 50rem;
   }
@@ -57,7 +57,7 @@ export const SwiperSlideStyled = styled(SwiperSlide)`
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     border-radius: 20rem;
   }
 `;
@@ -106,7 +106,7 @@ export const ShopSliderLinkName = styled.p`
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 50rem;
     border-radius: 20rem;
   }

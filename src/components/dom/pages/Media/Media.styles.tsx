@@ -11,7 +11,7 @@ export const Container = styled.div`
   position: relative;
   padding: 0 0 16rem 0;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     padding: 0 20%;
   }
 `;

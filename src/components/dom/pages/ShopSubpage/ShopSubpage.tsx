@@ -42,7 +42,7 @@ export const ShopSubpage: ShopSubpageComponent = ({ slug }) => {
   const [itemsPerRow, setItemsPerRow] = useState<ListItemsPerRow>(2);
 
   useEffect(() => {
-    if (window.matchMedia(SCREENS.fullHd).matches) {
+    if (window.matchMedia(SCREENS.laptop).matches) {
       setItemsPerRow(3);
     } else {
       setItemsPerRow(2);

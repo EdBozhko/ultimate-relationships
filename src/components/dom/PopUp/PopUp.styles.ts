@@ -139,7 +139,7 @@ export const PopUpContainer = styled.div<PopUpContainerProps>`
       animation: ${popupIn} 2s linear;
       animation-fill-mode: both;
 
-      @media ${SCREENS.fullHd} {
+      @media ${SCREENS.laptop} {
         animation: ${popupInFullHd} 2s linear;
         animation-fill-mode: both;
       }
@@ -156,7 +156,7 @@ export const PopUpTitle = styled.p`
   margin: 0 0 10rem 0;
   padding: 0;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 36rem;
     margin: 0 0 20rem 0;
   }
@@ -171,7 +171,7 @@ export const PopUpText = styled.p`
   margin: 0 0 10rem 0;
   padding: 0;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 24rem;
     margin: 0 0 20rem 0;
   }
@@ -202,7 +202,7 @@ export const PopUpButtonCss = css`
     margin: 10rem 0 0 0;
   }
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 24rem;
     padding: 20rem 15rem;
     width: 400rem;

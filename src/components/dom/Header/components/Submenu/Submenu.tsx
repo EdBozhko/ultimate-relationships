@@ -193,7 +193,7 @@ export const Submenu: SubmenuComponent = memo(
             className='mySwiper'
             mousewheel={true}
             breakpoints={{
-              [BREAKPOINTS.fullHdScreenWidth]: {
+              [BREAKPOINTS.laptopScreenWidth]: {
                 direction: 'vertical',
                 slidesPerView: 3.5,
                 spaceBetween: 20,

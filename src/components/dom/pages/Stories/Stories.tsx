@@ -15,7 +15,7 @@ const popupButtons = [{ id: 1, textContent: 'select' }];
 export const Stories: StoriesComponent = () => {
   const [itemsPerRow, setItemsPerRow] = useState<ListItemsPerRow>(2);
   useEffect(() => {
-    if (window.matchMedia(SCREENS.fullHd).matches) {
+    if (window.matchMedia(SCREENS.laptop).matches) {
       setItemsPerRow(2);
     } else {
       setItemsPerRow(1);

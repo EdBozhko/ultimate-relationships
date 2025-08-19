@@ -94,6 +94,10 @@ const GlobalStyle = styled.createGlobalStyle`
       font-size: ${100 / BREAKPOINTS.mobileScreenWidth}vw;
     }
 
+    @media ${SCREENS.laptop} {
+      font-size: ${100 / BREAKPOINTS.laptopScreenWidth}vw;
+    }
+
     @media ${SCREENS.fullHd} {
       font-size: ${100 / BREAKPOINTS.fullHdScreenWidth}vw;
     }

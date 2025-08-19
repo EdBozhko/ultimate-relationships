@@ -72,7 +72,7 @@ export const ListWithPopup: ListWithPopupComponent = memo(
       if (typeof window !== 'undefined') {
         setHeight(window.innerHeight * 0.8);
 
-        if (window.matchMedia(SCREENS.fullHd).matches) {
+        if (window.matchMedia(SCREENS.laptop).matches) {
           setPaddingBottom('33vh');
         } else {
           setPaddingBottom('50vh');

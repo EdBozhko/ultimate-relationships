@@ -15,7 +15,7 @@ import type { ListItemsPerRow } from '@comp/dom/ListWithPopup/ListWithPopup.type
 export const Media: MediaComponent = () => {
   const [itemsPerRow, setItemsPerRow] = useState<ListItemsPerRow>(2);
   useEffect(() => {
-    if (window.matchMedia(SCREENS.fullHd).matches) {
+    if (window.matchMedia(SCREENS.laptop).matches) {
       setItemsPerRow(2);
     } else {
       setItemsPerRow(1);

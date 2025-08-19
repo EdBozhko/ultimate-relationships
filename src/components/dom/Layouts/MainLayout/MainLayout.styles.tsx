@@ -17,7 +17,7 @@ export const MainLayoutStyled = styled.div<MainLayoutStyledProps>`
       height: ${$height};
     `}
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     flex-direction: row-reverse;
   }
 `;

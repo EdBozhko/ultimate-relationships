@@ -24,7 +24,7 @@ export const HeaderStyled = styled.header`
   width: 100%;
   z-index: 10;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     height: 100%;
     width: unset;
   }
@@ -38,7 +38,7 @@ export const Nav = styled.nav`
   background-color: #181818;
   overflow: hidden;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     height: 100%;
     width: unset;
     border-top: unset;
@@ -54,7 +54,7 @@ export const NavList = styled.ul`
   align-items: flex-start;
   flex-wrap: wrap;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     height: 100%;
     width: unset;
     flex-direction: column;
@@ -74,7 +74,7 @@ export const NavLinkIcon = styled.div<NavLinkIconProps>`
   width: 35rem;
   aspect-ratio: 1 / 1;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     width: 50rem;
   }
 `;
@@ -83,7 +83,7 @@ export const NavLinkName = styled.span<NavLinkNameProps>`
   font: inherit;
   font-weight: 500;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 16rem;
   }
 `;
@@ -104,7 +104,7 @@ export const NavLink = styled(Link)<NavLinkProps>`
     transform: scale(0.9);
   }
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     margin: 12rem 0;
   }
 `;
@@ -166,7 +166,7 @@ export const Switcher = styled.div<SwitcherProps>`
       }
     `}
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     height: 22rem;
     svg {
       width: 90%;

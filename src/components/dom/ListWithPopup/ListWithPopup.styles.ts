@@ -19,7 +19,7 @@ export const Container = styled.div`
   position: relative;
   padding: 0 0 16rem 0;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     padding: 0 20%;
   }
 `;
@@ -88,7 +88,7 @@ export const ListItem = styled.li<ListItemProps>`
     }
   }}
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     padding-bottom: 40rem;
     ${({ $itemsPerRow, $itemsOrientation }) => {
       switch ($itemsPerRow) {
@@ -165,7 +165,7 @@ export const ListItemContainer = styled.div`
     transform: scale(0.9);
   }
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     border-radius: 20rem;
   }
 `;
@@ -207,7 +207,7 @@ export const ListItemName = styled.p`
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     border-radius: 20rem;
     font-size: 40rem;
   }
@@ -248,7 +248,7 @@ export const AnimatedPopup = styled(animated.div)`
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     width: 50vw;
     left: 25vw;
     padding: 30rem;
@@ -264,7 +264,7 @@ export const AnimatedPopupClose = styled.button`
   background-color: rgba(42, 43, 52, 1);
   border: 1px solid rgba(255, 255, 255, 0.1);
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     width: 80rem;
     height: 8rem;
     min-height: 8rem;
@@ -306,7 +306,7 @@ export const AnimatedPopupDescriptionTitle = styled.p`
     color: #ffffff;
   }
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 36rem;
   }
 `;
@@ -321,7 +321,7 @@ export const AnimatedPopupDescription = styled.p`
     color: #ffffff;
   }
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 24rem;
   }
 `;
@@ -350,7 +350,7 @@ export const AnimatedPopupButtonsContainer = styled.div`
   gap: 5rem;
   padding: 7rem 0 0 0;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     gap: 10rem;
     padding: 15rem 0 0 0;
   }

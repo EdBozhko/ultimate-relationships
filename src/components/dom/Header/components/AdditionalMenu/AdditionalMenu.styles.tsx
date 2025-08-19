@@ -26,7 +26,7 @@ export const AdditionalMenuStyled = styled.div<AdditionalMenuStyledProps>`
       transform: translate(0, 0);
     `}
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     bottom: unset;
     left: unset;
     top: 0;
@@ -60,7 +60,7 @@ export const AdditionalMenuLink = styled(Link)`
   justify-content: flex-start;
   align-items: center;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 34rem;
   }
 `;

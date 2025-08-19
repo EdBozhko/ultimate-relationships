@@ -18,7 +18,7 @@ export const PageHeadingStyled = styled.h2`
     0 0 42px #c300b6,
     0 0 82px #c300b6;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 50rem;
   }
 `;

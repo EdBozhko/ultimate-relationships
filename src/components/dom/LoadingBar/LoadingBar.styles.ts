@@ -63,7 +63,7 @@ export const LoadingBarCounter = styled.span`
   font: inherit;
   font-size: 36rem;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 70rem;
   }
 `;
@@ -72,7 +72,7 @@ export const DisplayProgress = styled.span`
   font: inherit;
   font-size: 16rem;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     font-size: 40rem;
   }
 `;
@@ -86,7 +86,7 @@ export const SVG = styled.svg`
   // Lots of drop-shadows are bad for performance
   filter: drop-shadow(0 0 21px #c295c0) drop-shadow(0 0 151px #c300b6);
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     width: ${loadingBarWidthFullHd}rem;
   }
 `;
@@ -107,7 +107,7 @@ export const Meter = styled.circle<MeterProps>`
   stroke-dashoffset: ${({ $strokeDashoffset }) => $strokeDashoffset}px;
   transition: stroke-dashoffset 0.2s linear;
 
-  @media ${SCREENS.fullHd} {
+  @media ${SCREENS.laptop} {
     stroke-width: 12rem;
     stroke-dasharray: calc(${loadingBarWidthFullHd}rem * 3.14);
   }
