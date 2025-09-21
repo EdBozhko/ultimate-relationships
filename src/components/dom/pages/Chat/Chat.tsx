@@ -133,6 +133,11 @@ const AI_MESSAGES: AiMessages = [
 ];
 
 export const Chat: ChatComponent = () => {
+  const [currentAnimation, setCurrentAnimation] = useState('idle');
+  const setIdleAnimation = () => {
+    setCurrentAnimation('idle');
+  };
+
   const audioRef = useRef<HTMLAudioElement>(null!);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -283,8 +288,9 @@ export const Chat: ChatComponent = () => {
 
       const timeout = setTimeout(() => {
         if (messageData.audio?.src) {
-          audioRef.current.play();
+          setCurrentAnimation('talking');
           setIsPlaying(true);
+          audioRef.current.play();
         }
         setIsTypingIndicatorVisible(false);
         setIsAiTyping(false);
@@ -357,6 +363,12 @@ export const Chat: ChatComponent = () => {
     }
   }, [messages, isTypingIndicatorVisible]);
 
+  useEffect(() => {
+    audioRef.current?.addEventListener('ended', setIdleAnimation);
+
+    return () => audioRef.current?.removeEventListener('ended', setIdleAnimation);
+  }, [audioRef]);
+
   const messagesLists = Object.keys(messages).map((messagesListsId) => {
     const curtainDateMessages = messages[messagesListsId].messages;
     const messagesList = curtainDateMessages.map(({ id, author, time, message }) =>
@@ -384,7 +396,7 @@ export const Chat: ChatComponent = () => {
   return (
     <>
       <Container>
-        <ChatView />
+        <ChatView currentAnimation={currentAnimation} />
         <audio ref={audioRef} />
         <AudioVisualizer isPlaying={isPlaying} audio={audioRef} />
         <Display ref={displayRef}>

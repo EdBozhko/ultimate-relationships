@@ -17,6 +17,6 @@ export const ChatViewStyled = styled(View)`
   z-index: -1;
 
   @media ${SCREENS.laptop} {
-    width: 30%;
+    width: 60%;
   }
 `;

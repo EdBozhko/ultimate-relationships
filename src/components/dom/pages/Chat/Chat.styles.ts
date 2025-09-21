@@ -153,7 +153,7 @@ export const Form = styled.form`
   z-index: 1;
 
   @media ${SCREENS.laptop} {
-    padding: 0 32% 50rem;
+    padding: 0 30% 50rem;
   }
 `;
 

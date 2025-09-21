@@ -9,10 +9,10 @@ const Content = dynamic(() => import('./components/Content').then((mod) => mod.C
   ssr: false,
 });
 
-export const ChatView = () => {
+export const ChatView = ({ currentAnimation }: { currentAnimation?: string }) => {
   return (
     <ChatViewStyled orbitControls>
-      <Content />
+      <Content currentAnimation={currentAnimation} />
     </ChatViewStyled>
   );
 };

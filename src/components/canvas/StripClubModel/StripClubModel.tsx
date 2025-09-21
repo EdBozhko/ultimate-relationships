@@ -133,7 +133,7 @@ export const StripClubModel: StripClubModelComponent = ({ cameraTarget, ...props
       const fromCoords = controls.target;
       let toCoords = null;
 
-      const headBone = cameraTarget.skeleton.getBoneByName('head');
+      const headBone = cameraTarget.skeleton.getBoneByName('mixamorigHead');
       if (headBone) {
         const headWorldPos = new THREE.Vector3();
         toCoords = headBone.getWorldPosition(headWorldPos);
