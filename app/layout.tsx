@@ -4,7 +4,7 @@ import GlobalStyle from '@themeConfigs/global.style.ts';
 import { NextFont } from 'next/dist/compiled/@next/font';
 
 import { Header } from '@src/components/dom/Header';
-import { GlobalClientPreload } from '@comp/dom/globalClientPreload';
+// import { GlobalClientPreload } from '@comp/dom/globalClientPreload';
 import { MainLayout } from '@src/components/dom/Layouts/MainLayout';
 
 import type { FC, ReactNode } from 'react';
@@ -74,7 +74,7 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
               </main>
             </MainLayout>
           </StyledComponentsRegistry>
-          <GlobalClientPreload />
+          {/* <GlobalClientPreload /> */}
         </body>
       </html>
     </>
