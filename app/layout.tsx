@@ -4,7 +4,7 @@ import GlobalStyle from '@themeConfigs/global.style.ts';
 import { NextFont } from 'next/dist/compiled/@next/font';
 
 import { Header } from '@src/components/dom/Header';
-import { GlobalClientPreload } from '@src/components/dom/globalClientPreload/';
+import { GlobalClientPreload } from '@src/components/dom/globalClientPreload';
 import { MainLayout } from '@src/components/dom/Layouts/MainLayout';
 
 import type { FC, ReactNode } from 'react';
