@@ -45,8 +45,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-# prefer yarn than npm
-package-lock.json
 
 report.*.json
 
