@@ -156,8 +156,8 @@ export const StripClubModel: StripClubModelComponent = ({ cameraTarget, ...props
         )
         .to(camera.position, {
           x: toCoords.x + 0.25,
-          y: toCoords.y - 2,
-          z: toCoords.z + 1,
+          y: toCoords.y - 3,
+          z: toCoords.z + 2,
           duration: 2.5,
           ease: 'power1.out',
         });
@@ -175,7 +175,7 @@ export const StripClubModel: StripClubModelComponent = ({ cameraTarget, ...props
       <spotLight
         ref={refs.spotLight}
         color={spotLightDebug.color}
-        castShadow
+        // castShadow
         angle={spotLightDebug.angle}
         penumbra={spotLightDebug.penumbra}
         decay={spotLightDebug.decay}

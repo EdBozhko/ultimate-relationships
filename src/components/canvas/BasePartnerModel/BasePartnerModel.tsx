@@ -19,23 +19,6 @@ export const BasePartnerModel: BasePartnerModelComponent = ({ onFaceUpdate = () 
   const { animations: idleAnimation } = useGLTF('/models/base_partner/animations/Idle.glb');
   const { animations: talkingAnimation } = useGLTF('/models/base_partner/animations/Talking.glb');
 
-  useEffect(() => {
-    const danceClip = baseAnimation?.[0];
-    if (danceClip && danceClip.name !== 'dance') {
-      danceClip.name = 'dance';
-    }
-
-    const idleClip = idleAnimation?.[0];
-    if (idleClip && idleClip.name !== 'idle') {
-      idleClip.name = 'idle';
-    }
-
-    const talkingClip = talkingAnimation?.[0];
-    if (talkingClip && talkingClip.name !== 'talking') {
-      talkingClip.name = 'talking';
-    }
-  }, [baseAnimation, idleAnimation, talkingAnimation]);
-
   const modelRef = useRef<THREE.Group>(null!);
   const bodyRef = useRef<THREE.Group>(null!);
   const faceRef = useRef<THREE.SkinnedMesh>(null!);

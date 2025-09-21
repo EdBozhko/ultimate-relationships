@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { redirect, RedirectType } from 'next/navigation';
 import { useProgress } from '@react-three/drei';
 
 import { PAGES } from '@src/utils/constants.ts';
@@ -24,7 +24,6 @@ import type { HomeComponent } from './Home.types.ts';
 
 export const Home: HomeComponent = () => {
   const { isAgeConfirmed, confirmAge } = useGlobalStore();
-  const router = useRouter();
 
   const [hideLoadingBar, setHideLoadingBar] = useState(true);
   const [showPopUp, setShowPopUp] = useState(false);
@@ -45,7 +44,7 @@ export const Home: HomeComponent = () => {
 
   useEffect(() => {
     if (isAgeConfirmed) {
-      router.push(PAGES.GAME);
+      redirect(`${PAGES.GAME}`, RedirectType.replace);
     }
   }, [isAgeConfirmed]);
 

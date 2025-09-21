@@ -31,30 +31,38 @@ export const Game: GameComponent = () => {
     setFaceMeshData(faceMesh);
   }, []);
 
+  const handler = () => {
+    const el = audioRef.current;
+
+    if (!el) return;
+
+    el.volume = 0.5;
+
+    if (el.paused) {
+      // play() должен вызываться строго внутри жеста пользователя
+      el.play().catch(() => {
+        /* проглатываем, если что-то пошло не так */
+      });
+    }
+    // если надо один раз — сразу снимаем обработчик
+    document.body.removeEventListener('pointerdown', handler);
+  };
+
   useEffect(() => {
-    const handler = () => {
-      const el = audioRef.current;
-      if (!el) return;
-
-      el.volume = 0.5;
-
-      if (el.paused) {
-        // play() должен вызываться строго внутри жеста пользователя
-        el.play().catch(() => {
-          /* проглатываем, если что-то пошло не так */
-        });
-      }
-      // если надо один раз — сразу снимаем обработчик
-      document.body.removeEventListener('pointerdown', handler);
-    };
-
+    handler();
     // pointerdown лучше, чем click, для мобильных
     document.body.addEventListener('pointerdown', handler, { passive: true });
+    document.body.addEventListener('click', handler, { passive: true });
 
     return () => {
       document.body.removeEventListener('pointerdown', handler);
+      document.body.removeEventListener('click', handler);
     };
   }, []);
+
+  useEffect(() => {
+    handler();
+  }, [audioRef]);
 
   return (
     <>
